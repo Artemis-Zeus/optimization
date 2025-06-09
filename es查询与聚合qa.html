@@ -1,0 +1,680 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-10T01:18:27.8593426"><title>ES查询与聚合QA | 技术知识库</title><script type="application/json" id="virtual-toc-data">[{"id":"nsy50f_4","level":0,"title":"📋 知识结构","anchor":"#nsy50f_4"},{"id":"query-dsl","level":0,"title":"🔍 Query DSL基础","anchor":"#query-dsl"},{"id":"nsy50f_6","level":0,"title":"🔎 全文检索","anchor":"#nsy50f_6"},{"id":"nsy50f_7","level":0,"title":"📊 聚合分析","anchor":"#nsy50f_7"},{"id":"nsy50f_8","level":0,"title":"💡 面试技巧","anchor":"#nsy50f_8"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="ES查询与聚合QA | 技术知识库"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="技术知识库 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/es查询与聚合qa.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="ES查询与聚合QA | 技术知识库"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/es查询与聚合qa.html#webpage",
+    "url": "writerside-documentation/es查询与聚合qa.html",
+    "name": "ES查询与聚合QA | 技术知识库",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "技术知识库 Help"
+}</script><!-- End Schema.org --></head><body data-id="ES查询与聚合QA" data-main-title="ES查询与聚合QA" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="ES面试大纲.md|Elasticsearch面试大纲"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>技术知识库  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="ES查询与聚合QA" id="ES查询与聚合QA.md">ES查询与聚合QA</h1><p id="nsy50f_3">本文档深入解析Elasticsearch的查询和聚合机制，涵盖Query DSL、全文检索、聚合分析、脚本查询等内容。</p><section class="chapter"><h2 id="nsy50f_4" data-toc="nsy50f_4">📋 知识结构</h2><svg aria-roledescription="mindmap" role="graphics-document document" viewBox="5 5 706.086181640625 400.2546691894531" style="max-width: 706.086181640625px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g></g><g class="mindmap-edges"><path class="edge section-edge-0 edge-depth-1" d="M 479.6499569006844,119.19545085195666 L 538.5151173274044,106.96959559479686 L597.3802777541243,94.74374033763705"></path><path class="edge section-edge-0 edge-depth-1" d="M 472.5611498634393,109.31230708554358 L 490.9128226128996,78.072872317015 L509.2644953623599,46.833437548486415"></path><path class="edge section-edge-0 edge-depth-1" d="M 455.30297622059595,110.7706974217501 L 430.69619521766333,81.54167696219352 L406.0894142147307,52.31265650263694"></path><path class="edge section-edge-0 edge-depth-1" d="M 478.99233588022446,127.55500424300033 L 534.0641773233609,148.3969391325043 L589.1360187664974,169.23887402200825"></path><path class="edge section-edge-0 edge-depth-0" d="M 371.14153994084154,191.0503621939177 L 412.00447926969684,161.08336217263067 L452.86741859855215,131.11636215134365"></path><path class="edge section-edge-1 edge-depth-1" d="M 472.87093715166463,286.95701752629617 L 532.7813459939857,307.2258714638474 L592.6917548363068,327.4947254013986"></path><path class="edge section-edge-1 edge-depth-1" d="M 473.4626677575752,279.71211466695604 L 544.112410392785,268.07554748660476 L614.7621530279948,256.4389803062535"></path><path class="edge section-edge-1 edge-depth-1" d="M 447.0468170993147,291.64122847312314 L 413.06242013458416,319.41136149215856 L379.0780231698536,347.181494511194"></path><path class="edge section-edge-1 edge-depth-1" d="M 462.5969495551589,296.6245833400712 L 471.4666064687518,329.25228150422174 L480.3362633823447,361.8799796683723"></path><path class="edge section-edge-1 edge-depth-0" d="M 370.61360097124884,209.46985338222103 L 408.85383433013067,241.03543331398913 L447.0940676890125,272.60101324575726"></path><path class="edge section-edge-2 edge-depth-1" d="M 188.54957122466664,266.854976522472 L 152.78481379022975,294.0170745689451 L117.02005635579287,321.17917261541817"></path><path class="edge section-edge-2 edge-depth-1" d="M 185.53108628693758,256.7440716154132 L 129.26553942100202,252.83848021837224 L72.99999255506646,248.9328888213313"></path><path class="edge section-edge-2 edge-depth-1" d="M 215.35000630160323,259.86391728148436 L 266.3845399345732,267.0137404248321 L317.41907356754314,274.1635635681799"></path><path class="edge section-edge-2 edge-depth-1" d="M 204.47495525256952,272.2451608487876 L 213.09120080901266,303.55555153190573 L221.7074463654558,334.8659422150239"></path><path class="edge section-edge-2 edge-depth-0" d="M 344.95460262718706,205.06337582802655 L 279.7703318806941,228.85187761656158 L214.5860611342011,252.6403794050966"></path><path class="edge section-edge-3 edge-depth-1" d="M 197.06759894596314,128.66869512375553 L 157.33188706893952,102.01490912461949 L117.59617519191589,75.36112312548347"></path><path class="edge section-edge-3 edge-depth-1" d="M 224.2759625944754,134.3044137742496 L 274.3652015351942,125.06776238839936 L324.45444047591303,115.83111100254911"></path><path class="edge section-edge-3 edge-depth-1" d="M 214.4082361704522,122.8418445119716 L 225.23098085040948,91.41060392758087 L236.05372553036676,59.97936334319013"></path><path class="edge section-edge-3 edge-depth-1" d="M 194.61328129218577,138.6526108790814 L 139.12971988594865,144.7102165719812 L83.64615847971152,150.76782226488098"></path><path class="edge section-edge-3 edge-depth-0" d="M 345.2190765787344,194.1048223444028 L 284.2851287389529,168.47279443988936 L223.3511808991714,142.84076653537596"></path></g><g class="mindmap-nodes"><g transform="translate(300.3407654918939, 181.02097971123135)" class="mindmap-node section--1 section-root"><g transform="translate(58.70481872558594, 18.9)"><circle r="58.70481872558594" class="node-bkg node-circle" id="node-0"></circle></g><g transform="translate(58.70481872558594, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ES查询与聚合</tspan></tspan></text></g></g></g><g transform="translate(418.0055000238182, 103.34574463402998)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h83.9157485961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-1"></path><line y2="37.8" x2="93.9157485961914" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(46.9578742980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Query</tspan><tspan font-weight="normal" class="text-inner-tspan" font-style="normal"> DSL</tspan></tspan></text></g></g></g><g transform="translate(415.6260851446858, 263.24988691674696)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-6"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">全文检索</tspan></tspan></text></g></g></g><g transform="translate(157.45908024581263, 238.88277552189183)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-11"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">聚合分析</tspan></tspan></text></g></g></g><g transform="translate(166.98867396233027, 118.12460916854741)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-16"></path><line y2="37.8" x2="85.0719985961914" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(42.5359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">高级特性</tspan></tspan></text></g></g></g><g transform="translate(570.0121728328949, 72.79344655556372)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h74.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-2"></path><line y2="37.8" x2="84.109375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.0546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">叶子查询</tspan></tspan></text></g></g></g><g transform="translate(474.30758340388536, 15)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-3"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">复合查询</tspan></tspan></text></g></g></g><g transform="translate(353.8743286134128, 21.937609290357045)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-4"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">过滤查询</tspan></tspan></text></g></g></g><g transform="translate(560.610292824808, 155.64813363097858)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-5"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">脚本查询</tspan></tspan></text></g></g></g><g transform="translate(558.4631075451899, 313.4018560109479)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h86.875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-7"></path><line y2="37.8" x2="96.875" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(48.4375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">match查询</tspan></tspan></text></g></g></g><g transform="translate(558.0392988427885, 235.1012080564626)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h133.046875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-8"></path><line y2="37.8" x2="143.046875" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(71.5234375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">multi_match查询</tspan></tspan></text></g></g></g><g transform="translate(324.9080683263868, 337.7728360675702)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-9"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">短语查询</tspan></tspan></text></g></g></g><g transform="translate(441.7164409947221, 357.45467609169657)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-10"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">模糊查询</tspan></tspan></text></g></g></g><g transform="translate(70.05054786870448, 311.35137361599834)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h60.04800033569336 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-12"></path><line y2="37.8" x2="70.04800033569336" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(35.02400016784668, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">桶聚合</tspan></tspan></text></g></g></g><g transform="translate(15, 228.99418491485267)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-13"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">指标聚合</tspan></tspan></text></g></g></g><g transform="translate(289.23800102714233, 257.34470532777243)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-14"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">管道聚合</tspan></tspan></text></g></g></g><g transform="translate(182.6513227760213, 330.42832754191966)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-15"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">矩阵聚合</tspan></tspan></text></g></g></g><g transform="translate(54.091100541759715, 48.10520908069157)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-17"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">相关性评分</tspan></tspan></text></g></g></g><g transform="translate(296.66973051186676, 94.2109156082513)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-18"></path><line y2="37.8" x2="85.0719985961914" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(42.5359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">高亮显示</tspan></tspan></text></g></g></g><g transform="translate(197.9012891422973, 26.89659868661431)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-19"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">搜索建议</tspan></tspan></text></g></g></g><g transform="translate(25.698767213375618, 133.49582397541496)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-20"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">滚动搜索</tspan></tspan></text></g></g></g></g></svg></section><section class="chapter"><h2 id="query-dsl" data-toc="query-dsl">🔍 Query DSL基础</h2><section class="chapter"><h3 id="q1-es-dsl" data-toc="q1-es-dsl">Q1: ES的查询DSL有哪些主要类型？它们各自的特点和使用场景是什么？</h3><p id="nsy50f_12"><span class="control" id="nsy50f_19">答案：</span></p><p id="nsy50f_13"><span class="control" id="nsy50f_20">ES查询DSL分类结构：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 878.734375 1180"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="878.734375" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="ES查询DSL体系" class="cluster"><rect height="1164" width="862.734375" y="8" x="8" style=""></rect><g transform="translate(386.3203125, 8)" class="cluster-label"><foreignObject height="24" width="106.09375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ES查询DSL体系</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M113.863,593L128.342,551.833C142.82,510.667,171.777,428.333,191.07,387.167C210.362,346,219.99,346,228.951,346C237.911,346,246.206,346,250.353,346L254.5,346"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_C_1" d="M113.465,647L128.01,690.167C142.555,733.333,171.645,819.667,189.314,862.833C206.984,906,213.234,906,218.818,906C224.401,906,229.318,906,231.776,906L234.234,906"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_2" d="M387.078,319L411.854,283.5C436.63,248,486.182,177,514.083,141.5C541.984,106,548.234,106,553.818,106C559.401,106,564.318,106,566.776,106L569.234,106"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B2_3" d="M427.741,319L445.74,310.833C463.739,302.667,499.737,286.333,525.372,278.167C551.007,270,566.279,270,580.884,270C595.49,270,609.428,270,616.398,270L623.367,270"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B3_4" d="M427.741,373L445.74,381.167C463.739,389.333,499.737,405.667,523.641,413.833C547.546,422,559.357,422,570.501,422C581.646,422,592.124,422,597.363,422L602.602,422"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B4_5" d="M388.07,373L412.681,406.5C437.291,440,486.513,507,517.577,540.5C548.642,574,561.549,574,573.79,574C586.031,574,597.605,574,603.393,574L609.18,574"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_6" d="M402.258,867L424.504,841.5C446.75,816,491.242,765,521.765,739.5C552.288,714,568.841,714,584.728,714C600.615,714,615.835,714,623.445,714L631.055,714"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C2_7" d="M470.305,867L481.21,862.833C492.115,858.667,513.924,850.333,531.875,846.167C549.826,842,563.917,842,577.341,842C590.766,842,603.523,842,609.902,842L616.281,842"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C3_8" d="M470.305,945L481.21,949.167C492.115,953.333,513.924,961.667,531.778,965.833C549.632,970,563.529,970,576.759,970C589.99,970,602.553,970,608.835,970L615.117,970"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C4_9" d="M402.258,945L424.504,970.5C446.75,996,491.242,1047,520.521,1072.5C549.799,1098,563.865,1098,577.263,1098C590.661,1098,603.393,1098,609.759,1098L616.125,1098"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(104.3671875, 620)" id="flowchart-A-10983" class="node default"><rect height="54" width="117.734375" y="-27" x="-58.8671875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-28.8671875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="57.734375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>查询DSL</p></span></div></foreignObject></g></g><g transform="translate(368.234375, 346)" id="flowchart-B-10984" class="node default"><rect height="54" width="219.46875" y="-27" x="-109.734375" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-79.734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="159.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>叶子查询 Leaf Queries</p></span></div></foreignObject></g></g><g transform="translate(368.234375, 906)" id="flowchart-C-10986" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>复合查询 Compound Queries</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 106)" id="flowchart-B1-10988" class="node default"><rect height="126" width="260" y="-63" x="-130" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-100, -48)" style="" class="label"><rect></rect><foreignObject height="96" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>全文查询<br>match, multi_match<br>match_phrase, query_string</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 270)" id="flowchart-B2-10990" class="node default"><rect height="102" width="151.734375" y="-51" x="-75.8671875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-45.8671875, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="91.734375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>词级查询<br>term, terms<br>range, exists</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 422)" id="flowchart-B3-10992" class="node default"><rect height="102" width="193.265625" y="-51" x="-96.6328125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-66.6328125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="133.265625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>地理查询<br>geo_distance<br>geo_bounding_box</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 574)" id="flowchart-B4-10994" class="node default"><rect height="102" width="180.109375" y="-51" x="-90.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-60.0546875, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="120.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>特殊查询<br>more_like_this<br>script, percolate</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 714)" id="flowchart-C1-10996" class="node default"><rect height="78" width="136.359375" y="-39" x="-68.1796875" data-et="node" data-id="abc" style="fill:#f3e5f5 !important" class="basic label-container"></rect><g transform="translate(-38.1796875, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="76.359375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>布尔查询<br>bool query</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 842)" id="flowchart-C2-10998" class="node default"><rect height="78" width="165.90625" y="-39" x="-82.953125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-52.953125, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="105.90625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>提升查询<br>boosting query</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 970)" id="flowchart-C3-11000" class="node default"><rect height="78" width="168.234375" y="-39" x="-84.1171875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-54.1171875, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="108.234375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>常量评分<br>constant_score</p></span></div></foreignObject></g></g><g transform="translate(703.234375, 1098)" id="flowchart-C4-11002" class="node default"><rect height="78" width="166.21875" y="-39" x="-83.109375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-53.109375, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="106.21875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>函数评分<br>function_score</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="nsy50f_15"><span class="control" id="nsy50f_21">查询类型详解：</span></p><ol class="list _decimal" id="nsy50f_16" type="1"><li class="list__item" id="nsy50f_22"><p id="nsy50f_25"><span class="control" id="nsy50f_27">全文查询(Full Text Queries)</span></p><div class="code-block" data-lang="json">
+// match查询 - 基础全文搜索
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;title&quot;: {
+        &quot;query&quot;: &quot;elasticsearch 教程&quot;,
+        &quot;operator&quot;: &quot;and&quot;,
+        &quot;minimum_should_match&quot;: &quot;75%&quot;
+      }
+    }
+  }
+}
+
+// multi_match查询 - 多字段搜索
+{
+  &quot;query&quot;: {
+    &quot;multi_match&quot;: {
+      &quot;query&quot;: &quot;java开发&quot;,
+      &quot;fields&quot;: [&quot;title^2&quot;, &quot;content&quot;, &quot;tags&quot;],
+      &quot;type&quot;: &quot;best_fields&quot;,
+      &quot;tie_breaker&quot;: 0.3
+    }
+  }
+}
+
+// match_phrase查询 - 短语匹配
+{
+  &quot;query&quot;: {
+    &quot;match_phrase&quot;: {
+      &quot;content&quot;: {
+        &quot;query&quot;: &quot;elasticsearch 是一个搜索引擎&quot;,
+        &quot;slop&quot;: 2
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_23"><p id="nsy50f_28"><span class="control" id="nsy50f_30">词级查询(Term Level Queries)</span></p><div class="code-block" data-lang="json">
+// term查询 - 精确匹配
+{
+  &quot;query&quot;: {
+    &quot;term&quot;: {
+      &quot;status&quot;: &quot;published&quot;
+    }
+  }
+}
+
+// range查询 - 范围查询
+{
+  &quot;query&quot;: {
+    &quot;range&quot;: {
+      &quot;price&quot;: {
+        &quot;gte&quot;: 100,
+        &quot;lte&quot;: 1000
+      },
+      &quot;created_at&quot;: {
+        &quot;gte&quot;: &quot;2023-01-01&quot;,
+        &quot;format&quot;: &quot;yyyy-MM-dd&quot;
+      }
+    }
+  }
+}
+
+// exists查询 - 字段存在性
+{
+  &quot;query&quot;: {
+    &quot;exists&quot;: {
+      &quot;field&quot;: &quot;description&quot;
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_24"><p id="nsy50f_31"><span class="control" id="nsy50f_33">复合查询(Compound Queries)</span></p><div class="code-block" data-lang="json">
+// bool查询 - 布尔组合
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {&quot;match&quot;: {&quot;title&quot;: &quot;elasticsearch&quot;}}
+      ],
+      &quot;filter&quot;: [
+        {&quot;term&quot;: {&quot;status&quot;: &quot;published&quot;}},
+        {&quot;range&quot;: {&quot;created_at&quot;: {&quot;gte&quot;: &quot;2023-01-01&quot;}}}
+      ],
+      &quot;should&quot;: [
+        {&quot;match&quot;: {&quot;tags&quot;: &quot;教程&quot;}},
+        {&quot;match&quot;: {&quot;category&quot;: &quot;技术&quot;}}
+      ],
+      &quot;must_not&quot;: [
+        {&quot;term&quot;: {&quot;author&quot;: &quot;spam_user&quot;}}
+      ],
+      &quot;minimum_should_match&quot;: 1
+    }
+  }
+}
+</div></li></ol><p id="nsy50f_17"><span class="control" id="nsy50f_34">查询与过滤的区别：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 619.921875 346"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="619.921875" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="subGraph0" class="cluster"><rect height="330" width="603.921875" y="8" x="8" style=""></rect><g transform="translate(209.9609375, 8)" class="cluster-label"><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Query Context vs Filter Context</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M161.445,99.5L161.445,105.75C161.445,112,161.445,124.5,161.445,134.875C161.445,145.25,161.445,153.5,161.445,161.083C161.445,168.667,161.445,175.583,161.445,179.042L161.445,182.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_1" d="M453.406,99.5L453.406,105.75C453.406,112,453.406,124.5,453.406,133.875C453.406,143.25,453.406,149.5,453.406,155.083C453.406,160.667,453.406,165.583,453.406,168.042L453.406,170.5"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(161.4453125, 72.5)" id="flowchart-A-11080" class="node default"><rect height="54" width="163.859375" y="-27" x="-81.9296875" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-51.9296875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="103.859375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Query Context</p></span></div></foreignObject></g></g><g transform="translate(161.4453125, 237.5)" id="flowchart-A1-11081" class="node default"><rect height="102" width="236.890625" y="-51" x="-118.4453125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-88.4453125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="176.890625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>计算相关性评分<br>回答: 文档匹配程度如何?<br>用于: must, should子句</p></span></div></foreignObject></g></g><g transform="translate(453.40625, 72.5)" id="flowchart-B-11082" class="node default"><rect height="54" width="160.46875" y="-27" x="-80.234375" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-50.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="100.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Filter Context</p></span></div></foreignObject></g></g><g transform="translate(453.40625, 237.5)" id="flowchart-B1-11083" class="node default"><rect height="126" width="247.03125" y="-63" x="-123.515625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-93.515625, -48)" style="" class="label"><rect></rect><foreignObject height="96" width="187.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>只判断是否匹配<br>回答: 文档是否匹配?<br>用于: filter, must_not子句<br>可以缓存结果</p></span></div></foreignObject></g></g></g></g></g></g></g></svg></section><section class="chapter"><h3 id="q2-es" data-toc="q2-es">Q2: 如何优化ES查询性能？有哪些常见的优化技巧？</h3><p id="nsy50f_35"><span class="control" id="nsy50f_40">答案：</span></p><p id="nsy50f_36"><span class="control" id="nsy50f_41">ES查询性能优化策略：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 526.375 644"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="526.375" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="ES查询性能优化策略" class="cluster"><rect height="628" width="510.375" y="8" x="8" style=""></rect><g transform="translate(190.9296875, 8)" class="cluster-label"><foreignObject height="24" width="144.515625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ES查询性能优化策略</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M201.656,94L207.906,94C214.156,94,226.656,94,236.031,94C245.406,94,251.656,94,257.24,94C262.823,94,267.74,94,270.198,94L272.656,94"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_1" d="M201.656,246L207.906,246C214.156,246,226.656,246,236.699,246C246.741,246,254.326,246,261.243,246C268.161,246,274.413,246,277.538,246L280.664,246"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_2" d="M201.656,398L207.906,398C214.156,398,226.656,398,238.034,398C249.411,398,259.667,398,269.255,398C278.844,398,287.766,398,292.227,398L296.688,398"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_D1_3" d="M201.656,550L207.906,550C214.156,550,226.656,550,238.034,550C249.411,550,259.667,550,269.255,550C278.844,550,287.766,550,292.227,550L296.688,550"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(123.578125, 94)" id="flowchart-A-11131" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>查询层面优化</p></span></div></foreignObject></g></g><g transform="translate(378.765625, 94)" id="flowchart-A1-11132" class="node default"><rect height="102" width="204.21875" y="-51" x="-102.109375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-72.109375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="144.21875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>使用过滤器代替查询<br>合理使用bool查询<br>避免深度嵌套</p></span></div></foreignObject></g></g><g transform="translate(123.578125, 246)" id="flowchart-B-11133" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>索引层面优化</p></span></div></foreignObject></g></g><g transform="translate(378.765625, 246)" id="flowchart-B1-11134" class="node default"><rect height="102" width="188.203125" y="-51" x="-94.1015625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-64.1015625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="128.203125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>合理设计映射<br>使用合适的分析器<br>控制分片数量</p></span></div></foreignObject></g></g><g transform="translate(123.578125, 398)" id="flowchart-C-11135" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>数据层面优化</p></span></div></foreignObject></g></g><g transform="translate(378.765625, 398)" id="flowchart-C1-11136" class="node default"><rect height="102" width="156.15625" y="-51" x="-78.078125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-48.078125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>数据预处理<br>反规范化设计<br>合理分区</p></span></div></foreignObject></g></g><g transform="translate(123.578125, 550)" id="flowchart-D-11137" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="fill:#f3e5f5 !important" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>系统层面优化</p></span></div></foreignObject></g></g><g transform="translate(378.765625, 550)" id="flowchart-D1-11138" class="node default"><rect height="102" width="156.15625" y="-51" x="-78.078125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-48.078125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>调整JVM参数<br>优化硬件配置<br>监控集群状态</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="nsy50f_38"><span class="control" id="nsy50f_42">具体优化技巧：</span></p><ol class="list _decimal" id="nsy50f_39" type="1"><li class="list__item" id="nsy50f_43"><p id="nsy50f_46"><span class="control" id="nsy50f_48">查询优化技巧</span></p><div class="code-block" data-lang="json">
+// 优化前：低效查询
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {&quot;wildcard&quot;: {&quot;title&quot;: &quot;*elasticsearch*&quot;}},  // 避免通配符查询
+        {&quot;script&quot;: {                                  // 避免复杂脚本
+          &quot;source&quot;: &quot;Math.log(doc['price'].value) &gt; 5&quot;
+        }}
+      ]
+    }
+  }
+}
+
+// 优化后：高效查询
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;filter&quot;: [                    // 使用filter而非must
+        {&quot;term&quot;: {&quot;status&quot;: &quot;active&quot;}},
+        {&quot;range&quot;: {&quot;price&quot;: {&quot;gte&quot;: 100}}}
+      ],
+      &quot;must&quot;: [
+        {&quot;match&quot;: {&quot;title&quot;: &quot;elasticsearch&quot;}}  // 使用match而非wildcard
+      ]
+    }
+  },
+  &quot;_source&quot;: [&quot;title&quot;, &quot;price&quot;],     // 只返回需要的字段
+  &quot;size&quot;: 20                         // 合理的分页大小
+}
+</div></li><li class="list__item" id="nsy50f_44"><p id="nsy50f_49"><span class="control" id="nsy50f_51">分页优化</span></p><div class="code-block" data-lang="json">
+// 深度分页问题（避免）
+{
+  &quot;from&quot;: 9990,
+  &quot;size&quot;: 10,
+  &quot;query&quot;: {&quot;match_all&quot;: {}}
+}
+
+// 使用scroll滚动搜索
+POST /my_index/_search?scroll=1m
+{
+  &quot;size&quot;: 1000,
+  &quot;query&quot;: {&quot;match_all&quot;: {}}
+}
+
+// 使用search_after
+{
+  &quot;size&quot;: 10,
+  &quot;query&quot;: {&quot;match_all&quot;: {}},
+  &quot;sort&quot;: [
+    {&quot;created_at&quot;: {&quot;order&quot;: &quot;desc&quot;}},
+    {&quot;_id&quot;: {&quot;order&quot;: &quot;desc&quot;}}
+  ],
+  &quot;search_after&quot;: [&quot;2023-12-01T10:00:00&quot;, &quot;doc_123&quot;]
+}
+</div></li><li class="list__item" id="nsy50f_45"><p id="nsy50f_52"><span class="control" id="nsy50f_54">聚合优化</span></p><div class="code-block" data-lang="json">
+// 优化聚合查询
+{
+  &quot;size&quot;: 0,  // 不返回文档，只要聚合结果
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;filter&quot;: [  // 先过滤再聚合
+        {&quot;term&quot;: {&quot;status&quot;: &quot;active&quot;}}
+      ]
+    }
+  },
+  &quot;aggs&quot;: {
+    &quot;categories&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;category.keyword&quot;,  // 使用keyword字段
+        &quot;size&quot;: 10,
+        &quot;execution_hint&quot;: &quot;map&quot;       // 指定执行方式
+      }
+    }
+  }
+}
+</div></li></ol></section></section><section class="chapter"><h2 id="nsy50f_6" data-toc="nsy50f_6">🔎 全文检索</h2><section class="chapter"><h3 id="q3-es" data-toc="q3-es">Q3: ES的相关性评分是如何计算的？如何自定义评分规则？</h3><p id="nsy50f_57"><span class="control" id="nsy50f_64">答案：</span></p><p id="nsy50f_58"><span class="control" id="nsy50f_65">ES相关性评分机制：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 959.54296875 733"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="959.54296875" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="ES相关性评分机制" class="cluster"><rect height="717" width="943.54296875" y="8" x="8" style=""></rect><g transform="translate(415.529296875, 8)" class="cluster-label"><foreignObject height="24" width="128.484375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ES相关性评分机制</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M342.813,87.705L309.283,95.921C275.753,104.137,208.693,120.568,175.163,132.909C141.633,145.25,141.633,153.5,141.633,161.083C141.633,168.667,141.633,175.583,141.633,179.042L141.633,182.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_C_1" d="M411.313,99.5L412.805,105.75C414.297,112,417.281,124.5,418.774,133.875C420.266,143.25,420.266,149.5,420.266,155.083C420.266,160.667,420.266,165.583,420.266,168.042L420.266,170.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_D_2" d="M466.922,86.227L505.176,94.689C543.43,103.151,619.938,120.076,658.191,132.663C696.445,145.25,696.445,153.5,696.445,161.083C696.445,168.667,696.445,175.583,696.445,179.042L696.445,182.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_E_3" d="M141.633,264.5L141.633,272.75C141.633,281,141.633,297.5,148.547,308.875C155.46,320.25,169.288,326.5,182.508,332.475C195.728,338.451,208.34,344.152,214.646,347.002L220.953,349.852"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_E_4" d="M420.266,276.5L420.266,282.75C420.266,289,420.266,301.5,413.68,310.875C407.094,320.25,393.922,326.5,381.352,332.464C368.783,338.428,356.816,344.107,350.832,346.946L344.848,349.785"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_E_5" d="M696.445,264.5L696.445,272.75C696.445,281,696.445,297.5,667.87,310.222C639.295,322.945,582.145,331.889,525.653,340.731C469.161,349.572,413.328,358.311,385.411,362.68L357.495,367.049"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_E_F_6" d="M284.332,405.5L284.332,411.75C284.332,418,284.332,430.5,284.332,439.875C284.332,449.25,284.332,455.5,284.332,461.083C284.332,466.667,284.332,471.583,284.332,474.042L284.332,476.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_G_7" d="M284.332,558.5L284.332,564.75C284.332,571,284.332,583.5,313.086,594.052C341.84,604.604,399.348,613.207,456.196,621.712C513.045,630.217,569.234,638.623,597.328,642.826L625.423,647.029"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_H_G_8" d="M502.715,546.5L502.715,554.75C502.715,563,502.715,579.5,513.27,590.95C523.826,602.4,544.936,608.8,565.409,615.007C585.882,621.214,605.716,627.227,615.634,630.234L625.551,633.241"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_I_G_9" d="M680.379,546.5L680.379,554.75C680.379,563,680.379,579.5,682.079,590.875C683.779,602.25,687.179,608.5,690.26,614.164C693.341,619.829,696.104,624.907,697.485,627.447L698.866,629.986"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_J_G_10" d="M854.488,546.5L854.488,554.75C854.488,563,854.488,579.5,847.753,590.875C841.017,602.25,827.546,608.5,814.679,614.469C801.813,620.439,789.551,626.128,783.42,628.972L777.289,631.817"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(404.8671875, 72.5)" id="flowchart-A-11197" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>查询词项</p></span></div></foreignObject></g></g><g transform="translate(141.6328125, 225.5)" id="flowchart-B-11198" class="node default"><rect height="78" width="197.265625" y="-39" x="-98.6328125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-68.6328125, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="137.265625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TF Term Frequency<br>词频</p></span></div></foreignObject></g></g><g transform="translate(420.265625, 225.5)" id="flowchart-C-11200" class="node default"><rect height="102" width="260" y="-51" x="-130" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-100, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>IDF Inverse Document Frequency<br>逆文档频率</p></span></div></foreignObject></g></g><g transform="translate(696.4453125, 225.5)" id="flowchart-D-11202" class="node default"><rect height="78" width="192.359375" y="-39" x="-96.1796875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-66.1796875, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="132.359375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Field Length Norm<br>字段长度归一化</p></span></div></foreignObject></g></g><g transform="translate(284.33203125, 378.5)" id="flowchart-E-11204" class="node default"><rect height="54" width="138.421875" y="-27" x="-69.2109375" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-39.2109375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="78.421875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TF-IDF评分</p></span></div></foreignObject></g></g><g transform="translate(284.33203125, 519.5)" id="flowchart-F-11210" class="node default"><rect height="78" width="181.515625" y="-39" x="-90.7578125" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-60.7578125, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="121.515625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>BM25算法<br>Best Matching 25</p></span></div></foreignObject></g></g><g transform="translate(715.46484375, 660.5)" id="flowchart-G-11212" class="node default"><rect height="54" width="172.171875" y="-27" x="-86.0859375" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-56.0859375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>最终相关性评分</p></span></div></foreignObject></g></g><g transform="translate(502.71484375, 519.5)" id="flowchart-H-11213" class="node default"><rect height="54" width="131.21875" y="-27" x="-65.609375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-35.609375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="71.21875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Boost权重</p></span></div></foreignObject></g></g><g transform="translate(680.37890625, 519.5)" id="flowchart-I-11215" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>脚本评分</p></span></div></foreignObject></g></g><g transform="translate(854.48828125, 519.5)" id="flowchart-J-11217" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>函数评分</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="nsy50f_60"><span class="control" id="nsy50f_66">BM25算法详解：</span></p><div class="code-block" data-lang="bash">
+# BM25评分公式
+score(D,Q) = Σ(i=1 to n) IDF(qi) × (f(qi,D) × (k1 + 1)) / (f(qi,D) + k1 × (1 - b + b × |D|/avgdl))
+
+其中：
+- IDF(qi): 词项qi的逆文档频率
+- f(qi,D): 词项qi在文档D中的频率
+- |D|: 文档D的长度
+- avgdl: 平均文档长度
+- k1: 控制词频饱和度的参数（默认1.2）
+- b: 控制字段长度归一化的参数（默认0.75）
+</div><p id="nsy50f_62"><span class="control" id="nsy50f_67">自定义评分示例：</span></p><ol class="list _decimal" id="nsy50f_63" type="1"><li class="list__item" id="nsy50f_68"><p id="nsy50f_71"><span class="control" id="nsy50f_73">使用boost提升权重</span></p><div class="code-block" data-lang="json">
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;should&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;title&quot;: {
+              &quot;query&quot;: &quot;elasticsearch&quot;,
+              &quot;boost&quot;: 2.0  // 标题匹配权重翻倍
+            }
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;content&quot;: {
+              &quot;query&quot;: &quot;elasticsearch&quot;,
+              &quot;boost&quot;: 1.0
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_69"><p id="nsy50f_74"><span class="control" id="nsy50f_76">使用function_score自定义评分</span></p><div class="code-block" data-lang="json">
+{
+  &quot;query&quot;: {
+    &quot;function_score&quot;: {
+      &quot;query&quot;: {
+        &quot;match&quot;: {&quot;title&quot;: &quot;elasticsearch&quot;}
+      },
+      &quot;functions&quot;: [
+        {
+          &quot;filter&quot;: {&quot;term&quot;: {&quot;category&quot;: &quot;technology&quot;}},
+          &quot;weight&quot;: 2.0  // 技术类文章权重翻倍
+        },
+        {
+          &quot;field_value_factor&quot;: {
+            &quot;field&quot;: &quot;views&quot;,
+            &quot;factor&quot;: 0.1,
+            &quot;modifier&quot;: &quot;log1p&quot;  // 浏览量影响评分
+          }
+        },
+        {
+          &quot;gauss&quot;: {  // 时间衰减函数
+            &quot;created_at&quot;: {
+              &quot;origin&quot;: &quot;now&quot;,
+              &quot;scale&quot;: &quot;30d&quot;,
+              &quot;decay&quot;: 0.5
+            }
+          }
+        }
+      ],
+      &quot;score_mode&quot;: &quot;multiply&quot;,
+      &quot;boost_mode&quot;: &quot;multiply&quot;
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_70"><p id="nsy50f_77"><span class="control" id="nsy50f_79">使用script_score脚本评分</span></p><div class="code-block" data-lang="json">
+{
+  &quot;query&quot;: {
+    &quot;script_score&quot;: {
+      &quot;query&quot;: {&quot;match&quot;: {&quot;title&quot;: &quot;elasticsearch&quot;}},
+      &quot;script&quot;: {
+        &quot;source&quot;: &quot;&quot;&quot;
+          double base_score = _score;
+          double view_factor = Math.log(1 + doc['views'].value);
+          double like_factor = Math.log(1 + doc['likes'].value);
+          double time_factor = Math.exp(-(System.currentTimeMillis() - doc['created_at'].value.millis) / 8.64e7);
+          return base_score * (1 + view_factor * 0.1 + like_factor * 0.2) * time_factor;
+        &quot;&quot;&quot;
+      }
+    }
+  }
+}
+</div></li></ol></section><section class="chapter"><h3 id="q4" data-toc="q4">Q4: 如何实现复杂的搜索功能，如搜索建议、高亮显示、模糊搜索？</h3><p id="nsy50f_80"><span class="control" id="nsy50f_83">答案：</span></p><p id="nsy50f_81"><span class="control" id="nsy50f_84">复杂搜索功能实现：</span></p><ol class="list _decimal" id="nsy50f_82" type="1"><li class="list__item" id="nsy50f_85"><p id="nsy50f_89"><span class="control" id="nsy50f_91">搜索建议(Search Suggestions)</span></p><div class="code-block" data-lang="json">
+// 自动补全映射设置
+PUT /products
+{
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;name&quot;: {
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;fields&quot;: {
+          &quot;suggest&quot;: {
+            &quot;type&quot;: &quot;completion&quot;,
+            &quot;analyzer&quot;: &quot;simple&quot;,
+            &quot;preserve_separators&quot;: true,
+            &quot;preserve_position_increments&quot;: true,
+            &quot;max_input_length&quot;: 50
+          }
+        }
+      }
+    }
+  }
+}
+
+// 自动补全查询
+POST /products/_search
+{
+  &quot;suggest&quot;: {
+    &quot;product_suggest&quot;: {
+      &quot;prefix&quot;: &quot;iph&quot;,
+      &quot;completion&quot;: {
+        &quot;field&quot;: &quot;name.suggest&quot;,
+        &quot;size&quot;: 10,
+        &quot;contexts&quot;: {
+          &quot;category&quot;: [&quot;electronics&quot;]
+        }
+      }
+    }
+  }
+}
+
+// 词项建议（纠错）
+POST /products/_search
+{
+  &quot;suggest&quot;: {
+    &quot;text&quot;: &quot;elasticsearc&quot;,  // 拼写错误
+    &quot;term_suggest&quot;: {
+      &quot;term&quot;: {
+        &quot;field&quot;: &quot;name&quot;,
+        &quot;suggest_mode&quot;: &quot;popular&quot;,
+        &quot;min_word_length&quot;: 4
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_86"><p id="nsy50f_92"><span class="control" id="nsy50f_94">高亮显示(Highlighting)</span></p><div class="code-block" data-lang="json">
+{
+  &quot;query&quot;: {
+    &quot;multi_match&quot;: {
+      &quot;query&quot;: &quot;elasticsearch 教程&quot;,
+      &quot;fields&quot;: [&quot;title&quot;, &quot;content&quot;]
+    }
+  },
+  &quot;highlight&quot;: {
+    &quot;pre_tags&quot;: [&quot;&lt;mark&gt;&quot;],
+    &quot;post_tags&quot;: [&quot;&lt;/mark&gt;&quot;],
+    &quot;fields&quot;: {
+      &quot;title&quot;: {
+        &quot;fragment_size&quot;: 100,
+        &quot;number_of_fragments&quot;: 1
+      },
+      &quot;content&quot;: {
+        &quot;fragment_size&quot;: 200,
+        &quot;number_of_fragments&quot;: 3,
+        &quot;highlight_query&quot;: {
+          &quot;match_phrase&quot;: {
+            &quot;content&quot;: &quot;elasticsearch 教程&quot;
+          }
+        }
+      }
+    },
+    &quot;type&quot;: &quot;unified&quot;,  // 高亮器类型
+    &quot;require_field_match&quot;: false
+  }
+}
+</div></li><li class="list__item" id="nsy50f_87"><p id="nsy50f_95"><span class="control" id="nsy50f_97">模糊搜索(Fuzzy Search)</span></p><div class="code-block" data-lang="json">
+// 模糊匹配查询
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;title&quot;: {
+        &quot;query&quot;: &quot;elasticsearh&quot;,  // 拼写错误
+        &quot;fuzziness&quot;: &quot;AUTO&quot;,      // 自动模糊度
+        &quot;prefix_length&quot;: 2,       // 前缀长度
+        &quot;max_expansions&quot;: 50      // 最大扩展数
+      }
+    }
+  }
+}
+
+// 模糊词项查询
+{
+  &quot;query&quot;: {
+    &quot;fuzzy&quot;: {
+      &quot;title&quot;: {
+        &quot;value&quot;: &quot;elasticsearh&quot;,
+        &quot;fuzziness&quot;: 2,
+        &quot;prefix_length&quot;: 0,
+        &quot;max_expansions&quot;: 100,
+        &quot;transpositions&quot;: true
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_88"><p id="nsy50f_98"><span class="control" id="nsy50f_100">更多相似文档查询</span></p><div class="code-block" data-lang="json">
+{
+  &quot;query&quot;: {
+    &quot;more_like_this&quot;: {
+      &quot;fields&quot;: [&quot;title&quot;, &quot;content&quot;],
+      &quot;like&quot;: [
+        {
+          &quot;_index&quot;: &quot;articles&quot;,
+          &quot;_id&quot;: &quot;1&quot;
+        },
+        &quot;Elasticsearch是一个搜索引擎&quot;
+      ],
+      &quot;min_term_freq&quot;: 2,
+      &quot;max_query_terms&quot;: 12,
+      &quot;min_doc_freq&quot;: 5,
+      &quot;analyzer&quot;: &quot;standard&quot;
+    }
+  }
+}
+</div></li></ol></section></section><section class="chapter"><h2 id="nsy50f_7" data-toc="nsy50f_7">📊 聚合分析</h2><section class="chapter"><h3 id="q5-es" data-toc="q5-es">Q5: ES中有哪些类型的聚合？如何设计复杂的聚合查询？</h3><p id="nsy50f_103"><span class="control" id="nsy50f_108">答案：</span></p><p id="nsy50f_104"><span class="control" id="nsy50f_109">ES聚合类型分类：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 944.5625 608"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="944.5625" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="ES聚合类型体系" class="cluster"><rect height="592" width="928.5625" y="8" x="8" style=""></rect><g transform="translate(416.046875, 8)" class="cluster-label"><foreignObject height="24" width="112.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ES聚合类型体系</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M152.801,295L171.823,261.5C190.846,228,228.892,161,251.133,127.5C273.374,94,279.81,94,285.579,94C291.349,94,296.452,94,299.003,94L301.555,94"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_C_1" d="M183.464,295L197.376,286.833C211.289,278.667,239.113,262.333,256.15,254.167C273.188,246,279.438,246,285.021,246C290.604,246,295.521,246,297.979,246L300.438,246"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_D_2" d="M183.464,349L197.376,357.167C211.289,365.333,239.113,381.667,256.15,389.833C273.188,398,279.438,398,285.021,398C290.604,398,295.521,398,297.979,398L300.438,398"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_E_3" d="M154.604,349L173.327,378.5C192.049,408,229.493,467,251.34,496.5C273.188,526,279.438,526,285.021,526C290.604,526,295.521,526,297.979,526L300.438,526"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_4" d="M563.32,94L569.757,94C576.193,94,589.065,94,600.124,94C611.182,94,620.427,94,629.005,94C637.583,94,645.495,94,649.451,94L653.406,94"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_5" d="M564.438,246L570.688,246C576.938,246,589.438,246,600.21,246C610.982,246,620.026,246,628.404,246C636.781,246,644.492,246,648.348,246L652.203,246"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_D1_6" d="M564.438,398L570.688,398C576.938,398,589.438,398,598.813,398C608.188,398,614.438,398,620.021,398C625.604,398,630.521,398,632.979,398L635.438,398"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_E_E1_7" d="M564.438,526L570.688,526C576.938,526,589.438,526,603.398,526C617.359,526,632.781,526,647.536,526C662.292,526,676.38,526,683.424,526L690.469,526"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(137.46875, 322)" id="flowchart-A-11245" class="node default"><rect height="54" width="183.9375" y="-27" x="-91.96875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-61.96875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="123.9375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>聚合Aggregations</p></span></div></foreignObject></g></g><g transform="translate(434.4375, 94)" id="flowchart-B-11246" class="node default"><rect height="54" width="257.765625" y="-27" x="-128.8828125" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-98.8828125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="197.765625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>桶聚合 Bucket Aggregations</p></span></div></foreignObject></g></g><g transform="translate(434.4375, 246)" id="flowchart-C-11248" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>指标聚合 Metric Aggregations</p></span></div></foreignObject></g></g><g transform="translate(434.4375, 398)" id="flowchart-D-11250" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>管道聚合 Pipeline Aggregations</p></span></div></foreignObject></g></g><g transform="translate(434.4375, 526)" id="flowchart-E-11252" class="node default"><rect height="78" width="260" y="-39" x="-130" data-et="node" data-id="abc" style="fill:#f3e5f5 !important" class="basic label-container"></rect><g transform="translate(-100, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>矩阵聚合 Matrix Aggregations</p></span></div></foreignObject></g></g><g transform="translate(769.25, 94)" id="flowchart-B1-11254" class="node default"><rect height="102" width="223.6875" y="-51" x="-111.84375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-81.84375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="163.6875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>terms, date_histogram<br>range, filters<br>nested, geo_distance</p></span></div></foreignObject></g></g><g transform="translate(769.25, 246)" id="flowchart-C1-11256" class="node default"><rect height="102" width="226.09375" y="-51" x="-113.046875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-83.046875, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="166.09375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>avg, sum, min, max<br>cardinality, percentiles<br>stats, extended_stats</p></span></div></foreignObject></g></g><g transform="translate(769.25, 398)" id="flowchart-D1-11258" class="node default"><rect height="102" width="259.625" y="-51" x="-129.8125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-99.8125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="199.625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>avg_bucket, max_bucket<br>derivative, cumulative_sum<br>bucket_script, bucket_sort</p></span></div></foreignObject></g></g><g transform="translate(769.25, 526)" id="flowchart-E1-11260" class="node default"><rect height="54" width="149.5625" y="-27" x="-74.78125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-44.78125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="89.5625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>matrix_stats</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="nsy50f_106"><span class="control" id="nsy50f_110">复杂聚合查询设计：</span></p><ol class="list _decimal" id="nsy50f_107" type="1"><li class="list__item" id="nsy50f_111"><p id="nsy50f_114"><span class="control" id="nsy50f_116">电商分析聚合示例</span></p><div class="code-block" data-lang="json">
+{
+  &quot;size&quot;: 0,
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;filter&quot;: [
+        {&quot;range&quot;: {&quot;order_date&quot;: {&quot;gte&quot;: &quot;2023-01-01&quot;}}},
+        {&quot;term&quot;: {&quot;status&quot;: &quot;completed&quot;}}
+      ]
+    }
+  },
+  &quot;aggs&quot;: {
+    // 按月销售趋势
+    &quot;sales_over_time&quot;: {
+      &quot;date_histogram&quot;: {
+        &quot;field&quot;: &quot;order_date&quot;,
+        &quot;calendar_interval&quot;: &quot;month&quot;,
+        &quot;format&quot;: &quot;yyyy-MM&quot;
+      },
+      &quot;aggs&quot;: {
+        &quot;total_sales&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}},
+        &quot;order_count&quot;: {&quot;value_count&quot;: {&quot;field&quot;: &quot;_id&quot;}},
+        &quot;avg_order_value&quot;: {
+          &quot;bucket_script&quot;: {
+            &quot;buckets_path&quot;: {
+              &quot;totalSales&quot;: &quot;total_sales&quot;,
+              &quot;orderCount&quot;: &quot;order_count&quot;
+            },
+            &quot;script&quot;: &quot;params.totalSales / params.orderCount&quot;
+          }
+        }
+      }
+    },
+
+    // 商品类别分析
+    &quot;categories&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;category.keyword&quot;,
+        &quot;size&quot;: 10
+      },
+      &quot;aggs&quot;: {
+        &quot;revenue&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}},
+        &quot;brands&quot;: {
+          &quot;terms&quot;: {
+            &quot;field&quot;: &quot;brand.keyword&quot;,
+            &quot;size&quot;: 5
+          },
+          &quot;aggs&quot;: {
+            &quot;brand_revenue&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}}
+          }
+        },
+        &quot;price_ranges&quot;: {
+          &quot;range&quot;: {
+            &quot;field&quot;: &quot;amount&quot;,
+            &quot;ranges&quot;: [
+              {&quot;to&quot;: 100},
+              {&quot;from&quot;: 100, &quot;to&quot;: 500},
+              {&quot;from&quot;: 500, &quot;to&quot;: 1000},
+              {&quot;from&quot;: 1000}
+            ]
+          }
+        }
+      }
+    },
+
+    // 用户行为分析
+    &quot;user_segments&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;user_id&quot;,
+        &quot;size&quot;: 1000
+      },
+      &quot;aggs&quot;: {
+        &quot;total_spent&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}},
+        &quot;order_frequency&quot;: {&quot;value_count&quot;: {&quot;field&quot;: &quot;_id&quot;}},
+        &quot;user_bucket_sort&quot;: {
+          &quot;bucket_sort&quot;: {
+            &quot;sort&quot;: [{&quot;total_spent&quot;: {&quot;order&quot;: &quot;desc&quot;}}],
+            &quot;size&quot;: 10
+          }
+        }
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_112"><p id="nsy50f_117"><span class="control" id="nsy50f_119">地理位置聚合分析</span></p><div class="code-block" data-lang="json">
+{
+  &quot;aggs&quot;: {
+    &quot;sales_by_distance&quot;: {
+      &quot;geo_distance&quot;: {
+        &quot;field&quot;: &quot;location&quot;,
+        &quot;origin&quot;: &quot;40.7128,-74.0060&quot;,  // 纽约坐标
+        &quot;ranges&quot;: [
+          {&quot;to&quot;: 10000},      // 10km内
+          {&quot;from&quot;: 10000, &quot;to&quot;: 50000},  // 10-50km
+          {&quot;from&quot;: 50000}     // 50km外
+        ]
+      },
+      &quot;aggs&quot;: {
+        &quot;total_sales&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}}
+      }
+    },
+
+    &quot;heatmap&quot;: {
+      &quot;geohash_grid&quot;: {
+        &quot;field&quot;: &quot;location&quot;,
+        &quot;precision&quot;: 5
+      },
+      &quot;aggs&quot;: {
+        &quot;sales_density&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}}
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_113"><p id="nsy50f_120"><span class="control" id="nsy50f_122">嵌套聚合分析</span></p><div class="code-block" data-lang="json">
+{
+  &quot;aggs&quot;: {
+    &quot;order_items&quot;: {
+      &quot;nested&quot;: {
+        &quot;path&quot;: &quot;items&quot;
+      },
+      &quot;aggs&quot;: {
+        &quot;products&quot;: {
+          &quot;terms&quot;: {
+            &quot;field&quot;: &quot;items.product_id&quot;,
+            &quot;size&quot;: 20
+          },
+          &quot;aggs&quot;: {
+            &quot;total_quantity&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;items.quantity&quot;}},
+            &quot;total_revenue&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;items.revenue&quot;}},
+            &quot;reverse_nested_orders&quot;: {
+              &quot;reverse_nested&quot;: {},
+              &quot;aggs&quot;: {
+                &quot;unique_customers&quot;: {
+                  &quot;cardinality&quot;: {&quot;field&quot;: &quot;customer_id&quot;}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</div></li></ol></section><section class="chapter"><h3 id="q6" data-toc="q6">Q6: 如何使用管道聚合进行高级数据分析？</h3><p id="nsy50f_123"><span class="control" id="nsy50f_128">答案：</span></p><p id="nsy50f_124"><span class="control" id="nsy50f_129">管道聚合工作原理：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 630.12890625 661"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="630.12890625" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="管道聚合处理流程" class="cluster"><rect height="645" width="614.12890625" y="8" x="8" style=""></rect><g transform="translate(250.962890625, 8)" class="cluster-label"><foreignObject height="24" width="128.203125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>管道聚合处理流程</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M105.055,99.5L105.055,105.75C105.055,112,105.055,124.5,105.055,133.875C105.055,143.25,105.055,149.5,105.055,155.083C105.055,160.667,105.055,165.583,105.055,168.042L105.055,170.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M105.055,228.5L105.055,234.75C105.055,241,105.055,253.5,105.055,262.875C105.055,272.25,105.055,278.5,105.055,284.083C105.055,289.667,105.055,294.583,105.055,297.042L105.055,299.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_D_2" d="M105.055,357.5L105.055,363.75C105.055,370,105.055,382.5,105.055,391.875C105.055,401.25,105.055,407.5,105.055,413.083C105.055,418.667,105.055,423.583,105.055,426.042L105.055,428.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_E_3" d="M105.055,486.5L105.055,492.75C105.055,499,105.055,511.5,105.055,520.875C105.055,530.25,105.055,536.5,105.055,542.083C105.055,547.667,105.055,552.583,105.055,555.042L105.055,557.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_G_4" d="M365.556,486.5L355.51,492.75C345.464,499,325.373,511.5,315.327,520.875C305.281,530.25,305.281,536.5,305.281,542.083C305.281,547.667,305.281,552.583,305.281,555.042L305.281,557.5"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_H_5" d="M452.351,486.5L462.396,492.75C472.442,499,492.534,511.5,502.579,520.875C512.625,530.25,512.625,536.5,512.625,542.083C512.625,547.667,512.625,552.583,512.625,555.042L512.625,557.5"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(105.0546875, 72.5)" id="flowchart-A-11329" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>原始数据</p></span></div></foreignObject></g></g><g transform="translate(105.0546875, 201.5)" id="flowchart-B-11330" class="node default"><rect height="54" width="108.078125" y="-27" x="-54.0390625" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-24.0390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>桶聚合</p></span></div></foreignObject></g></g><g transform="translate(105.0546875, 330.5)" id="flowchart-C-11332" class="node default"><rect height="54" width="108.078125" y="-27" x="-54.0390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-24.0390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>桶结果</p></span></div></foreignObject></g></g><g transform="translate(105.0546875, 459.5)" id="flowchart-D-11334" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>管道聚合</p></span></div></foreignObject></g></g><g transform="translate(105.0546875, 588.5)" id="flowchart-E-11336" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>最终结果</p></span></div></foreignObject></g></g><g transform="translate(408.953125, 459.5)" id="flowchart-F-11337" class="node default"><rect height="54" width="159.671875" y="-27" x="-79.8359375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.8359375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="99.671875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>父聚合 Parent</p></span></div></foreignObject></g></g><g transform="translate(305.28125, 588.5)" id="flowchart-G-11338" class="node default"><rect height="54" width="176.34375" y="-27" x="-88.171875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-58.171875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="116.34375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>同级聚合 Sibling</p></span></div></foreignObject></g></g><g transform="translate(512.625, 588.5)" id="flowchart-H-11340" class="node default"><rect height="54" width="138.34375" y="-27" x="-69.171875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-39.171875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="78.34375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>子聚合 Sub</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="nsy50f_126"><span class="control" id="nsy50f_130">管道聚合类型和应用：</span></p><ol class="list _decimal" id="nsy50f_127" type="1"><li class="list__item" id="nsy50f_131"><p id="nsy50f_134"><span class="control" id="nsy50f_136">同级管道聚合(Sibling Pipeline)</span></p><div class="code-block" data-lang="json">
+{
+  &quot;aggs&quot;: {
+    &quot;monthly_sales&quot;: {
+      &quot;date_histogram&quot;: {
+        &quot;field&quot;: &quot;date&quot;,
+        &quot;calendar_interval&quot;: &quot;month&quot;
+      },
+      &quot;aggs&quot;: {
+        &quot;sales&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}}
+      }
+    },
+
+    // 计算最大销售月份
+    &quot;max_monthly_sales&quot;: {
+      &quot;max_bucket&quot;: {
+        &quot;buckets_path&quot;: &quot;monthly_sales&gt;sales&quot;
+      }
+    },
+
+    // 计算平均月销售额
+    &quot;avg_monthly_sales&quot;: {
+      &quot;avg_bucket&quot;: {
+        &quot;buckets_path&quot;: &quot;monthly_sales&gt;sales&quot;
+      }
+    },
+
+    // 统计月销售额
+    &quot;sales_stats&quot;: {
+      &quot;stats_bucket&quot;: {
+        &quot;buckets_path&quot;: &quot;monthly_sales&gt;sales&quot;
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_132"><p id="nsy50f_137"><span class="control" id="nsy50f_139">父级管道聚合(Parent Pipeline)</span></p><div class="code-block" data-lang="json">
+{
+  &quot;aggs&quot;: {
+    &quot;daily_sales&quot;: {
+      &quot;date_histogram&quot;: {
+        &quot;field&quot;: &quot;date&quot;,
+        &quot;calendar_interval&quot;: &quot;day&quot;
+      },
+      &quot;aggs&quot;: {
+        &quot;sales&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}},
+
+        // 计算销售增长率
+        &quot;sales_derivative&quot;: {
+          &quot;derivative&quot;: {
+            &quot;buckets_path&quot;: &quot;sales&quot;
+          }
+        },
+
+        // 计算累计销售额
+        &quot;cumulative_sales&quot;: {
+          &quot;cumulative_sum&quot;: {
+            &quot;buckets_path&quot;: &quot;sales&quot;
+          }
+        },
+
+        // 移动平均
+        &quot;sales_moving_avg&quot;: {
+          &quot;moving_avg&quot;: {
+            &quot;buckets_path&quot;: &quot;sales&quot;,
+            &quot;window&quot;: 7,
+            &quot;model&quot;: &quot;linear&quot;
+          }
+        }
+      }
+    }
+  }
+}
+</div></li><li class="list__item" id="nsy50f_133"><p id="nsy50f_140"><span class="control" id="nsy50f_142">复杂的业务分析示例</span></p><div class="code-block" data-lang="json">
+{
+  &quot;aggs&quot;: {
+    &quot;categories&quot;: {
+      &quot;terms&quot;: {
+        &quot;field&quot;: &quot;category.keyword&quot;
+      },
+      &quot;aggs&quot;: {
+        &quot;monthly_revenue&quot;: {
+          &quot;date_histogram&quot;: {
+            &quot;field&quot;: &quot;date&quot;,
+            &quot;calendar_interval&quot;: &quot;month&quot;
+          },
+          &quot;aggs&quot;: {
+            &quot;revenue&quot;: {&quot;sum&quot;: {&quot;field&quot;: &quot;amount&quot;}},
+            &quot;order_count&quot;: {&quot;value_count&quot;: {&quot;field&quot;: &quot;_id&quot;}},
+
+            // 计算每月增长率
+            &quot;revenue_growth&quot;: {
+              &quot;derivative&quot;: {
+                &quot;buckets_path&quot;: &quot;revenue&quot;
+              }
+            },
+
+            // 计算复合指标
+            &quot;performance_score&quot;: {
+              &quot;bucket_script&quot;: {
+                &quot;buckets_path&quot;: {
+                  &quot;revenue&quot;: &quot;revenue&quot;,
+                  &quot;orders&quot;: &quot;order_count&quot;,
+                  &quot;growth&quot;: &quot;revenue_growth&quot;
+                },
+                &quot;script&quot;: &quot;&quot;&quot;
+                  double baseScore = params.revenue / 1000;
+                  double orderBonus = params.orders * 0.1;
+                  double growthBonus = params.growth != null ? params.growth / 100 : 0;
+                  return baseScore + orderBonus + growthBonus;
+                &quot;&quot;&quot;
+              }
+            }
+          }
+        },
+
+        // 选择表现最好的月份
+        &quot;best_month&quot;: {
+          &quot;max_bucket&quot;: {
+            &quot;buckets_path&quot;: &quot;monthly_revenue&gt;performance_score&quot;
+          }
+        }
+      }
+    },
+
+    // 跨类别比较
+    &quot;category_comparison&quot;: {
+      &quot;stats_bucket&quot;: {
+        &quot;buckets_path&quot;: &quot;categories&gt;best_month&quot;
+      }
+    }
+  }
+}
+</div></li></ol></section></section><section class="chapter"><h2 id="nsy50f_8" data-toc="nsy50f_8">💡 面试技巧</h2><section class="chapter"><h3 id="nsy50f_143" data-toc="nsy50f_143">高频考点</h3><ol class="list _decimal" id="nsy50f_146" type="1"><li class="list__item" id="nsy50f_147"><p id="nsy50f_152"><span class="control" id="nsy50f_153">Query DSL掌握</span> ：各种查询类型的特点和使用场景</p></li><li class="list__item" id="nsy50f_148"><p id="nsy50f_154"><span class="control" id="nsy50f_155">性能优化</span> ：查询优化技巧和最佳实践</p></li><li class="list__item" id="nsy50f_149"><p id="nsy50f_156"><span class="control" id="nsy50f_157">相关性评分</span> ：BM25算法原理和自定义评分方法</p></li><li class="list__item" id="nsy50f_150"><p id="nsy50f_158"><span class="control" id="nsy50f_159">聚合分析</span> ：复杂聚合查询的设计和实现</p></li><li class="list__item" id="nsy50f_151"><p id="nsy50f_160"><span class="control" id="nsy50f_161">高级功能</span> ：搜索建议、高亮、模糊搜索等功能实现</p></li></ol></section><section class="chapter"><h3 id="nsy50f_144" data-toc="nsy50f_144">回答策略</h3><ol class="list _decimal" id="nsy50f_162" type="1"><li class="list__item" id="nsy50f_163"><p id="nsy50f_167"><span class="control" id="nsy50f_168">原理解释</span> ：深入理解ES搜索和聚合的底层原理</p></li><li class="list__item" id="nsy50f_164"><p id="nsy50f_169"><span class="control" id="nsy50f_170">实际应用</span> ：结合业务场景说明查询设计思路</p></li><li class="list__item" id="nsy50f_165"><p id="nsy50f_171"><span class="control" id="nsy50f_172">性能考虑</span> ：说明不同查询方式的性能特点</p></li><li class="list__item" id="nsy50f_166"><p id="nsy50f_173"><span class="control" id="nsy50f_174">最佳实践</span> ：提及业界认可的查询优化方法</p></li></ol></section><section class="chapter"><h3 id="nsy50f_145" data-toc="nsy50f_145">常见问题解决</h3><ol class="list _decimal" id="nsy50f_175" type="1"><li class="list__item" id="nsy50f_178"><p id="nsy50f_182"><span class="control" id="nsy50f_183">深度分页问题</span> ：使用scroll或search_after替代from/size</p></li><li class="list__item" id="nsy50f_179"><p id="nsy50f_184"><span class="control" id="nsy50f_185">聚合内存问题</span> ：合理设置circuit breaker和使用composite聚合</p></li><li class="list__item" id="nsy50f_180"><p id="nsy50f_186"><span class="control" id="nsy50f_187">查询超时问题</span> ：优化查询结构和设置合理的timeout</p></li><li class="list__item" id="nsy50f_181"><p id="nsy50f_188"><span class="control" id="nsy50f_189">相关性问题</span> ：使用function_score或rescore优化评分</p></li></ol><p id="nsy50f_177"><span class="control" id="nsy50f_190">学习建议</span> ：ES查询与聚合是ES的核心功能，建议通过大量实践来掌握各种查询语法，重点理解不同查询类型的性能特点和适用场景，特别要掌握复杂聚合分析的设计思路。</p></section></section><div class="last-modified">09 六月 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="es索引管理qa.html" class="navigation-links__prev">ES索引管理QA</a><a href="es集群管理qa.html" class="navigation-links__next">ES集群管理QA</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
