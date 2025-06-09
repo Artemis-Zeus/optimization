@@ -1,0 +1,563 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-10T01:07:27.3860591"><title>Map集合详解QA | 技术知识库</title><script type="application/json" id="virtual-toc-data">[{"id":"-dd27ij_4","level":0,"title":"📋 知识结构","anchor":"#-dd27ij_4"},{"id":"hashmap","level":0,"title":"🗺️ HashMap深入分析","anchor":"#hashmap"},{"id":"treemap","level":0,"title":"🌲 TreeMap有序映射","anchor":"#treemap"},{"id":"-dd27ij_7","level":0,"title":"💡 面试技巧","anchor":"#-dd27ij_7"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Map集合详解QA | 技术知识库"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="技术知识库 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/map集合详解qa.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Map集合详解QA | 技术知识库"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/map集合详解qa.html#webpage",
+    "url": "writerside-documentation/map集合详解qa.html",
+    "name": "Map集合详解QA | 技术知识库",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "技术知识库 Help"
+}</script><!-- End Schema.org --></head><body data-id="Map集合详解QA" data-main-title="Map集合详解QA" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="Java集合面试大纲.md|Java集合面试大纲"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>技术知识库  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Map集合详解QA" id="Map集合详解QA.md">Map集合详解QA</h1><p id="-dd27ij_3">Map是Java集合框架中的核心接口，提供键值对映射关系。本文档深入解析HashMap、TreeMap、LinkedHashMap、ConcurrentHashMap等重要实现类。</p><section class="chapter"><h2 id="-dd27ij_4" data-toc="-dd27ij_4">📋 知识结构</h2><svg aria-roledescription="mindmap" role="graphics-document document" viewBox="5 5 764.54541015625 437.9717102050781" style="max-width: 764.54541015625px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g></g><g class="mindmap-edges"><path class="edge section-edge-0 edge-depth-1" d="M 568.3622768348533,166.40413948554757 L 616.3291974388046,139.76689722642115 L664.2961180427559,113.12965496729473"></path><path class="edge section-edge-0 edge-depth-1" d="M 554.949683136023,158.6894548966691 L 554.3319736002062,127.70192837524101 L553.7142640643893,96.71440185381292"></path><path class="edge section-edge-0 edge-depth-1" d="M 570.229916268836,174.4356314264848 L 632.1230269844633,177.53066659298023 L694.0161377000907,180.62570175947565"></path><path class="edge section-edge-0 edge-depth-1" d="M 566.8054840964916,183.24886311795518 L 597.9634463866529,209.0296386374482 L629.1214086768142,234.8104141569412"></path><path class="edge section-edge-0 edge-depth-0" d="M 419.9518606269351,216.55294059574632 L 480.4505235843262,197.38497579702485 L540.9491865417174,178.21701099830338"></path><path class="edge section-edge-1 edge-depth-1" d="M 464.4704233659626,323.7293826770774 L 512.1111801459219,350.4013439614929 L559.7519369258813,377.0733052459084"></path><path class="edge section-edge-1 edge-depth-1" d="M 450.10781874303825,331.3475490176189 L 447.21857695909694,365.2367448040841 L444.3293351751556,399.12594059054925"></path><path class="edge section-edge-1 edge-depth-1" d="M 466.3820180250964,316.38324174936884 L 532.9732052227389,316.3009985148241 L599.5643924203814,316.2187552802793"></path><path class="edge section-edge-1 edge-depth-1" d="M 437.82836460303156,322.8281325693467 L 386.5228294002021,347.15425438541115 L335.21729419737255,371.4803762014756"></path><path class="edge section-edge-1 edge-depth-0" d="M 412.14070638013976,234.60760371596524 L 428.51722043240136,268.7426217600811 L444.89373448466296,302.877639804197"></path><path class="edge section-edge-2 edge-depth-1" d="M 210.76374511260184,255.40521996367656 L 141.6201197654126,248.3174632213761 L72.47649441822335,241.22970647907567"></path><path class="edge section-edge-2 edge-depth-1" d="M 214.53929511171535,246.89684493478853 L 183.72351205783798,219.14509970371222 L152.9077290039606,191.3933544726359"></path><path class="edge section-edge-2 edge-depth-1" d="M 223.07793573412062,271.7064264392681 L 217.71867533774542,302.06552564219373 L212.35941494137023,332.42462484511935"></path><path class="edge section-edge-2 edge-depth-1" d="M 211.90584742173147,262.8610117559534 L 153.21182770508176,288.1033508917094 L94.51780798843205,313.34569002746537"></path><path class="edge section-edge-2 edge-depth-0" d="M 390.941472872693,224.01405412371503 L 315.6689817152448,239.00914837207694 L240.39649055779657,254.0042426204388"></path><path class="edge section-edge-3 edge-depth-1" d="M 367.26712628211686,117.16359779423193 L 292.3220699984751,99.57228902678477 L217.37701371483337,81.98098025933761"></path><path class="edge section-edge-3 edge-depth-1" d="M 372.6239234599845,108.78003244408364 L 350.30617739015577,80.27134025360922 L327.98843132032704,51.762648063134804"></path><path class="edge section-edge-3 edge-depth-1" d="M 368.1946123600753,126.75384184895981 L 319.95393171057856,148.49222866661856 L271.7132510610818,170.2306154842773"></path><path class="edge section-edge-3 edge-depth-1" d="M 389.33488624113596,107.58055144382641 L 406.7389308838359,77.2456405397219 L424.14297552653585,46.9107296356174"></path><path class="edge section-edge-3 edge-depth-0" d="M 402.1979757709131,206.4866656608051 L 393.76132667631657,170.83737858097038 L385.32467758172004,135.18809150113572"></path></g><g class="mindmap-nodes"><g transform="translate(364.26847356397104, 202.183476082497)" class="mindmap-node section--1 section-root"><g transform="translate(41.38393783569336, 18.9)"><circle r="41.38393783569336" class="node-bkg node-circle" id="node-0"></circle></g><g transform="translate(41.38393783569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Map集合</tspan></tspan></text></g></g></g><g transform="translate(513.7508521080994, 154.78647551155268)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h72.99556732177734 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-1"></path><line y2="37.8" x2="82.99556732177734" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(41.49778366088867, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">HashMap</tspan></tspan></text></g></g></g><g transform="translate(410.82955830424964, 297.5017674376652)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h71.10494232177734 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-6"></path><line y2="37.8" x2="81.10494232177734" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(40.55247116088867, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">TreeMap</tspan></tspan></text></g></g></g><g transform="translate(160.55716839435058, 238.03482066165677)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h120.25676727294922 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-11"></path><line y2="37.8" x2="130.25676727294922" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(65.12838363647461, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">LinkedHashMap</tspan></tspan></text></g></g></g><g transform="translate(300.3462017308008, 101.6912810794438)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h153.04808044433594 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-16"></path><line y2="37.8" x2="163.04808044433594" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(81.52404022216797, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ConcurrentHashMap</tspan></tspan></text></g></g></g><g transform="translate(627.3472591086212, 86.94731894128961)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h90.125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-2"></path><line y2="37.8" x2="100.125" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(50.0625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">哈希表实现</tspan></tspan></text></g></g></g><g transform="translate(510.86062393142436, 62.817381238929336)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-3"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">扩容机制</tspan></tspan></text></g></g></g><g transform="translate(658.4494178642452, 162.47485767440776)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h91.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-4"></path><line y2="37.8" x2="101.09600067138672" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(50.54800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">红黑树优化</tspan></tspan></text></g></g></g><g transform="translate(597.0845070043177, 225.47280176334368)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h77.1875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-5"></path><line y2="37.8" x2="87.1875" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(43.59375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">JDK8改进</tspan></tspan></text></g></g></g><g transform="translate(522.7778308267056, 365.50092048532065)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h90.125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-7"></path><line y2="37.8" x2="100.125" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(50.0625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">红黑树实现</tspan></tspan></text></g></g></g><g transform="translate(392.0071241173622, 395.171722170503)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-8"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">有序性保证</tspan></tspan></text></g></g></g><g transform="translate(546.1503184803395, 297.300229591983)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h126.828125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-9"></path><line y2="37.8" x2="136.828125" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(68.4140625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Comparator接口</tspan></tspan></text></g></g></g><g transform="translate(279.1089418352658, 359.00674133315715)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-10"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">导航方法</tspan></tspan></text></g></g></g><g transform="translate(15, 220.80010578109545)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-12"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">插入顺序</tspan></tspan></text></g></g></g><g transform="translate(99.70678458485077, 162.4553787457677)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h74.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-13"></path><line y2="37.8" x2="84.109375" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(42.0546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">访问顺序</tspan></tspan></text></g></g></g><g transform="translate(169.3092670589723, 328.2962306227307)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h70.88506317138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-14"></path><line y2="37.8" x2="80.88506317138672" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(40.44253158569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">LRU缓存</tspan></tspan></text></g></g></g><g transform="translate(22.716317643254342, 300.37188112176204)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h106.04357147216797 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-15"></path><line y2="37.8" x2="116.04357147216797" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(58.021785736083984, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">继承HashMap</tspan></tspan></text></g></g></g><g transform="translate(159.7378987458858, 59.653296974125745)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-17"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程安全</tspan></tspan></text></g></g></g><g transform="translate(283.7181126594961, 21.05139942777464)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h60.04800033569336 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-18"></path><line y2="37.8" x2="70.04800033569336" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(35.02400016784668, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">分段锁</tspan></tspan></text></g></g></g><g transform="translate(218.13805863249502, 157.4931762537933)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h69.79912567138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-19"></path><line y2="37.8" x2="79.79912567138672" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(39.89956283569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">CAS优化</tspan></tspan></text></g></g></g><g transform="translate(389.05293231470307, 15)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-20"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">并发性能</tspan></tspan></text></g></g></g></g></svg></section><section class="chapter"><h2 id="hashmap" data-toc="hashmap">🗺️ HashMap深入分析</h2><section class="chapter"><h3 id="q1-hashmap-jdk7-jdk8" data-toc="q1-hashmap-jdk7-jdk8">Q1: HashMap的实现原理是什么？JDK7和JDK8有什么区别？</h3><p id="-dd27ij_11"><span class="control" id="-dd27ij_16">答案：</span></p><p id="-dd27ij_12"><span class="control" id="-dd27ij_17">HashMap基本结构：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1133.0625 556"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="1133.0625" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="subGraph1" class="cluster"><rect height="540" width="552.984375" y="8" x="8" style=""></rect><g transform="translate(217.0078125, 8)" class="cluster-label"><foreignObject height="24" width="134.96875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>JDK8 HashMap结构</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_6" d="M98.76,355L111.477,307.5C124.194,260,149.628,165,165.787,117.5C181.947,70,188.831,70,195.048,70C201.266,70,206.816,70,209.592,70L212.367,70"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B2_7" d="M137.563,382L143.813,382C150.063,382,162.563,382,171.938,382C181.313,382,187.563,382,193.146,382C198.729,382,203.646,382,206.104,382L208.563,382"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B3_8" d="M113.217,409L123.525,421.833C133.832,434.667,154.447,460.333,168.197,473.167C181.947,486,188.831,486,195.048,486C201.266,486,206.816,486,209.592,486L212.367,486"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B1_B11_9" d="M316.836,70L323.72,70C330.604,70,344.372,70,355.686,70C366.999,70,375.857,70,384.048,70C392.24,70,399.764,70,403.527,70L407.289,70"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B1_B12_10" d="M290.367,97L301.662,109.833C312.958,122.667,335.549,148.333,351.274,161.167C366.999,174,375.857,174,384.048,174C392.24,174,399.764,174,403.527,174L407.289,174"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B2_B21_11" d="M290.367,355L301.662,342.167C312.958,329.333,335.549,303.667,349.97,290.833C364.391,278,370.641,278,376.224,278C381.807,278,386.724,278,389.182,278L391.641,278"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B2_B22_12" d="M320.641,382L326.891,382C333.141,382,345.641,382,355.016,382C364.391,382,370.641,382,376.224,382C381.807,382,386.724,382,389.182,382L391.641,382"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B2_B23_13" d="M290.367,409L301.662,421.833C312.958,434.667,335.549,460.333,349.97,473.167C364.391,486,370.641,486,376.224,486C381.807,486,386.724,486,389.182,486L391.641,486"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(91.53125, 382)" id="flowchart-B-2211" class="node default"><rect height="54" width="92.0625" y="-27" x="-46.03125" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-16.03125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="32.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>数组</p></span></div></foreignObject></g></g><g transform="translate(266.6015625, 70)" id="flowchart-B1-2212" class="node default"><rect height="54" width="100.46875" y="-27" x="-50.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-20.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表1</p></span></div></foreignObject></g></g><g transform="translate(266.6015625, 382)" id="flowchart-B2-2214" class="node default"><rect height="54" width="108.078125" y="-27" x="-54.0390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-24.0390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>红黑树</p></span></div></foreignObject></g></g><g transform="translate(266.6015625, 486)" id="flowchart-B3-2216" class="node default"><rect height="54" width="100.46875" y="-27" x="-50.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-20.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表3</p></span></div></foreignObject></g></g><g transform="translate(459.5625, 70)" id="flowchart-B11-2218" class="node default"><rect height="54" width="96.546875" y="-27" x="-48.2734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Node</p></span></div></foreignObject></g></g><g transform="translate(459.5625, 174)" id="flowchart-B12-2220" class="node default"><rect height="54" width="96.546875" y="-27" x="-48.2734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Node</p></span></div></foreignObject></g></g><g transform="translate(459.5625, 278)" id="flowchart-B21-2222" class="node default"><rect height="54" width="127.84375" y="-27" x="-63.921875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-33.921875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="67.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TreeNode</p></span></div></foreignObject></g></g><g transform="translate(459.5625, 382)" id="flowchart-B22-2224" class="node default"><rect height="54" width="127.84375" y="-27" x="-63.921875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-33.921875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="67.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TreeNode</p></span></div></foreignObject></g></g><g transform="translate(459.5625, 486)" id="flowchart-B23-2226" class="node default"><rect height="54" width="127.84375" y="-27" x="-63.921875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-33.921875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="67.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TreeNode</p></span></div></foreignObject></g></g></g></g><g transform="translate(602.984375, 52)" class="root"><g class="clusters"><g data-look="classic" id="subGraph0" class="cluster"><rect height="436" width="514.078125" y="8" x="8" style=""></rect><g transform="translate(197.5546875, 8)" class="cluster-label"><foreignObject height="24" width="134.96875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>JDK7 HashMap结构</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M105.989,251L117.501,229.5C129.013,208,152.038,165,166.675,143.5C181.313,122,187.563,122,193.146,122C198.729,122,203.646,122,206.104,122L208.563,122"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A2_1" d="M137.563,278L143.813,278C150.063,278,162.563,278,171.938,278C181.313,278,187.563,278,193.146,278C198.729,278,203.646,278,206.104,278L208.563,278"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A3_2" d="M113.217,305L123.525,317.833C133.832,330.667,154.447,356.333,167.88,369.167C181.313,382,187.563,382,193.146,382C198.729,382,203.646,382,206.104,382L208.563,382"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A1_A11_3" d="M308.351,95L315.381,90.833C322.411,86.667,336.471,78.333,346.626,74.167C356.781,70,363.031,70,368.615,70C374.198,70,379.115,70,381.573,70L384.031,70"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A1_A12_4" d="M308.351,149L315.381,153.167C322.411,157.333,336.471,165.667,346.626,169.833C356.781,174,363.031,174,368.615,174C374.198,174,379.115,174,381.573,174L384.031,174"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A2_A21_5" d="M313.031,278L319.281,278C325.531,278,338.031,278,347.406,278C356.781,278,363.031,278,368.615,278C374.198,278,379.115,278,381.573,278L384.031,278"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(91.53125, 278)" id="flowchart-A-2199" class="node default"><rect height="54" width="92.0625" y="-27" x="-46.03125" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-16.03125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="32.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>数组</p></span></div></foreignObject></g></g><g transform="translate(262.796875, 122)" id="flowchart-A1-2200" class="node default"><rect height="54" width="100.46875" y="-27" x="-50.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-20.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表1</p></span></div></foreignObject></g></g><g transform="translate(262.796875, 278)" id="flowchart-A2-2202" class="node default"><rect height="54" width="100.46875" y="-27" x="-50.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-20.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表2</p></span></div></foreignObject></g></g><g transform="translate(262.796875, 382)" id="flowchart-A3-2204" class="node default"><rect height="54" width="100.46875" y="-27" x="-50.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-20.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="40.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表3</p></span></div></foreignObject></g></g><g transform="translate(436.3046875, 70)" id="flowchart-A11-2206" class="node default"><rect height="54" width="96.546875" y="-27" x="-48.2734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Node</p></span></div></foreignObject></g></g><g transform="translate(436.3046875, 174)" id="flowchart-A12-2208" class="node default"><rect height="54" width="96.546875" y="-27" x="-48.2734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Node</p></span></div></foreignObject></g></g><g transform="translate(436.3046875, 278)" id="flowchart-A21-2210" class="node default"><rect height="54" width="96.546875" y="-27" x="-48.2734375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-18.2734375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="36.546875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Node</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="-dd27ij_14"><span class="control" id="-dd27ij_18">HashMap核心实现：</span></p><div class="code-block" data-lang="java">
+// HashMap实现原理分析
+public class HashMapAnalysis {
+    
+    // 1. HashMap基本结构演示
+    public void hashMapStructureDemo() {
+        Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+        
+        // 添加元素，观察hash分布
+        map.put(&quot;apple&quot;, 1);   // hash: 93029210
+        map.put(&quot;banana&quot;, 2);  // hash: -1396355227
+        map.put(&quot;cherry&quot;, 3);  // hash: -1274652045
+        
+        System.out.println(&quot;HashMap size: &quot; + map.size());
+        
+        // 演示key的hash计算
+        demonstrateHashFunction();
+    }
+    
+    // 2. Hash函数分析
+    private void demonstrateHashFunction() {
+        String[] keys = {&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;date&quot;, &quot;elderberry&quot;};
+        
+        for (String key : keys) {
+            int hashCode = key.hashCode();
+            int hash = hash(hashCode); // 模拟HashMap的hash方法
+            int index = indexFor(hash, 16); // 假设容量为16
+            
+            System.out.printf(&quot;Key: %s, HashCode: %d, Hash: %d, Index: %d%n&quot;, 
+                            key, hashCode, hash, index);
+        }
+    }
+    
+    // 模拟JDK8的hash方法
+    static int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+    }
+    
+    // 模拟索引计算
+    static int indexFor(int hash, int length) {
+        return hash &amp; (length - 1); // 等价于 hash % length，但更高效
+    }
+    
+    // 3. 扩容机制演示
+    public void resizeDemo() {
+        // 创建初始容量为4的HashMap（仅为演示）
+        Map&lt;Integer, String&gt; map = new HashMap&lt;&gt;(4);
+        
+        System.out.println(&quot;=== HashMap扩容演示 ===&quot;);
+        
+        // 添加元素触发扩容
+        for (int i = 0; i &lt; 10; i++) {
+            map.put(i, &quot;Value&quot; + i);
+            System.out.println(&quot;Added key &quot; + i + &quot;, size: &quot; + map.size());
+            
+            // 在实际HashMap中，当size &gt; threshold时会扩容
+            // threshold = capacity * loadFactor (默认0.75)
+        }
+    }
+    
+    // 4. 自定义HashMap简化实现
+    public static class SimpleHashMap&lt;K, V&gt; {
+        private Node&lt;K, V&gt;[] table;
+        private int size;
+        private int threshold;
+        private static final double LOAD_FACTOR = 0.75;
+        private static final int DEFAULT_CAPACITY = 16;
+        
+        public SimpleHashMap() {
+            this.table = new Node[DEFAULT_CAPACITY];
+            this.threshold = (int) (DEFAULT_CAPACITY * LOAD_FACTOR);
+        }
+        
+        static class Node&lt;K, V&gt; {
+            final int hash;
+            final K key;
+            V value;
+            Node&lt;K, V&gt; next;
+            
+            Node(int hash, K key, V value, Node&lt;K, V&gt; next) {
+                this.hash = hash;
+                this.key = key;
+                this.value = value;
+                this.next = next;
+            }
+        }
+        
+        public V put(K key, V value) {
+            return putVal(hash(key), key, value);
+        }
+        
+        private V putVal(int hash, K key, V value) {
+            Node&lt;K, V&gt;[] tab = table;
+            int n = tab.length;
+            int i = (n - 1) &amp; hash; // 计算索引
+            
+            Node&lt;K, V&gt; p = tab[i];
+            if (p == null) {
+                // 直接插入
+                tab[i] = new Node&lt;&gt;(hash, key, value, null);
+            } else {
+                // 处理冲突
+                Node&lt;K, V&gt; e = null;
+                if (p.hash == hash &amp;&amp; Objects.equals(key, p.key)) {
+                    e = p; // 找到相同key
+                } else {
+                    // 遍历链表
+                    while (p.next != null) {
+                        if (p.next.hash == hash &amp;&amp; Objects.equals(key, p.next.key)) {
+                            e = p.next;
+                            break;
+                        }
+                        p = p.next;
+                    }
+                    
+                    if (e == null) {
+                        // 添加到链表尾部
+                        p.next = new Node&lt;&gt;(hash, key, value, null);
+                    }
+                }
+                
+                if (e != null) {
+                    // 更新已存在的key
+                    V oldValue = e.value;
+                    e.value = value;
+                    return oldValue;
+                }
+            }
+            
+            if (++size &gt; threshold) {
+                resize(); // 扩容
+            }
+            return null;
+        }
+        
+        public V get(Object key) {
+            Node&lt;K, V&gt; e = getNode(hash(key), key);
+            return e == null ? null : e.value;
+        }
+        
+        private Node&lt;K, V&gt; getNode(int hash, Object key) {
+            Node&lt;K, V&gt;[] tab = table;
+            int n = tab.length;
+            int i = (n - 1) &amp; hash;
+            
+            Node&lt;K, V&gt; first = tab[i];
+            if (first != null) {
+                if (first.hash == hash &amp;&amp; Objects.equals(key, first.key)) {
+                    return first;
+                }
+                
+                Node&lt;K, V&gt; e = first.next;
+                while (e != null) {
+                    if (e.hash == hash &amp;&amp; Objects.equals(key, e.key)) {
+                        return e;
+                    }
+                    e = e.next;
+                }
+            }
+            return null;
+        }
+        
+        private void resize() {
+            Node&lt;K, V&gt;[] oldTab = table;
+            int oldCap = oldTab.length;
+            int newCap = oldCap &lt;&lt; 1; // 扩容为原来的2倍
+            int newThr = (int) (newCap * LOAD_FACTOR);
+            
+            Node&lt;K, V&gt;[] newTab = new Node[newCap];
+            table = newTab;
+            threshold = newThr;
+            
+            // 重新分布所有元素
+            for (int j = 0; j &lt; oldCap; ++j) {
+                Node&lt;K, V&gt; e = oldTab[j];
+                if (e != null) {
+                    oldTab[j] = null;
+                    if (e.next == null) {
+                        // 只有一个元素
+                        newTab[e.hash &amp; (newCap - 1)] = e;
+                    } else {
+                        // 处理链表
+                        Node&lt;K, V&gt; loHead = null, loTail = null;
+                        Node&lt;K, V&gt; hiHead = null, hiTail = null;
+                        Node&lt;K, V&gt; next;
+                        
+                        do {
+                            next = e.next;
+                            if ((e.hash &amp; oldCap) == 0) {
+                                // 在低位
+                                if (loTail == null)
+                                    loHead = e;
+                                else
+                                    loTail.next = e;
+                                loTail = e;
+                            } else {
+                                // 在高位
+                                if (hiTail == null)
+                                    hiHead = e;
+                                else
+                                    hiTail.next = e;
+                                hiTail = e;
+                            }
+                        } while ((e = next) != null);
+                        
+                        if (loTail != null) {
+                            loTail.next = null;
+                            newTab[j] = loHead;
+                        }
+                        if (hiTail != null) {
+                            hiTail.next = null;
+                            newTab[j + oldCap] = hiHead;
+                        }
+                    }
+                }
+            }
+            
+            System.out.println(&quot;Resized from &quot; + oldCap + &quot; to &quot; + newCap);
+        }
+        
+        private static int hash(Object key) {
+            int h;
+            return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+        }
+        
+        public int size() {
+            return size;
+        }
+    }
+}
+</div></section><section class="chapter"><h3 id="q2-hashmap" data-toc="q2-hashmap">Q2: 什么时候HashMap会转换为红黑树？红黑树的优势是什么？</h3><p id="-dd27ij_19"><span class="control" id="-dd27ij_24">答案：</span></p><p id="-dd27ij_20"><span class="control" id="-dd27ij_25">红黑树转换条件：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1254.75 300.671875" height="300.671875" class="flowchart" xmlns="http://www.w3.org/2000/svg" width="1254.75" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 80.3359375)" class="root"><g class="clusters"><g data-look="classic" id="红黑树转链表条件" class="cluster"><rect height="124" width="465.1875" y="8" x="8" style=""></rect><g transform="translate(176.4921875, 8)" class="cluster-label"><foreignObject height="24" width="128.203125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>红黑树转链表条件</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_E_F_3" d="M220.563,70L226.813,70C233.063,70,245.563,70,254.938,70C264.313,70,270.563,70,276.146,70C281.729,70,286.646,70,289.104,70L291.563,70"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(133.03125, 70)" id="flowchart-E-2379" class="node default"><rect height="54" width="175.0625" y="-27" x="-87.53125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-57.53125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="115.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>红黑树节点 &lt;= 6</p></span></div></foreignObject></g></g><g transform="translate(365.625, 70)" id="flowchart-F-2380" class="node default"><rect height="54" width="140.125" y="-27" x="-70.0625" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-40.0625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>转换为链表</p></span></div></foreignObject></g></g></g></g><g transform="translate(515.1875, 0)" class="root"><g class="clusters"><g data-look="classic" id="链表转红黑树条件" class="cluster"><rect height="284.671875" width="723.5625" y="8" x="8" style=""></rect><g transform="translate(305.6796875, 8)" class="cluster-label"><foreignObject height="24" width="128.203125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表转红黑树条件</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M204.531,150.336L210.781,150.336C217.031,150.336,229.531,150.336,238.948,150.378C248.365,150.419,254.698,150.503,260.365,150.577C266.031,150.652,271.031,150.718,273.532,150.75L276.032,150.783"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M423.362,126.822L434.866,122.075C446.371,117.327,469.381,107.831,484.679,103.084C499.977,98.336,507.563,98.336,514.482,98.336C521.401,98.336,527.654,98.336,530.78,98.336L533.906,98.336"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_D_2" d="M423.362,174.849L434.866,179.43C446.371,184.012,469.381,193.174,486.014,197.755C502.647,202.336,512.904,202.336,522.493,202.336C532.083,202.336,541.007,202.336,545.468,202.336L549.93,202.336"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g transform="translate(492.390625, 98.3359375)" class="edgeLabel"><g transform="translate(-8.015625, -12)" class="label"><foreignObject height="24" width="16.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>是</p></span></div></foreignObject></g></g><g transform="translate(492.390625, 202.3359375)" class="edgeLabel"><g transform="translate(-8.015625, -12)" class="label"><foreignObject height="24" width="16.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>否</p></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(125.015625, 150.3359375)" id="flowchart-A-2373" class="node default"><rect height="54" width="159.03125" y="-27" x="-79.515625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.515625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="99.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>链表长度 &gt;= 8</p></span></div></foreignObject></g></g><g transform="translate(363.203125, 150.3359375)" id="flowchart-B-2374" class="node default"><polygon transform="translate(-83.671875,83.671875)" class="label-container" points="83.671875,0 167.34375,-83.671875 83.671875,-167.34375 0,-83.671875"></polygon><g transform="translate(-56.671875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="113.34375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>数组长度 &gt;= 64?</p></span></div></foreignObject></g></g><g transform="translate(615.984375, 98.3359375)" id="flowchart-C-2376" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>转换为红黑树</p></span></div></foreignObject></g></g><g transform="translate(615.984375, 202.3359375)" id="flowchart-D-2378" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>扩容数组</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="-dd27ij_22"><span class="control" id="-dd27ij_26">红黑树特性与优势：</span></p><div class="code-block" data-lang="java">
+// 红黑树在HashMap中的应用
+public class RedBlackTreeInHashMap {
+    
+    // 1. 红黑树转换演示
+    public void treeConversionDemo() {
+        Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+        
+        // 创建会产生相同hash的key（人为构造冲突）
+        String[] conflictKeys = generateConflictKeys();
+        
+        System.out.println(&quot;=== 演示链表转红黑树 ===&quot;);
+        for (int i = 0; i &lt; conflictKeys.length; i++) {
+            map.put(conflictKeys[i], i);
+            System.out.println(&quot;Added key &quot; + i + &quot;: &quot; + conflictKeys[i]);
+            
+            if (i == 7) {
+                System.out.println(&quot;&gt;&gt;&gt; 第8个元素添加后，链表可能转换为红黑树&quot;);
+            }
+        }
+        
+        // 查找性能测试
+        long startTime = System.nanoTime();
+        for (String key : conflictKeys) {
+            map.get(key);
+        }
+        long endTime = System.nanoTime();
+        
+        System.out.println(&quot;查找耗时: &quot; + (endTime - startTime) + &quot; 纳秒&quot;);
+    }
+    
+    // 生成hash冲突的key（仅为演示）
+    private String[] generateConflictKeys() {
+        return new String[]{
+            &quot;key0&quot;, &quot;key1&quot;, &quot;key2&quot;, &quot;key3&quot;, &quot;key4&quot;, 
+            &quot;key5&quot;, &quot;key6&quot;, &quot;key7&quot;, &quot;key8&quot;, &quot;key9&quot;
+        };
+    }
+    
+    // 2. 红黑树性质演示
+    public void redBlackTreeProperties() {
+        System.out.println(&quot;=== 红黑树性质 ===&quot;);
+        System.out.println(&quot;1. 每个节点要么是红色，要么是黑色&quot;);
+        System.out.println(&quot;2. 根节点是黑色&quot;);
+        System.out.println(&quot;3. 所有叶子节点（NIL）都是黑色&quot;);
+        System.out.println(&quot;4. 每个红色节点的两个子节点都是黑色&quot;);
+        System.out.println(&quot;5. 从任意节点到其每个叶子的路径都包含相同数目的黑色节点&quot;);
+        
+        System.out.println(&quot;\n=== 红黑树优势 ===&quot;);
+        System.out.println(&quot;1. 查找时间复杂度: O(log n)&quot;);
+        System.out.println(&quot;2. 插入时间复杂度: O(log n)&quot;);
+        System.out.println(&quot;3. 删除时间复杂度: O(log n)&quot;);
+        System.out.println(&quot;4. 相比链表的O(n)，在冲突严重时性能提升显著&quot;);
+    }
+    
+    // 3. 性能对比测试
+    public void performanceComparison() {
+        System.out.println(&quot;=== 链表 vs 红黑树性能对比 ===&quot;);
+        
+        // 模拟链表查找
+        List&lt;String&gt; linkedList = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 1000; i++) {
+            linkedList.add(&quot;element&quot; + i);
+        }
+        
+        long startTime = System.nanoTime();
+        for (int i = 0; i &lt; 1000; i++) {
+            linkedList.contains(&quot;element&quot; + (999 - i)); // 最坏情况
+        }
+        long linkedListTime = System.nanoTime() - startTime;
+        
+        // 模拟红黑树查找（使用TreeSet）
+        TreeSet&lt;String&gt; redBlackTree = new TreeSet&lt;&gt;(linkedList);
+        
+        startTime = System.nanoTime();
+        for (int i = 0; i &lt; 1000; i++) {
+            redBlackTree.contains(&quot;element&quot; + (999 - i));
+        }
+        long treeTime = System.nanoTime() - startTime;
+        
+        System.out.println(&quot;链表查找耗时: &quot; + linkedListTime + &quot; 纳秒&quot;);
+        System.out.println(&quot;红黑树查找耗时: &quot; + treeTime + &quot; 纳秒&quot;);
+        System.out.println(&quot;性能提升: &quot; + (double) linkedListTime / treeTime + &quot; 倍&quot;);
+    }
+    
+    // 4. TreeNode结构分析（简化版）
+    static class SimpleTreeNode&lt;K, V&gt; {
+        final int hash;
+        final K key;
+        V value;
+        SimpleTreeNode&lt;K, V&gt; parent;
+        SimpleTreeNode&lt;K, V&gt; left;
+        SimpleTreeNode&lt;K, V&gt; right;
+        boolean red; // 红黑树颜色
+        
+        SimpleTreeNode(int hash, K key, V value) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+            this.red = true; // 新节点默认为红色
+        }
+        
+        // 查找节点
+        final SimpleTreeNode&lt;K, V&gt; find(int h, Object k) {
+            SimpleTreeNode&lt;K, V&gt; p = this;
+            do {
+                int ph = p.hash;
+                K pk = p.key;
+                
+                if (ph &gt; h) {
+                    p = p.left;
+                } else if (ph &lt; h) {
+                    p = p.right;
+                } else if (Objects.equals(k, pk)) {
+                    return p;
+                } else {
+                    // hash相同但key不同，继续比较
+                    SimpleTreeNode&lt;K, V&gt; q = p.right;
+                    if (q != null &amp;&amp; (q = q.find(h, k)) != null) {
+                        return q;
+                    }
+                    p = p.left;
+                }
+            } while (p != null);
+            
+            return null;
+        }
+        
+        @Override
+        public String toString() {
+            return key + &quot;=&quot; + value + (red ? &quot;(R)&quot; : &quot;(B)&quot;);
+        }
+    }
+    
+    public static void main(String[] args) {
+        RedBlackTreeInHashMap demo = new RedBlackTreeInHashMap();
+        
+        demo.treeConversionDemo();
+        System.out.println();
+        
+        demo.redBlackTreeProperties();
+        System.out.println();
+        
+        demo.performanceComparison();
+    }
+}
+</div></section></section><section class="chapter"><h2 id="treemap" data-toc="treemap">🌲 TreeMap有序映射</h2><section class="chapter"><h3 id="q3-treemap-hashmap" data-toc="q3-treemap-hashmap">Q3: TreeMap是如何保证有序性的？与HashMap有什么区别？</h3><p id="-dd27ij_28"><span class="control" id="-dd27ij_33">答案：</span></p><p id="-dd27ij_29"><span class="control" id="-dd27ij_34">TreeMap vs HashMap对比：</span></p><p id="-dd27ij_31"><span class="control" id="-dd27ij_35">TreeMap实现原理：</span></p><div class="code-block" data-lang="java">
+// TreeMap实现原理和使用
+public class TreeMapAnalysis {
+    
+    // 1. TreeMap基本使用
+    public void basicTreeMapUsage() {
+        // 自然排序（Comparable）
+        TreeMap&lt;Integer, String&gt; numberMap = new TreeMap&lt;&gt;();
+        numberMap.put(3, &quot;three&quot;);
+        numberMap.put(1, &quot;one&quot;);
+        numberMap.put(4, &quot;four&quot;);
+        numberMap.put(2, &quot;two&quot;);
+        
+        System.out.println(&quot;自然排序结果: &quot; + numberMap);
+        // 输出: {1=one, 2=two, 3=three, 4=four}
+        
+        // 自定义排序（Comparator）
+        TreeMap&lt;String, Integer&gt; stringMap = new TreeMap&lt;&gt;(String.CASE_INSENSITIVE_ORDER);
+        stringMap.put(&quot;banana&quot;, 2);
+        stringMap.put(&quot;Apple&quot;, 1);
+        stringMap.put(&quot;cherry&quot;, 3);
+        
+        System.out.println(&quot;自定义排序结果: &quot; + stringMap);
+        // 输出: {Apple=1, banana=2, cherry=3}
+    }
+    
+    // 2. 导航方法演示
+    public void navigationMethodsDemo() {
+        TreeMap&lt;Integer, String&gt; map = new TreeMap&lt;&gt;();
+        for (int i = 1; i &lt;= 10; i += 2) {
+            map.put(i, &quot;value&quot; + i);
+        }
+        // map内容: {1=value1, 3=value3, 5=value5, 7=value7, 9=value9}
+        
+        System.out.println(&quot;=== TreeMap导航方法 ===&quot;);
+        System.out.println(&quot;原始map: &quot; + map);
+        
+        // 边界方法
+        System.out.println(&quot;firstKey(): &quot; + map.firstKey()); // 1
+        System.out.println(&quot;lastKey(): &quot; + map.lastKey());   // 9
+        System.out.println(&quot;firstEntry(): &quot; + map.firstEntry()); // 1=value1
+        System.out.println(&quot;lastEntry(): &quot; + map.lastEntry());   // 9=value9
+        
+        // 相邻方法
+        System.out.println(&quot;lowerKey(5): &quot; + map.lowerKey(5));     // 3 (小于5)
+        System.out.println(&quot;floorKey(5): &quot; + map.floorKey(5));     // 5 (小于等于5)
+        System.out.println(&quot;ceilingKey(6): &quot; + map.ceilingKey(6)); // 7 (大于等于6)
+        System.out.println(&quot;higherKey(5): &quot; + map.higherKey(5));   // 7 (大于5)
+        
+        // 子映射
+        System.out.println(&quot;subMap(3, 8): &quot; + map.subMap(3, 8));     // {3=value3, 5=value5, 7=value7}
+        System.out.println(&quot;headMap(5): &quot; + map.headMap(5));         // {1=value1, 3=value3}
+        System.out.println(&quot;tailMap(5): &quot; + map.tailMap(5));         // {5=value5, 7=value7, 9=value9}
+    }
+    
+    // 3. 自定义排序示例
+    public void customComparatorDemo() {
+        // 按字符串长度排序
+        TreeMap&lt;String, Integer&gt; lengthSortedMap = new TreeMap&lt;&gt;((s1, s2) -&gt; {
+            int lengthCompare = Integer.compare(s1.length(), s2.length());
+            return lengthCompare != 0 ? lengthCompare : s1.compareTo(s2);
+        });
+        
+        lengthSortedMap.put(&quot;a&quot;, 1);
+        lengthSortedMap.put(&quot;bb&quot;, 2);
+        lengthSortedMap.put(&quot;ccc&quot;, 3);
+        lengthSortedMap.put(&quot;dd&quot;, 4);
+        
+        System.out.println(&quot;按长度排序: &quot; + lengthSortedMap);
+        // 输出: {a=1, bb=2, dd=4, ccc=3}
+        
+        // 倒序排序
+        TreeMap&lt;Integer, String&gt; reverseMap = new TreeMap&lt;&gt;(Collections.reverseOrder());
+        reverseMap.put(1, &quot;one&quot;);
+        reverseMap.put(2, &quot;two&quot;);
+        reverseMap.put(3, &quot;three&quot;);
+        
+        System.out.println(&quot;倒序排序: &quot; + reverseMap);
+        // 输出: {3=three, 2=two, 1=one}
+    }
+    
+    // 4. TreeMap实现细节分析
+    public void implementationDetails() {
+        System.out.println(&quot;=== TreeMap实现细节 ===&quot;);
+        
+        // 红黑树节点结构（简化）
+        class TreeNode&lt;K, V&gt; {
+            K key;
+            V value;
+            TreeNode&lt;K, V&gt; left;
+            TreeNode&lt;K, V&gt; right;
+            TreeNode&lt;K, V&gt; parent;
+            boolean color; // true=红色, false=黑色
+            
+            TreeNode(K key, V value, TreeNode&lt;K, V&gt; parent) {
+                this.key = key;
+                this.value = value;
+                this.parent = parent;
+                this.color = true; // 新节点默认红色
+            }
+        }
+        
+        System.out.println(&quot;1. TreeMap基于红黑树实现&quot;);
+        System.out.println(&quot;2. 所有操作时间复杂度为O(log n)&quot;);
+        System.out.println(&quot;3. 键必须实现Comparable或提供Comparator&quot;);
+        System.out.println(&quot;4. 不允许null键，但允许null值&quot;);
+        System.out.println(&quot;5. 非线程安全&quot;);
+    }
+    
+    // 5. 性能对比测试
+    public void performanceComparison() {
+        final int SIZE = 100000;
+        
+        System.out.println(&quot;=== HashMap vs TreeMap 性能对比 ===&quot;);
+        
+        // HashMap性能测试
+        Map&lt;Integer, String&gt; hashMap = new HashMap&lt;&gt;();
+        long startTime = System.nanoTime();
+        
+        for (int i = 0; i &lt; SIZE; i++) {
+            hashMap.put(i, &quot;value&quot; + i);
+        }
+        long hashMapInsertTime = System.nanoTime() - startTime;
+        
+        startTime = System.nanoTime();
+        for (int i = 0; i &lt; SIZE; i++) {
+            hashMap.get(i);
+        }
+        long hashMapGetTime = System.nanoTime() - startTime;
+        
+        // TreeMap性能测试
+        Map&lt;Integer, String&gt; treeMap = new TreeMap&lt;&gt;();
+        startTime = System.nanoTime();
+        
+        for (int i = 0; i &lt; SIZE; i++) {
+            treeMap.put(i, &quot;value&quot; + i);
+        }
+        long treeMapInsertTime = System.nanoTime() - startTime;
+        
+        startTime = System.nanoTime();
+        for (int i = 0; i &lt; SIZE; i++) {
+            treeMap.get(i);
+        }
+        long treeMapGetTime = System.nanoTime() - startTime;
+        
+        System.out.println(&quot;数据量: &quot; + SIZE);
+        System.out.println(&quot;HashMap插入耗时: &quot; + hashMapInsertTime / 1_000_000 + &quot;ms&quot;);
+        System.out.println(&quot;TreeMap插入耗时: &quot; + treeMapInsertTime / 1_000_000 + &quot;ms&quot;);
+        System.out.println(&quot;HashMap查找耗时: &quot; + hashMapGetTime / 1_000_000 + &quot;ms&quot;);
+        System.out.println(&quot;TreeMap查找耗时: &quot; + treeMapGetTime / 1_000_000 + &quot;ms&quot;);
+    }
+    
+    public static void main(String[] args) {
+        TreeMapAnalysis analysis = new TreeMapAnalysis();
+        
+        analysis.basicTreeMapUsage();
+        System.out.println();
+        
+        analysis.navigationMethodsDemo();
+        System.out.println();
+        
+        analysis.customComparatorDemo();
+        System.out.println();
+        
+        analysis.implementationDetails();
+        System.out.println();
+        
+        analysis.performanceComparison();
+    }
+}
+</div></section></section><section class="chapter"><h2 id="-dd27ij_7" data-toc="-dd27ij_7">💡 面试技巧</h2><section class="chapter"><h3 id="-dd27ij_36" data-toc="-dd27ij_36">高频考点</h3><ol class="list _decimal" id="-dd27ij_38" type="1"><li class="list__item" id="-dd27ij_39"><p id="-dd27ij_44"><span class="control" id="-dd27ij_45">HashMap原理</span> ：数组+链表+红黑树结构、hash函数、扩容机制</p></li><li class="list__item" id="-dd27ij_40"><p id="-dd27ij_46"><span class="control" id="-dd27ij_47">红黑树优化</span> ：转换条件、性能优势、JDK8改进</p></li><li class="list__item" id="-dd27ij_41"><p id="-dd27ij_48"><span class="control" id="-dd27ij_49">TreeMap有序性</span> ：红黑树实现、自然排序、自定义排序</p></li><li class="list__item" id="-dd27ij_42"><p id="-dd27ij_50"><span class="control" id="-dd27ij_51">性能对比</span> ：HashMap O(1) vs TreeMap O(log n)</p></li><li class="list__item" id="-dd27ij_43"><p id="-dd27ij_52"><span class="control" id="-dd27ij_53">线程安全</span> ：HashMap非线程安全、ConcurrentHashMap并发实现</p></li></ol></section><section class="chapter"><h3 id="-dd27ij_37" data-toc="-dd27ij_37">回答策略</h3><ol class="list _decimal" id="-dd27ij_54" type="1"><li class="list__item" id="-dd27ij_57"><p id="-dd27ij_61"><span class="control" id="-dd27ij_62">原理清晰</span> ：能够画图说明HashMap的数据结构和存储原理</p></li><li class="list__item" id="-dd27ij_58"><p id="-dd27ij_63"><span class="control" id="-dd27ij_64">源码理解</span> ：熟悉put、get、resize等核心方法的实现</p></li><li class="list__item" id="-dd27ij_59"><p id="-dd27ij_65"><span class="control" id="-dd27ij_66">性能分析</span> ：对比不同Map实现的时间空间复杂度</p></li><li class="list__item" id="-dd27ij_60"><p id="-dd27ij_67"><span class="control" id="-dd27ij_68">实际应用</span> ：结合具体场景说明Map的选择和使用</p></li></ol><p id="-dd27ij_56"><span class="control" id="-dd27ij_69">学习建议</span> ：Map是Java集合中最重要的接口之一，建议重点掌握HashMap的实现原理，这是面试的高频考点。同时要理解TreeMap的有序特性和ConcurrentHashMap的并发机制。</p></section></section><div class="last-modified">09 六月 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="set集合详解qa.html" class="navigation-links__prev">Set集合详解QA</a><a href="java集合源码分析qa.html" class="navigation-links__next">Java集合源码分析QA</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

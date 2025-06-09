@@ -1,0 +1,480 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-10T01:07:27.3870586"><title>Java线程基础QA | 技术知识库</title><script type="application/json" id="virtual-toc-data">[{"id":"kzu2py_4","level":0,"title":"📋 知识结构","anchor":"#kzu2py_4"},{"id":"kzu2py_5","level":0,"title":"🔍 线程基础概念","anchor":"#kzu2py_5"},{"id":"kzu2py_6","level":0,"title":"💡 面试技巧","anchor":"#kzu2py_6"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Java线程基础QA | 技术知识库"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="技术知识库 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/java线程基础qa.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Java线程基础QA | 技术知识库"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/java线程基础qa.html#webpage",
+    "url": "writerside-documentation/java线程基础qa.html",
+    "name": "Java线程基础QA | 技术知识库",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "技术知识库 Help"
+}</script><!-- End Schema.org --></head><body data-id="Java线程基础QA" data-main-title="Java线程基础QA" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="Java并发面试大纲.md|Java并发面试大纲"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>技术知识库  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Java线程基础QA" id="Java线程基础QA.md">Java线程基础QA</h1><p id="kzu2py_3">本文档深入解析Java线程的基础概念和核心机制，涵盖线程创建、生命周期管理、状态转换、线程通信等基础知识。</p><section class="chapter"><h2 id="kzu2py_4" data-toc="kzu2py_4">📋 知识结构</h2><svg aria-roledescription="mindmap" role="graphics-document document" viewBox="5 5 825.5660400390625 461.1511535644531" style="max-width: 825.5660400390625px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g></g><g class="mindmap-edges"><path class="edge section-edge-0 edge-depth-1" d="M 632.2599777405519,235.67554782151083 L 693.8085266856807,233.74998484502365 L755.3570756308095,231.82442186853646"></path><path class="edge section-edge-0 edge-depth-1" d="M 608.1885914957787,224.20404405782722 L 588.7357387323806,198.619183606994 L569.2828859689824,173.03432315616072"></path><path class="edge section-edge-0 edge-depth-1" d="M 629.547479426111,244.75839535092507 L 668.0769414244464,271.784495250737 L706.6064034227819,298.810595150549"></path><path class="edge section-edge-0 edge-depth-1" d="M 628.8910103571922,226.6635814846232 L 662.5053616946049,199.24561000129782 L696.1197130320176,171.82763851797245"></path><path class="edge section-edge-0 edge-depth-0" d="M 452.6852621820859,237.27739858546275 L 527.4764652968125,236.76261848453007 L602.2676684115391,236.24783838359738"></path><path class="edge section-edge-1 edge-depth-1" d="M 444.6723786433759,110.20715874767416 L 466.08049054936566,78.28266627765615 L487.4886024553554,46.35817380763814"></path><path class="edge section-edge-1 edge-depth-1" d="M 424.1919009224002,113.83610836877403 L 385.0525070609485,85.33827754121663 L345.9131131994969,56.840446713659205"></path><path class="edge section-edge-1 edge-depth-1" d="M 450.98589449780616,119.52591844974552 L 523.9345479575439,103.91238543923899 L596.8832014172817,88.29885242873246"></path><path class="edge section-edge-1 edge-depth-1" d="M 421.3554796933465,121.60709115374037 L 360.1127488081303,117.27565890058523 L298.87001792291403,112.94422664743009"></path><path class="edge section-edge-1 edge-depth-0" d="M 437.5068161828563,222.3817052869369 L 437.00186072140605,180.0229860704862 L436.4969052599558,137.66426685403553"></path><path class="edge section-edge-2 edge-depth-1" d="M 417.54610698105773,354.01317046567493 L 361.3284625581265,358.4951545975075 L305.11081813519525,362.9771387293401"></path><path class="edge section-edge-2 edge-depth-1" d="M 446.1829871318071,346.67784226674394 L 495.03377597946064,324.7475326409086 L543.8845648271142,302.8172230150733"></path><path class="edge section-edge-2 edge-depth-1" d="M 419.62534323857886,345.1218701199918 L 381.4736026284639,322.3042995631023 L343.3218620183489,299.4867290062128"></path><path class="edge section-edge-2 edge-depth-1" d="M 447.32008928327235,355.1287277062164 L 511.35228978116834,365.09837730873664 L575.3844902790643,375.0680269112569"></path><path class="edge section-edge-2 edge-depth-1" d="M 420.5043451742067,361.8286422845254 L 381.8133058825081,390.885100227899 L343.1222665908093,419.94155817127256"></path><path class="edge section-edge-2 edge-depth-1" d="M 442.76227991345274,363.7599058570569 L 472.1079169808173,395.03612056426505 L501.4535540481819,426.3123352714732"></path><path class="edge section-edge-2 edge-depth-0" d="M 437.0123185664647,252.3655209191188 L 435.0921396291211,295.1008544970901 L433.1719606917775,337.8361880750614"></path><path class="edge section-edge-3 edge-depth-1" d="M 237.63671026047922,237.11629630714185 L 167.56004701056986,237.92195959224335 L97.4833837606605,238.7276228773448"></path><path class="edge section-edge-3 edge-depth-1" d="M 265.5824733887101,229.36879329506013 L 303.83821867147356,206.98560740729013 L342.093963954237,184.60242151952014"></path><path class="edge section-edge-3 edge-depth-1" d="M 240.27139164689785,228.45130425841066 L 202.13290767692138,202.25554130651736 L163.9944237069449,176.05977835462406"></path><path class="edge section-edge-3 edge-depth-1" d="M 240.45996980187715,245.70462672018473 L 203.4432763387204,272.3391127107725 L166.42658287556367,298.9735987013603"></path><path class="edge section-edge-3 edge-depth-0" d="M 422.68565926114843,237.3452342220669 L 345.16066824878544,237.16224701270528 L267.63567723642245,236.9792598033436"></path></g><g class="mindmap-nodes"><g transform="translate(379.45124247643116, 218.48063958566013)" class="mindmap-node section--1 section-root"><g transform="translate(58.234375, 18.9)"><circle r="58.234375" class="node-bkg node-circle" id="node-0"></circle></g><g transform="translate(58.234375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Java线程基础</tspan></tspan></text></g></g></g><g transform="translate(574.2313138190982, 217.2445973834)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-1"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程概念</tspan></tspan></text></g></g></g><g transform="translate(393.2821046682852, 103.76533255531228)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-6"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">创建方式</tspan></tspan></text></g></g></g><g transform="translate(390.44397428181105, 333.9210694085201)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h74.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-11"></path><line y2="37.8" x2="84.109375" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(42.0546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">生命周期</tspan></tspan></text></g></g></g><g transform="translate(210.08103152113972, 218.04385443975036)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-18"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程通信</tspan></tspan></text></g></g></g><g transform="translate(720.1334888808765, 212.4553723066473)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h90.43250274658203 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-2"></path><line y2="37.8" x2="100.43250274658203" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(50.216251373291016, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程vs进程</tspan></tspan></text></g></g></g><g transform="translate(509.1561640118739, 142.19376983058794)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-3"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程的优势</tspan></tspan></text></g></g></g><g transform="translate(667.8385693960056, 288.52439311807404)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-4"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">线程的代价</tspan></tspan></text></g></g></g><g transform="translate(657.5271588987248, 143.44662261919564)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h90.43250274658203 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-5"></path><line y2="37.8" x2="100.43250274658203" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(50.216251373291016, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">并发vs并行</tspan></tspan></text></g></g></g><g transform="translate(435.5984389609637, 15)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h110.48887634277344 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-7"></path><line y2="37.8" x2="120.48887634277344" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(60.24443817138672, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">继承Thread类</tspan></tspan></text></g></g></g><g transform="translate(258.2165976555161, 29.111222527120958)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h141.140625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-8"></path><line y2="37.8" x2="151.140625" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(75.5703125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">实现Runnable接口</tspan></tspan></text></g></g></g><g transform="translate(539.816616948707, 66.25943832316568)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h133.46875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-9"></path><line y2="37.8" x2="143.46875" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(71.734375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">实现Callable接口</tspan></tspan></text></g></g></g><g transform="translate(232.85939331418626, 92.98598524585816)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-10"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">使用线程池</tspan></tspan></text></g></g></g><g transform="translate(247.40323174874857, 345.26923978649495)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.51006317138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-12"></path><line y2="37.8" x2="85.51006317138672" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(42.75503158569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">NEW状态</tspan></tspan></text></g></g></g><g transform="translate(493.32416971812586, 277.77399587329717)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h118.48944091796875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-13"></path><line y2="37.8" x2="128.48944091796875" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(64.24472045898438, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">RUNNABLE状态</tspan></tspan></text></g></g></g><g transform="translate(271.30176155373, 272.8875297176845)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h108.29356384277344 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-14"></path><line y2="37.8" x2="118.29356384277344" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(59.14678192138672, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">BLOCKED状态</tspan></tspan></text></g></g></g><g transform="translate(532.6646046091389, 358.4756852089532)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h105.08262634277344 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-15"></path><line y2="37.8" x2="115.08262634277344" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(57.54131317138672, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">WAITING状态</tspan></tspan></text></g></g></g><g transform="translate(247.58104446562686, 410.0491310472779)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h157.09381103515625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-16"></path><line y2="37.8" x2="167.09381103515625" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(83.54690551757812, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">TIMED_WAITING状态</tspan></tspan></text></g></g></g><g transform="translate(440.21407846034117, 418.35117172001003)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h133.00618743896484 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-17"></path><line y2="37.8" x2="143.00618743896484" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(71.50309371948242, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">TERMINATED状态</tspan></tspan></text></g></g></g><g transform="translate(15, 220.00006474473628)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h124.96875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-19"></path><line y2="37.8" x2="134.96875" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(67.484375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">wait/notify机制</tspan></tspan></text></g></g></g><g transform="translate(314.5875933218074, 158.1273603748299)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h70.90625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-20"></path><line y2="37.8" x2="80.90625" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(40.453125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">join方法</tspan></tspan></text></g></g></g><g transform="translate(93.09103383270303, 148.66722817328434)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h107.078125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-21"></path><line y2="37.8" x2="117.078125" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(58.5390625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">interrupt机制</tspan></tspan></text></g></g></g><g transform="translate(99.4745770950218, 288.8343709817947)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h99.5525131225586 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-22"></path><line y2="37.8" x2="109.5525131225586" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(54.7762565612793, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ThreadLocal</tspan></tspan></text></g></g></g></g></svg></section><section class="chapter"><h2 id="kzu2py_5" data-toc="kzu2py_5">🔍 线程基础概念</h2><section class="chapter"><h3 id="q1" data-toc="q1">Q1: 线程和进程的区别是什么？为什么需要多线程？</h3><p id="kzu2py_12"><span class="control" id="kzu2py_19">答案：</span></p><p id="kzu2py_13"><span class="control" id="kzu2py_20">线程vs进程对比：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1141.75 840"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="1141.75" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="进程与线程对比" class="cluster"><rect height="824" width="1125.75" y="8" x="8" style=""></rect><g transform="translate(514.7890625, 8)" class="cluster-label"><foreignObject height="24" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>进程与线程对比</p></span></div></foreignObject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(37.5, 35)" class="root"><g class="clusters"><g data-look="classic" id="内存结构" class="cluster"><rect height="202" width="1050.75" y="8" x="8" style=""></rect><g transform="translate(501.3203125, 8)" class="cluster-label"><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>内存结构</p></span></div></foreignObject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(129.0859375, 109)" id="flowchart-C1-2301" class="node default"><rect height="102" width="172.171875" y="-51" x="-86.0859375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-56.0859375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>进程A<br>堆、栈、代码段<br>独立地址空间</p></span></div></foreignObject></g></g><g transform="translate(351.2578125, 109)" id="flowchart-C2-2302" class="node default"><rect height="102" width="172.171875" y="-51" x="-86.0859375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-56.0859375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>进程B<br>堆、栈、代码段<br>独立地址空间</p></span></div></foreignObject></g></g><g transform="translate(541.3828125, 109)" id="flowchart-D1-2303" class="node default"><rect height="102" width="108.078125" y="-51" x="-54.0390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-24.0390625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>线程1<br>独立栈<br>共享堆</p></span></div></foreignObject></g></g><g transform="translate(699.4609375, 109)" id="flowchart-D2-2304" class="node default"><rect height="102" width="108.078125" y="-51" x="-54.0390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-24.0390625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>线程2<br>独立栈<br>共享堆</p></span></div></foreignObject></g></g><g transform="translate(913.625, 109)" id="flowchart-D3-2305" class="node default"><rect height="78" width="220.25" y="-39" x="-110.125" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-80.125, -24)" style="" class="label"><rect></rect><foreignObject height="48" width="160.25"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>共享内存区域<br>堆、方法区、直接内存</p></span></div></foreignObject></g></g></g></g><g transform="translate(441.7890625, 287)" class="root"><g class="clusters"><g data-look="classic" id="线程特性" class="cluster"><rect height="226" width="242.171875" y="8" x="8" style=""></rect><g transform="translate(97.03125, 8)" class="cluster-label"><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>线程特性</p></span></div></foreignObject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(129.0859375, 121)" id="flowchart-B1-2300" class="node default"><rect height="126" width="172.171875" y="-63" x="-86.0859375" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-56.0859375, -48)" style="" class="label"><rect></rect><foreignObject height="96" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>共享内存空间<br>线程间通信简单<br>创建开销小<br>切换成本低</p></span></div></foreignObject></g></g></g></g><g transform="translate(441.7890625, 563)" class="root"><g class="clusters"><g data-look="classic" id="进程特性" class="cluster"><rect height="226" width="242.171875" y="8" x="8" style=""></rect><g transform="translate(97.03125, 8)" class="cluster-label"><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>进程特性</p></span></div></foreignObject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(129.0859375, 121)" id="flowchart-A1-2299" class="node default"><rect height="126" width="172.171875" y="-63" x="-86.0859375" data-et="node" data-id="abc" style="fill:#ffcdd2 !important" class="basic label-container"></rect><g transform="translate(-56.0859375, -48)" style="" class="label"><rect></rect><foreignObject height="96" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>独立内存空间<br>进程间通信复杂<br>创建开销大<br>切换成本高</p></span></div></foreignObject></g></g></g></g></g></g></g></g></g></svg><p id="kzu2py_15"><span class="control" id="kzu2py_21">详细对比：</span></p><div class="table-wrapper"><table class="wide" id="kzu2py_16"><thead><tr class="ijRowHead" id="kzu2py_22"><th id="kzu2py_29"><p>特性</p></th><th id="kzu2py_30"><p>进程</p></th><th id="kzu2py_31"><p>线程</p></th></tr></thead><tbody><tr id="kzu2py_23"><td id="kzu2py_32"><p><span class="control" id="kzu2py_35">内存空间</span></p></td><td id="kzu2py_33"><p>独立的虚拟地址空间</p></td><td id="kzu2py_34"><p>共享进程的地址空间</p></td></tr><tr id="kzu2py_24"><td id="kzu2py_36"><p><span class="control" id="kzu2py_39">创建开销</span></p></td><td id="kzu2py_37"><p>大（需要分配内存、初始化PCB）</p></td><td id="kzu2py_38"><p>小（只需要分配栈空间、TCB）</p></td></tr><tr id="kzu2py_25"><td id="kzu2py_40"><p><span class="control" id="kzu2py_43">切换开销</span></p></td><td id="kzu2py_41"><p>大（需要切换虚拟地址空间）</p></td><td id="kzu2py_42"><p>小（只需要切换寄存器和栈）</p></td></tr><tr id="kzu2py_26"><td id="kzu2py_44"><p><span class="control" id="kzu2py_47">通信方式</span></p></td><td id="kzu2py_45"><p>IPC（管道、消息队列、共享内存）</p></td><td id="kzu2py_46"><p>直接访问共享变量</p></td></tr><tr id="kzu2py_27"><td id="kzu2py_48"><p><span class="control" id="kzu2py_51">安全性</span></p></td><td id="kzu2py_49"><p>高（进程间隔离）</p></td><td id="kzu2py_50"><p>低（共享内存可能冲突）</p></td></tr><tr id="kzu2py_28"><td id="kzu2py_52"><p><span class="control" id="kzu2py_55">稳定性</span></p></td><td id="kzu2py_53"><p>高（一个进程崩溃不影响其他）</p></td><td id="kzu2py_54"><p>低（一个线程崩溃可能影响整个进程）</p></td></tr></tbody></table></div><p id="kzu2py_17"><span class="control" id="kzu2py_56">多线程的优势：</span></p><div class="code-block" data-lang="java">
+// 单线程处理多个任务 - 串行执行
+public class SingleThreadExample {
+    public void processTasksSequentially() {
+        long startTime = System.currentTimeMillis();
+        
+        // 任务1：文件下载
+        downloadFile(&quot;file1.zip&quot;);  // 假设耗时3秒
+        
+        // 任务2：数据处理
+        processData();              // 假设耗时2秒
+        
+        // 任务3：发送邮件
+        sendEmail();                // 假设耗时1秒
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println(&quot;总耗时: &quot; + (endTime - startTime) + &quot;ms&quot;); // 约6秒
+    }
+}
+
+// 多线程处理多个任务 - 并行执行
+public class MultiThreadExample {
+    public void processTasksConcurrently() throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+        
+        // 创建多个线程同时执行任务
+        Thread downloadThread = new Thread(() -&gt; downloadFile(&quot;file1.zip&quot;));
+        Thread processThread = new Thread(() -&gt; processData());
+        Thread emailThread = new Thread(() -&gt; sendEmail());
+        
+        // 启动所有线程
+        downloadThread.start();
+        processThread.start();
+        emailThread.start();
+        
+        // 等待所有任务完成
+        downloadThread.join();
+        processThread.join();
+        emailThread.join();
+        
+        long endTime = System.currentTimeMillis();
+        System.out.println(&quot;总耗时: &quot; + (endTime - startTime) + &quot;ms&quot;); // 约3秒
+    }
+}
+</div></section><section class="chapter"><h3 id="q2-java" data-toc="q2-java">Q2: Java中有哪些创建线程的方式？各有什么优缺点？</h3><p id="kzu2py_57"><span class="control" id="kzu2py_70">答案：</span></p><p id="kzu2py_58"><span class="control" id="kzu2py_71">四种线程创建方式：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 528.3125 644"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="528.3125" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="Java线程创建方式" class="cluster"><rect height="628" width="512.3125" y="8" x="8" style=""></rect><g transform="translate(199.8984375, 8)" class="cluster-label"><foreignObject height="24" width="128.515625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Java线程创建方式</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M219.828,94L228.714,94C237.599,94,255.37,94,268.715,94C282.061,94,290.982,94,299.236,94C307.49,94,315.077,94,318.87,94L322.664,94"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_1" d="M235.641,246L241.891,246C248.141,246,260.641,246,270.016,246C279.391,246,285.641,246,291.224,246C296.807,246,301.724,246,304.182,246L306.641,246"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_2" d="M231.805,398L238.694,398C245.583,398,259.362,398,269.408,398C279.453,398,285.766,398,291.411,398C297.057,398,302.036,398,304.526,398L307.016,398"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_D1_3" d="M210.633,550L221.051,550C231.469,550,252.305,550,267.183,550C282.061,550,290.982,550,299.236,550C307.49,550,315.077,550,318.87,550L322.664,550"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(140.5703125, 94)" id="flowchart-A-2435" class="node default"><rect height="54" width="158.515625" y="-27" x="-79.2578125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.2578125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="98.515625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>继承Thread类</p></span></div></foreignObject></g></g><g transform="translate(396.7265625, 94)" id="flowchart-A1-2436" class="node default"><rect height="102" width="140.125" y="-51" x="-70.0625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.0625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>简单直接<br>单继承限制<br>耦合度高</p></span></div></foreignObject></g></g><g transform="translate(140.5703125, 246)" id="flowchart-B-2437" class="node default"><rect height="54" width="190.140625" y="-27" x="-95.0703125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-65.0703125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="130.140625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>实现Runnable接口</p></span></div></foreignObject></g></g><g transform="translate(396.7265625, 246)" id="flowchart-B1-2438" class="node default"><rect height="102" width="172.171875" y="-51" x="-86.0859375" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-56.0859375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="112.171875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>避免单继承限制<br>代码复用性好<br>推荐方式</p></span></div></foreignObject></g></g><g transform="translate(140.5703125, 398)" id="flowchart-C-2439" class="node default"><rect height="54" width="182.46875" y="-27" x="-91.234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-61.234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="122.46875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>实现Callable接口</p></span></div></foreignObject></g></g><g transform="translate(396.7265625, 398)" id="flowchart-C1-2440" class="node default"><rect height="102" width="171.421875" y="-51" x="-85.7109375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-55.7109375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="111.421875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>支持返回值<br>支持异常处理<br>配合Future使用</p></span></div></foreignObject></g></g><g transform="translate(140.5703125, 550)" id="flowchart-D-2441" class="node default"><rect height="54" width="140.125" y="-27" x="-70.0625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.0625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>使用线程池</p></span></div></foreignObject></g></g><g transform="translate(396.7265625, 550)" id="flowchart-D1-2442" class="node default"><rect height="102" width="140.125" y="-51" x="-70.0625" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-40.0625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>资源控制<br>性能优化<br>企业级首选</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="kzu2py_60"><span class="control" id="kzu2py_72">方式一：继承Thread类</span></p><div class="code-block" data-lang="java">
+// 继承Thread类
+public class MyThread extends Thread {
+    private String taskName;
+    
+    public MyThread(String taskName) {
+        this.taskName = taskName;
+    }
+    
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println(taskName + &quot; 执行第 &quot; + (i + 1) + &quot; 次&quot;);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        MyThread thread1 = new MyThread(&quot;任务A&quot;);
+        MyThread thread2 = new MyThread(&quot;任务B&quot;);
+        
+        thread1.start();  // 启动线程
+        thread2.start();
+        
+        // 错误用法：thread1.run(); // 这是在当前线程中执行，不是多线程
+    }
+}
+</div><p id="kzu2py_62"><span class="control" id="kzu2py_73">方式二：实现Runnable接口（推荐）</span></p><div class="code-block" data-lang="java">
+// 实现Runnable接口
+public class MyRunnable implements Runnable {
+    private String taskName;
+    
+    public MyRunnable(String taskName) {
+        this.taskName = taskName;
+    }
+    
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println(Thread.currentThread().getName() + 
+                             &quot; - &quot; + taskName + &quot; 执行第 &quot; + (i + 1) + &quot; 次&quot;);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        MyRunnable task1 = new MyRunnable(&quot;任务A&quot;);
+        MyRunnable task2 = new MyRunnable(&quot;任务B&quot;);
+        
+        Thread thread1 = new Thread(task1, &quot;线程1&quot;);
+        Thread thread2 = new Thread(task2, &quot;线程2&quot;);
+        
+        thread1.start();
+        thread2.start();
+        
+        // Lambda表达式方式（Java 8+）
+        Thread thread3 = new Thread(() -&gt; {
+            System.out.println(&quot;Lambda线程: &quot; + Thread.currentThread().getName());
+        }, &quot;Lambda线程&quot;);
+        thread3.start();
+    }
+}
+</div><p id="kzu2py_64"><span class="control" id="kzu2py_74">方式三：实现Callable接口</span></p><div class="code-block" data-lang="java">
+// 实现Callable接口，支持返回值
+public class MyCallable implements Callable&lt;String&gt; {
+    private String taskName;
+    private int seconds;
+    
+    public MyCallable(String taskName, int seconds) {
+        this.taskName = taskName;
+        this.seconds = seconds;
+    }
+    
+    @Override
+    public String call() throws Exception {
+        System.out.println(taskName + &quot; 开始执行&quot;);
+        Thread.sleep(seconds * 1000);
+        return taskName + &quot; 执行完成，耗时 &quot; + seconds + &quot; 秒&quot;;
+    }
+    
+    public static void main(String[] args) throws Exception {
+        // 创建ExecutorService
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        
+        // 提交Callable任务
+        Future&lt;String&gt; future1 = executor.submit(new MyCallable(&quot;任务A&quot;, 3));
+        Future&lt;String&gt; future2 = executor.submit(new MyCallable(&quot;任务B&quot;, 2));
+        
+        // 获取执行结果
+        System.out.println(&quot;等待任务完成...&quot;);
+        
+        String result1 = future1.get(); // 阻塞等待结果
+        String result2 = future2.get();
+        
+        System.out.println(&quot;结果1: &quot; + result1);
+        System.out.println(&quot;结果2: &quot; + result2);
+        
+        executor.shutdown();
+    }
+}
+</div><p id="kzu2py_66"><span class="control" id="kzu2py_75">方式四：使用线程池（企业级推荐）</span></p><div class="code-block" data-lang="java">
+// 使用线程池管理线程
+public class ThreadPoolExample {
+    
+    public static void main(String[] args) throws Exception {
+        // 1. 使用Executors工具类创建线程池
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        
+        // 2. 提交多个任务
+        for (int i = 0; i &lt; 10; i++) {
+            final int taskId = i;
+            
+            executorService.submit(() -&gt; {
+                System.out.println(&quot;任务 &quot; + taskId + &quot; 在线程 &quot; + 
+                                 Thread.currentThread().getName() + &quot; 中执行&quot;);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            });
+        }
+        
+        // 3. 关闭线程池
+        executorService.shutdown();
+        
+        // 等待任务完成
+        if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+            executorService.shutdownNow();
+        }
+        
+        System.out.println(&quot;所有任务执行完成&quot;);
+    }
+}
+
+// 自定义线程池配置
+public class CustomThreadPoolExample {
+    
+    public static void main(String[] args) {
+        // 自定义线程池参数
+        ThreadPoolExecutor customExecutor = new ThreadPoolExecutor(
+            2,                      // 核心线程数
+            4,                      // 最大线程数
+            60L,                    // 空闲线程存活时间
+            TimeUnit.SECONDS,       // 时间单位
+            new LinkedBlockingQueue&lt;&gt;(100),  // 任务队列
+            new ThreadFactory() {   // 线程工厂
+                private AtomicInteger counter = new AtomicInteger(1);
+                
+                @Override
+                public Thread newThread(Runnable r) {
+                    Thread thread = new Thread(r, &quot;CustomThread-&quot; + counter.getAndIncrement());
+                    thread.setDaemon(false);
+                    return thread;
+                }
+            },
+            new ThreadPoolExecutor.CallerRunsPolicy()  // 拒绝策略
+        );
+        
+        // 使用自定义线程池
+        for (int i = 0; i &lt; 10; i++) {
+            final int taskId = i;
+            customExecutor.submit(() -&gt; {
+                System.out.println(&quot;任务 &quot; + taskId + &quot; 执行&quot;);
+            });
+        }
+        
+        customExecutor.shutdown();
+    }
+}
+</div><p id="kzu2py_68"><span class="control" id="kzu2py_76">创建方式对比：</span></p><div class="table-wrapper"><table class="wide" id="kzu2py_69"><thead><tr class="ijRowHead" id="kzu2py_77"><th id="kzu2py_82"><p>创建方式</p></th><th id="kzu2py_83"><p>优点</p></th><th id="kzu2py_84"><p>缺点</p></th><th id="kzu2py_85"><p>适用场景</p></th></tr></thead><tbody><tr id="kzu2py_78"><td id="kzu2py_86"><p><span class="control" id="kzu2py_90">继承Thread</span></p></td><td id="kzu2py_87"><p>使用简单，直接调用start()</p></td><td id="kzu2py_88"><p>单继承限制，不能继承其他类</p></td><td id="kzu2py_89"><p>简单的线程任务</p></td></tr><tr id="kzu2py_79"><td id="kzu2py_91"><p><span class="control" id="kzu2py_95">实现Runnable</span></p></td><td id="kzu2py_92"><p>避免单继承限制，便于代码复用</p></td><td id="kzu2py_93"><p>不能直接获取返回值</p></td><td id="kzu2py_94"><p>大多数多线程场景</p></td></tr><tr id="kzu2py_80"><td id="kzu2py_96"><p><span class="control" id="kzu2py_100">实现Callable</span></p></td><td id="kzu2py_97"><p>支持返回值和异常处理</p></td><td id="kzu2py_98"><p>使用相对复杂，需要配合Future</p></td><td id="kzu2py_99"><p>需要获取执行结果的场景</p></td></tr><tr id="kzu2py_81"><td id="kzu2py_101"><p><span class="control" id="kzu2py_105">使用线程池</span></p></td><td id="kzu2py_102"><p>资源控制，性能优化，企业级</p></td><td id="kzu2py_103"><p>配置复杂，需要理解参数</p></td><td id="kzu2py_104"><p>生产环境，高并发场景</p></td></tr></tbody></table></div></section><section class="chapter"><h3 id="q3-java" data-toc="q3-java">Q3: Java线程有哪些状态？状态之间如何转换？</h3><p id="kzu2py_106"><span class="control" id="kzu2py_113">答案：</span></p><p id="kzu2py_107"><span class="control" id="kzu2py_114">Java线程状态图：</span></p><svg aria-roledescription="stateDiagram" role="graphics-document document" viewBox="0 0 847.0078125 699" style="max-width: 847.0078125px;" class="statediagram" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g><defs><marker orient="auto" markerUnits="userSpaceOnUse" markerHeight="14" markerWidth="20" refY="7" refX="19" id="mermaid_stateDiagram-barbEnd"><path d="M 19,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge0" d="M323.008,22L323.008,28.167C323.008,34.333,323.008,46.667,323.008,55.917C323.008,65.167,323.008,71.333,323.008,77.5C323.008,83.667,323.008,89.833,323.008,92.917L323.008,96"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge1" d="M323.008,136L323.008,142.167C323.008,148.333,323.008,160.667,323.008,169.917C323.008,179.167,323.008,185.333,323.008,191.5C323.008,197.667,323.008,203.833,323.008,206.917L323.008,210"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge2" d="M194.121,491.172L167.107,511.643C140.094,532.115,86.066,573.057,60.894,596.612C35.722,620.167,39.404,626.333,43.087,632.5C46.769,638.667,50.452,644.833,52.293,647.917L54.135,651"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge3" d="M78.022,651L81.704,644.833C85.387,638.667,92.752,626.333,104.268,612.417C115.785,598.501,131.452,583.001,147.119,567.502C162.786,552.003,178.454,536.504,186.287,528.754L194.121,521.004"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge4" d="M212.111,577L208.384,583.167C204.657,589.333,197.204,601.667,197.081,610.917C196.958,620.167,204.167,626.333,211.375,632.5C218.584,638.667,225.792,644.833,229.396,647.917L233,651"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge5" d="M279.757,651L286.966,644.833C294.174,638.667,308.591,626.333,315.799,617.083C323.008,607.833,323.008,601.667,323.008,595.5C323.008,589.333,323.008,583.167,323.008,580.083L323.008,577"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge6" d="M451.895,564.14L458.171,572.45C464.448,580.76,477.001,597.38,487.366,608.773C497.732,620.167,505.909,626.333,514.086,632.5C522.263,638.667,530.44,644.833,534.528,647.917L538.617,651"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge7" d="M591.657,651L599.834,644.833C608.011,638.667,624.365,626.333,616.806,609.246C609.248,592.158,577.777,570.317,546.307,548.475C514.836,526.634,483.365,504.792,467.63,493.872L451.895,482.951"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge8" d="M451.895,454.814L507.665,481.345C563.435,507.876,674.975,560.938,730.745,590.552C786.516,620.167,786.516,626.333,786.516,632.5C786.516,638.667,786.516,644.833,786.516,647.917L786.516,651"></path></g><g class="edgeLabels"><g transform="translate(323.0078125, 59)" class="edgeLabel"><g transform="translate(-48.078125, -12)" class="label"><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>创建线程对象</p></span></div></foreignObject></g></g><g transform="translate(323.0078125, 173)" class="edgeLabel"><g transform="translate(-22.859375, -12)" class="label"><foreignObject height="24" width="45.71875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>start()</p></span></div></foreignObject></g></g><g transform="translate(32.0390625, 614)" class="edgeLabel"><g transform="translate(-24.0390625, -12)" class="label"><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>等待锁</p></span></div></foreignObject></g></g><g transform="translate(100.1171875, 614)" class="edgeLabel"><g transform="translate(-24.0390625, -12)" class="label"><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>获得锁</p></span></div></foreignObject></g></g><g transform="translate(189.75, 614)" class="edgeLabel"><g transform="translate(-45.59375, -12)" class="label"><foreignObject height="24" width="91.1875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>wait()/join()</p></span></div></foreignObject></g></g><g transform="translate(323.0078125, 614)" class="edgeLabel"><g transform="translate(-67.6640625, -12)" class="label"><foreignObject height="24" width="135.328125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>notify()/notifyAll()</p></span></div></foreignObject></g></g><g transform="translate(489.5546875, 614)" class="edgeLabel"><g transform="translate(-78.8828125, -12)" class="label"><foreignObject height="24" width="157.765625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>sleep()/wait(timeout)</p></span></div></foreignObject></g></g><g transform="translate(640.71875, 614)" class="edgeLabel"><g transform="translate(-52.28125, -12)" class="label"><foreignObject height="24" width="104.5625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>时间到/被唤醒</p></span></div></foreignObject></g></g><g transform="translate(786.515625, 614)" class="edgeLabel"><g transform="translate(-52.28125, -12)" class="label"><foreignObject height="24" width="104.5625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>执行完成/异常</p></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(323.0078125, 15)" id="state-root_start-0" class="node default"><circle height="14" width="14" r="7" class="state-start"></circle></g><g transform="translate(323.0078125, 116)" id="state-NEW-1" class="node  statediagram-state"><rect height="40" width="48.5" y="-20" x="-24.25" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-16.25, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="32.5"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>NEW</p></span></div></foreignObject></g></g><g transform="translate(186.12109375, 202)" class="root"><g class="clusters"><g data-look="classic" data-id="RUNNABLE" id="RUNNABLE" class="statediagram-state statediagram-cluster"><g><rect data-look="classic" height="367" width="257.7734375" y="8" x="8" class="outer"></rect></g><g transform="translate(98.65234375, 9)" class="cluster-label"><foreignObject height="24" width="76.46875"><div style="display: inline-block; padding-right: 1px; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">RUNNABLE</span></div></foreignObject></g><rect height="337" width="257.7734375" y="34" x="8" class="inner"></rect></g></g><g class="edgePaths"><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge9" d="M140.504,59.5L140.504,67.75C140.504,76,140.504,92.5,140.504,104.875C140.504,117.25,140.504,125.5,140.504,133.75C140.504,142,140.504,150.25,140.504,154.375L140.504,158.5"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge10" d="M124.016,198.5L117.214,206.75C110.413,215,96.81,231.5,93.409,243.875C90.008,256.25,96.81,264.5,103.611,272.75C110.413,281,117.214,289.25,120.615,293.375L124.016,297.5"></path><path marker-end="url(#mermaid_stateDiagram-barbEnd)" style=";fill:none" class="edge-thickness-normal edge-pattern-solid transition" id="edge11" d="M156.992,297.5L163.794,289.25C170.595,281,184.198,264.5,187.599,252.125C190.999,239.75,184.198,231.5,177.396,223.25C170.595,215,163.794,206.75,160.393,202.625L156.992,198.5"></path></g><g class="edgeLabels"><g transform="translate(140.50390625, 109)" class="edgeLabel"><g transform="translate(-32.0546875, -12)" class="label"><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>就绪状态</p></span></div></foreignObject></g></g><g transform="translate(83.20703125, 248)" class="edgeLabel"><g transform="translate(-54.53125, -12)" class="label"><foreignObject height="24" width="109.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>获得CPU时间片</p></span></div></foreignObject></g></g><g transform="translate(197.80078125, 248)" class="edgeLabel"><g transform="translate(-40.0625, -12)" class="label"><foreignObject height="24" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>时间片用完</p></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(140.50390625, 52.5)" id="state-RUNNABLE_start-9" class="node default"><circle height="14" width="14" r="7" class="state-start"></circle></g><g transform="translate(140.50390625, 178.5)" id="state-READY-11" class="node  statediagram-state"><rect height="40" width="62.390625" y="-20" x="-31.1953125" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-23.1953125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="46.390625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>READY</p></span></div></foreignObject></g></g><g transform="translate(140.50390625, 317.5)" id="state-RUNNING-11" class="node  statediagram-state"><rect height="40" width="81.765625" y="-20" x="-40.8828125" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-32.8828125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="65.765625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>RUNNING</p></span></div></foreignObject></g></g></g></g><g transform="translate(66.078125, 671)" id="state-BLOCKED-3" class="node  statediagram-state"><rect height="40" width="81.28125" y="-20" x="-40.640625" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-32.640625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="65.28125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>BLOCKED</p></span></div></foreignObject></g></g><g transform="translate(256.37890625, 671)" id="state-WAITING-5" class="node  statediagram-state"><rect height="40" width="77.0625" y="-20" x="-38.53125" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-30.53125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="61.0625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>WAITING</p></span></div></foreignObject></g></g><g transform="translate(565.13671875, 671)" id="state-TIMED_WAITING-7" class="node  statediagram-state"><rect height="40" width="129.078125" y="-20" x="-64.5390625" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-56.5390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="113.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TIMED_WAITING</p></span></div></foreignObject></g></g><g transform="translate(786.515625, 671)" id="state-TERMINATED-8" class="node  statediagram-state"><rect height="40" width="104.984375" y="-20" x="-52.4921875" ry="5" data-et="node" data-id="abc" rx="5" style="" class="basic label-container"></rect><g transform="translate(-44.4921875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="88.984375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TERMINATED</p></span></div></foreignObject></g></g></g></g></g></svg><p id="kzu2py_109"><span class="control" id="kzu2py_115">线程状态详解：</span></p><div class="code-block" data-lang="java">
+// 线程状态演示
+public class ThreadStateExample {
+    
+    public static void main(String[] args) throws InterruptedException {
+        Object lock = new Object();
+        
+        // 创建多个线程演示不同状态
+        Thread thread1 = new Thread(() -&gt; {
+            synchronized (lock) {
+                try {
+                    System.out.println(&quot;Thread1 获得锁，进入WAITING状态&quot;);
+                    lock.wait(); // WAITING状态
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }, &quot;Thread-1&quot;);
+        
+        Thread thread2 = new Thread(() -&gt; {
+            synchronized (lock) {
+                try {
+                    System.out.println(&quot;Thread2 获得锁，进入TIMED_WAITING状态&quot;);
+                    Thread.sleep(5000); // TIMED_WAITING状态
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }, &quot;Thread-2&quot;);
+        
+        Thread thread3 = new Thread(() -&gt; {
+            synchronized (lock) {
+                System.out.println(&quot;Thread3 获得锁&quot;);
+            }
+        }, &quot;Thread-3&quot;);
+        
+        // 打印初始状态
+        System.out.println(&quot;thread1 状态: &quot; + thread1.getState()); // NEW
+        
+        // 启动线程
+        thread1.start();
+        Thread.sleep(100);
+        System.out.println(&quot;thread1 启动后状态: &quot; + thread1.getState()); // WAITING
+        
+        thread2.start();
+        Thread.sleep(100);
+        System.out.println(&quot;thread2 状态: &quot; + thread2.getState()); // TIMED_WAITING
+        
+        thread3.start();
+        Thread.sleep(100);
+        System.out.println(&quot;thread3 状态: &quot; + thread3.getState()); // BLOCKED
+        
+        // 唤醒waiting线程
+        synchronized (lock) {
+            lock.notify();
+        }
+        
+        // 等待所有线程结束
+        thread1.join();
+        thread2.join();
+        thread3.join();
+        
+        System.out.println(&quot;thread1 结束后状态: &quot; + thread1.getState()); // TERMINATED
+    }
+}
+</div><p id="kzu2py_111"><span class="control" id="kzu2py_116">状态转换条件：</span></p><div class="table-wrapper"><table class="wide" id="kzu2py_112"><thead><tr class="ijRowHead" id="kzu2py_117"><th id="kzu2py_126"><p>状态转换</p></th><th id="kzu2py_127"><p>触发条件</p></th><th id="kzu2py_128"><p>说明</p></th></tr></thead><tbody><tr id="kzu2py_118"><td id="kzu2py_129"><p><span class="control" id="kzu2py_132">NEW &rarr; RUNNABLE</span></p></td><td id="kzu2py_130"><p>调用start()方法</p></td><td id="kzu2py_131"><p>线程开始执行</p></td></tr><tr id="kzu2py_119"><td id="kzu2py_133"><p><span class="control" id="kzu2py_136">RUNNABLE &rarr; BLOCKED</span></p></td><td id="kzu2py_134"><p>等待获取同步锁</p></td><td id="kzu2py_135"><p>synchronized块/方法</p></td></tr><tr id="kzu2py_120"><td id="kzu2py_137"><p><span class="control" id="kzu2py_140">BLOCKED &rarr; RUNNABLE</span></p></td><td id="kzu2py_138"><p>获得同步锁</p></td><td id="kzu2py_139"><p>锁被释放</p></td></tr><tr id="kzu2py_121"><td id="kzu2py_141"><p><span class="control" id="kzu2py_144">RUNNABLE &rarr; WAITING</span></p></td><td id="kzu2py_142"><p>wait()、join()、park()</p></td><td id="kzu2py_143"><p>无限期等待</p></td></tr><tr id="kzu2py_122"><td id="kzu2py_145"><p><span class="control" id="kzu2py_148">WAITING &rarr; RUNNABLE</span></p></td><td id="kzu2py_146"><p>notify()、notifyAll()、unpark()</p></td><td id="kzu2py_147"><p>被唤醒</p></td></tr><tr id="kzu2py_123"><td id="kzu2py_149"><p><span class="control" id="kzu2py_152">RUNNABLE &rarr; TIMED_WAITING</span></p></td><td id="kzu2py_150"><p>sleep()、wait(timeout)、join(timeout)</p></td><td id="kzu2py_151"><p>有时限等待</p></td></tr><tr id="kzu2py_124"><td id="kzu2py_153"><p><span class="control" id="kzu2py_156">TIMED_WAITING &rarr; RUNNABLE</span></p></td><td id="kzu2py_154"><p>时间到期或被唤醒</p></td><td id="kzu2py_155"><p>等待结束</p></td></tr><tr id="kzu2py_125"><td id="kzu2py_157"><p><span class="control" id="kzu2py_160">任何状态 &rarr; TERMINATED</span></p></td><td id="kzu2py_158"><p>run()方法执行完成或异常</p></td><td id="kzu2py_159"><p>线程结束</p></td></tr></tbody></table></div></section><section class="chapter"><h3 id="q4-wait-notify-sleep" data-toc="q4-wait-notify-sleep">Q4: wait()、notify()和sleep()的区别是什么？如何正确使用？</h3><p id="kzu2py_161"><span class="control" id="kzu2py_172">答案：</span></p><p id="kzu2py_162"><span class="control" id="kzu2py_173">wait/notify vs sleep对比：</span></p><p id="kzu2py_164"><span class="control" id="kzu2py_174">详细对比：</span></p><div class="table-wrapper"><table class="wide" id="kzu2py_165"><thead><tr class="ijRowHead" id="kzu2py_175"><th id="kzu2py_181"><p>特性</p></th><th id="kzu2py_182"><p>wait()</p></th><th id="kzu2py_183"><p>notify()/notifyAll()</p></th><th id="kzu2py_184"><p>sleep()</p></th></tr></thead><tbody><tr id="kzu2py_176"><td id="kzu2py_185"><p><span class="control" id="kzu2py_189">所属类</span></p></td><td id="kzu2py_186"><p>Object类</p></td><td id="kzu2py_187"><p>Object类</p></td><td id="kzu2py_188"><p>Thread类</p></td></tr><tr id="kzu2py_177"><td id="kzu2py_190"><p><span class="control" id="kzu2py_194">锁的处理</span></p></td><td id="kzu2py_191"><p>释放锁</p></td><td id="kzu2py_192"><p>不涉及锁操作</p></td><td id="kzu2py_193"><p>不释放锁</p></td></tr><tr id="kzu2py_178"><td id="kzu2py_195"><p><span class="control" id="kzu2py_199">使用条件</span></p></td><td id="kzu2py_196"><p>必须在同步块中</p></td><td id="kzu2py_197"><p>必须在同步块中</p></td><td id="kzu2py_198"><p>任何地方都可以</p></td></tr><tr id="kzu2py_179"><td id="kzu2py_200"><p><span class="control" id="kzu2py_204">唤醒方式</span></p></td><td id="kzu2py_201"><p>notify()或时间到</p></td><td id="kzu2py_202"><p>-</p></td><td id="kzu2py_203"><p>时间到或interrupt()</p></td></tr><tr id="kzu2py_180"><td id="kzu2py_205"><p><span class="control" id="kzu2py_209">线程状态</span></p></td><td id="kzu2py_206"><p>WAITING/TIMED_WAITING</p></td><td id="kzu2py_207"><p>-</p></td><td id="kzu2py_208"><p>TIMED_WAITING</p></td></tr></tbody></table></div><p id="kzu2py_166"><span class="control" id="kzu2py_210">正确使用示例：</span></p><div class="code-block" data-lang="java">
+// 生产者消费者模式 - wait/notify的正确使用
+public class ProducerConsumerExample {
+    private final Queue&lt;Integer&gt; buffer = new LinkedList&lt;&gt;();
+    private final int CAPACITY = 5;
+    private final Object lock = new Object();
+    
+    // 生产者
+    class Producer implements Runnable {
+        @Override
+        public void run() {
+            int value = 0;
+            while (true) {
+                synchronized (lock) {
+                    // 使用while循环而不是if，防止虚假唤醒
+                    while (buffer.size() == CAPACITY) {
+                        try {
+                            System.out.println(&quot;缓冲区已满，生产者等待&quot;);
+                            lock.wait(); // 释放锁，等待消费者消费
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            return;
+                        }
+                    }
+                    
+                    buffer.offer(value);
+                    System.out.println(&quot;生产: &quot; + value + &quot;, 缓冲区大小: &quot; + buffer.size());
+                    value++;
+                    
+                    lock.notifyAll(); // 唤醒所有等待的消费者
+                }
+                
+                try {
+                    Thread.sleep(1000); // 模拟生产时间
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
+        }
+    }
+    
+    // 消费者
+    class Consumer implements Runnable {
+        @Override
+        public void run() {
+            while (true) {
+                synchronized (lock) {
+                    while (buffer.isEmpty()) {
+                        try {
+                            System.out.println(&quot;缓冲区为空，消费者等待&quot;);
+                            lock.wait(); // 释放锁，等待生产者生产
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            return;
+                        }
+                    }
+                    
+                    int value = buffer.poll();
+                    System.out.println(&quot;消费: &quot; + value + &quot;, 缓冲区大小: &quot; + buffer.size());
+                    
+                    lock.notifyAll(); // 唤醒所有等待的生产者
+                }
+                
+                try {
+                    Thread.sleep(1500); // 模拟消费时间
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
+        }
+    }
+    
+    public static void main(String[] args) {
+        ProducerConsumerExample example = new ProducerConsumerExample();
+        
+        Thread producer = new Thread(example.new Producer(), &quot;生产者&quot;);
+        Thread consumer = new Thread(example.new Consumer(), &quot;消费者&quot;);
+        
+        producer.start();
+        consumer.start();
+    }
+}
+</div><p id="kzu2py_168"><span class="control" id="kzu2py_211">wait/notify的最佳实践：</span></p><div class="code-block" data-lang="java">
+// wait/notify使用的最佳实践
+public class WaitNotifyBestPractice {
+    private boolean condition = false;
+    private final Object lock = new Object();
+    
+    // 等待条件满足
+    public void waitForCondition() throws InterruptedException {
+        synchronized (lock) {
+            // 1. 使用while循环而不是if，防止虚假唤醒
+            while (!condition) {
+                System.out.println(&quot;条件不满足，等待...&quot;);
+                lock.wait(); // 2. 在同步块中调用wait()
+            }
+            System.out.println(&quot;条件满足，继续执行&quot;);
+            // 3. 被唤醒后重新检查条件
+        }
+    }
+    
+    // 设置条件并通知
+    public void setConditionAndNotify() {
+        synchronized (lock) {
+            condition = true;
+            System.out.println(&quot;条件已设置，通知等待线程&quot;);
+            lock.notifyAll(); // 4. 使用notifyAll()而不是notify()
+        }
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        WaitNotifyBestPractice example = new WaitNotifyBestPractice();
+        
+        // 启动等待线程
+        Thread waitingThread = new Thread(() -&gt; {
+            try {
+                example.waitForCondition();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+        waitingThread.start();
+        
+        // 等待一段时间后设置条件
+        Thread.sleep(2000);
+        example.setConditionAndNotify();
+        
+        waitingThread.join();
+    }
+}
+</div><p id="kzu2py_170"><span class="control" id="kzu2py_212">sleep()的正确使用：</span></p><div class="code-block" data-lang="java">
+// sleep()的使用示例
+public class SleepExample {
+    
+    public static void main(String[] args) {
+        Object lock = new Object();
+        
+        Thread thread1 = new Thread(() -&gt; {
+            synchronized (lock) {
+                System.out.println(&quot;Thread1 获得锁&quot;);
+                try {
+                    System.out.println(&quot;Thread1 调用sleep，但不释放锁&quot;);
+                    Thread.sleep(3000); // 睡眠但不释放锁
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                System.out.println(&quot;Thread1 睡眠结束，释放锁&quot;);
+            }
+        });
+        
+        Thread thread2 = new Thread(() -&gt; {
+            System.out.println(&quot;Thread2 尝试获得锁&quot;);
+            synchronized (lock) {
+                System.out.println(&quot;Thread2 获得锁&quot;);
+            }
+        });
+        
+        thread1.start();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        thread2.start();
+        
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+</div></section></section><section class="chapter"><h2 id="kzu2py_6" data-toc="kzu2py_6">💡 面试技巧</h2><section class="chapter"><h3 id="kzu2py_213" data-toc="kzu2py_213">高频考点</h3><ol class="list _decimal" id="kzu2py_215" type="1"><li class="list__item" id="kzu2py_216"><p id="kzu2py_221"><span class="control" id="kzu2py_222">线程创建方式</span> ：四种创建方式的优缺点和适用场景</p></li><li class="list__item" id="kzu2py_217"><p id="kzu2py_223"><span class="control" id="kzu2py_224">线程状态转换</span> ：六种状态之间的转换条件和触发方式</p></li><li class="list__item" id="kzu2py_218"><p id="kzu2py_225"><span class="control" id="kzu2py_226">wait/notify机制</span> ：与sleep的区别，正确使用方法</p></li><li class="list__item" id="kzu2py_219"><p id="kzu2py_227"><span class="control" id="kzu2py_228">线程安全问题</span> ：竞态条件、死锁、活锁等概念</p></li><li class="list__item" id="kzu2py_220"><p id="kzu2py_229"><span class="control" id="kzu2py_230">线程通信</span> ：不同线程间的协作和数据共享</p></li></ol></section><section class="chapter"><h3 id="kzu2py_214" data-toc="kzu2py_214">回答策略</h3><ol class="list _decimal" id="kzu2py_231" type="1"><li class="list__item" id="kzu2py_234"><p id="kzu2py_238"><span class="control" id="kzu2py_239">概念清晰</span> ：准确描述线程的基本概念和特性</p></li><li class="list__item" id="kzu2py_235"><p id="kzu2py_240"><span class="control" id="kzu2py_241">对比分析</span> ：通过对比说明不同方法的适用场景</p></li><li class="list__item" id="kzu2py_236"><p id="kzu2py_242"><span class="control" id="kzu2py_243">代码示例</span> ：用简洁的代码展示核心机制</p></li><li class="list__item" id="kzu2py_237"><p id="kzu2py_244"><span class="control" id="kzu2py_245">实践经验</span> ：结合实际项目说明线程使用的最佳实践</p></li></ol><p id="kzu2py_233"><span class="control" id="kzu2py_246">学习建议</span> ：线程基础是Java并发编程的根基，建议通过实际编程练习来理解线程的行为和状态转换。重点掌握wait/notify机制和线程间通信，这是后续学习锁机制和并发工具类的基础。</p></section></section><div class="last-modified">09 六月 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="java并发面试大纲.html" class="navigation-links__prev">Java并发面试大纲</a><a href="java内存模型与可见性qa.html" class="navigation-links__next">Java内存模型与可见性QA</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

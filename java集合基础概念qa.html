@@ -1,0 +1,477 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-10T01:07:27.9630592"><title>Java集合基础概念QA | 技术知识库</title><script type="application/json" id="virtual-toc-data">[{"id":"-n1u8rn_4","level":0,"title":"📋 知识结构","anchor":"#-n1u8rn_4"},{"id":"-n1u8rn_5","level":0,"title":"🏗️ 集合框架设计","anchor":"#-n1u8rn_5"},{"id":"-n1u8rn_6","level":0,"title":"💡 面试技巧","anchor":"#-n1u8rn_6"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Java集合基础概念QA | 技术知识库"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="技术知识库 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/java集合基础概念qa.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Java集合基础概念QA | 技术知识库"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/java集合基础概念qa.html#webpage",
+    "url": "writerside-documentation/java集合基础概念qa.html",
+    "name": "Java集合基础概念QA | 技术知识库",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "技术知识库 Help"
+}</script><!-- End Schema.org --></head><body data-id="Java集合基础概念QA" data-main-title="Java集合基础概念QA" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="Java集合面试大纲.md|Java集合面试大纲"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>技术知识库  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Java集合基础概念QA" id="Java集合基础概念QA.md">Java集合基础概念QA</h1><p id="-n1u8rn_3">Java集合框架是Java核心API的重要组成部分，提供了统一的数据结构接口和实现。本文档深入解析集合框架的设计思想、接口层次、泛型机制等基础概念。</p><section class="chapter"><h2 id="-n1u8rn_4" data-toc="-n1u8rn_4">📋 知识结构</h2><svg aria-roledescription="mindmap" role="graphics-document document" viewBox="5 5 770.6385498046875 452.7887878417969" style="max-width: 770.6385498046875px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g></g><g class="mindmap-edges"><path class="edge section-edge-0 edge-depth-1" d="M 598.4393026370795,235.13310690071756 L 627.0344228271855,264.09453063427407 L655.6295430172914,293.05595436783057"></path><path class="edge section-edge-0 edge-depth-1" d="M 599.8396520532588,215.3787628488061 L 635.6128043924544,188.1712804297254 L671.3859567316501,160.96379801064478"></path><path class="edge section-edge-0 edge-depth-1" d="M 577.6286396054867,235.3903932438381 L 554.0703520850724,260.4610059197382 L530.5120645646581,285.5316185956383"></path><path class="edge section-edge-0 edge-depth-1" d="M 602.8761100361453,225.3128147092057 L 657.7851224987346,228.4425617407496 L712.6941349613239,231.5723087722935"></path><path class="edge section-edge-0 edge-depth-0" d="M 428.9673727677806,230.17416176098683 L 500.93873904552504,227.5862022680519 L572.9101053232695,224.99824277511695"></path><path class="edge section-edge-1 edge-depth-1" d="M 389.92545026187156,341.5989565908647 L 341.649413482693,367.4169375130547 L293.3733767035144,393.23491843524465"></path><path class="edge section-edge-1 edge-depth-1" d="M 417.22188296778535,339.72674284303775 L 472.5676967327099,360.18933847034987 L527.9135104976344,380.651934097662"></path><path class="edge section-edge-1 edge-depth-1" d="M 388.3473047037899,332.11657834437443 L 336.70128844149565,323.715064284087 L285.0552721792014,315.3135502237996"></path><path class="edge section-edge-1 edge-depth-1" d="M 406.065449738114,349.23951917382465 L 412.49244792983825,381.7069278564553 L418.9194461215625,414.17433653908597"></path><path class="edge section-edge-1 edge-depth-0" d="M 412.4214568122845,245.63230460780682 L 408.56487309565364,282.6191146530073 L404.7082893790228,319.6059246982077"></path><path class="edge section-edge-2 edge-depth-1" d="M 416.0848564326063,113.37609196910665 L 411.05286279401025,81.0488044122969 L406.02086915541423,48.72151685548714"></path><path class="edge section-edge-2 edge-depth-1" d="M 433.358528409444,129.19823572240912 L 486.34792164131466,132.74096793468155 L539.3373148731854,136.28370014695398"></path><path class="edge section-edge-2 edge-depth-1" d="M 430.57134906500255,119.44192419193838 L 468.371036223194,92.26801461161213 L506.1707233813854,65.09410503128586"></path><path class="edge section-edge-2 edge-depth-1" d="M 404.73703048102556,121.98927368374933 L 349.5716610788065,96.90781255566324 L294.4062916765875,71.82635142757715"></path><path class="edge section-edge-2 edge-depth-0" d="M 414.62244442894735,215.72707656011346 L 416.1845007836148,179.45539747625782 L417.74655713828224,143.1837183924021"></path><path class="edge section-edge-3 edge-depth-1" d="M 242.29875046098525,218.69029858473786 L 259.3904577776,191.75691948833813 L276.48216509421474,164.8235403919384"></path><path class="edge section-edge-3 edge-depth-1" d="M 222.12600039303544,240.17168519526908 L 185.18341291598028,267.00987232486057 L148.24082543892513,293.8480594544521"></path><path class="edge section-edge-3 edge-depth-1" d="M 219.26169020147896,231.4088536151092 L 151.8534536823908,231.64918719505235 L84.44521716330266,231.8895207749955"></path><path class="edge section-edge-3 edge-depth-1" d="M 222.09065790674407,222.58791728392046 L 184.8862474025234,195.78734703966424 L147.68183689830272,168.98677679540802"></path><path class="edge section-edge-3 edge-depth-0" d="M 398.97715657104857,230.76678615261596 L 324.1193278350515,231.03427995831868 L249.26149909905436,231.30177376402145"></path></g><g class="mindmap-nodes"><g transform="translate(355.74268580532134, 211.81318612792177)" class="mindmap-node section--1 section-root"><g transform="translate(58.234375, 18.9)"><circle r="58.234375" class="node-bkg node-circle" id="node-0"></circle></g><g transform="translate(58.234375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Java集合基础</tspan></tspan></text></g></g></g><g transform="translate(544.864417987633, 205.559218408182)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-1"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">框架设计</tspan></tspan></text></g></g></g><g transform="translate(360.61668608789023, 315.6250431780927)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-6"></path><line y2="37.8" x2="85.0719985961914" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">接口层次</tspan></tspan></text></g></g></g><g transform="translate(375.83725326190824, 109.2976088245938)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-11"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">泛型机制</tspan></tspan></text></g></g></g><g transform="translate(183.21359452908825, 212.45537378871563)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-16"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">迭代器模式</tspan></tspan></text></g></g></g><g transform="translate(603.7856158686423, 284.82984286036617)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h114.765625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-2"></path><line y2="37.8" x2="124.765625" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(62.3828125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Collection接口</tspan></tspan></text></g></g></g><g transform="translate(642.4267539991802, 132.98334245126887)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h71.796875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-3"></path><line y2="37.8" x2="81.796875" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(40.8984375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Map接口</tspan></tspan></text></g></g></g><g transform="translate(477.70428758632033, 277.5627934312944)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-4"></path><line y2="37.8" x2="85.0719985961914" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(42.5359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">设计模式</tspan></tspan></text></g></g></g><g transform="translate(689.7010777117405, 213.52590507331718)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h65.9375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-5"></path><line y2="37.8" x2="75.9375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(37.96875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">统一API</tspan></tspan></text></g></g></g><g transform="translate(217.76332907940002, 381.4088318480167)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h114.765625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-7"></path><line y2="37.8" x2="124.765625" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(62.3828125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Collection体系</tspan></tspan></text></g></g></g><g transform="translate(501.0842705794339, 366.95363376260707)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h71.796875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-8"></path><line y2="37.8" x2="81.796875" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(40.8984375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Map体系</tspan></tspan></text></g></g></g><g transform="translate(227.69520399700536, 294.0050853900814)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-9"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">继承关系</tspan></tspan></text></g></g></g><g transform="translate(379.29621117559486, 409.98881253481795)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-10"></path><line y2="37.8" x2="85.0719985961914" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(42.5359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">职责划分</tspan></tspan></text></g></g></g><g transform="translate(360.67778552801656, 15)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-12"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">类型安全</tspan></tspan></text></g></g></g><g transform="translate(511.26790322262536, 118.3843270447693)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-13"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">类型擦除</tspan></tspan></text></g></g></g><g transform="translate(483.32613151663304, 37.438420398630456)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h60.04800033569336 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-14"></path><line y2="37.8" x2="70.04800033569336" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(35.02400016784668, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">通配符</tspan></tspan></text></g></g></g><g transform="translate(237.7153820976091, 46.718016286732684)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-15"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">协变逆变</tspan></tspan></text></g></g></g><g transform="translate(230.74588319041834, 133.2584651879606)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h97.546875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-17"></path><line y2="37.8" x2="107.546875" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(53.7734375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Iterator接口</tspan></tspan></text></g></g></g><g transform="translate(85.19197718299927, 283.76437086100555)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h91.82650756835938 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-18"></path><line y2="37.8" x2="101.82650756835938" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(50.91325378417969, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ListIterator</tspan></tspan></text></g></g></g><g transform="translate(15, 213.04300060138905)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h98.890625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-19"></path><line y2="37.8" x2="108.890625" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(54.4453125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">fail-fast机制</tspan></tspan></text></g></g></g><g transform="translate(82.22183744026518, 141.31932029061284)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h96.578125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-20"></path><line y2="37.8" x2="106.578125" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(53.2890625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">forEach方法</tspan></tspan></text></g></g></g></g></svg></section><section class="chapter"><h2 id="-n1u8rn_5" data-toc="-n1u8rn_5">🏗️ 集合框架设计</h2><section class="chapter"><h3 id="q1-java" data-toc="q1-java">Q1: Java集合框架的整体设计思想是什么？有哪些核心接口？</h3><p id="-n1u8rn_11"><span class="control" id="-n1u8rn_16">答案：</span></p><p id="-n1u8rn_12"><span class="control" id="-n1u8rn_17">Java集合框架层次结构：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 1399.859375 972"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="1399.859375" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 364)" class="root"><g class="clusters"><g data-look="classic" id="工具类" class="cluster"><rect height="228" width="214.21875" y="8" x="8" style=""></rect><g transform="translate(91.0703125, 8)" class="cluster-label"><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>工具类</p></span></div></foreignObject></g></g></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(115.109375, 70)" id="flowchart-C-2644" class="node default"><rect height="54" width="139.21875" y="-27" x="-69.609375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-39.609375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="79.21875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Collections</p></span></div></foreignObject></g></g><g transform="translate(115.109375, 174)" id="flowchart-D-2645" class="node default"><rect height="54" width="104.796875" y="-27" x="-52.3984375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-22.3984375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="44.796875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Arrays</p></span></div></foreignObject></g></g></g></g><g transform="translate(264.21875, 260)" class="root"><g class="clusters"><g data-look="classic" id="Map体系" class="cluster"><rect height="436" width="441.75" y="8" x="8" style=""></rect><g transform="translate(198.4765625, 8)" class="cluster-label"><foreignObject height="24" width="60.796875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Map体系</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_12" d="M104.046,199L115.33,177.5C126.614,156,149.182,113,166.927,91.5C184.672,70,197.594,70,209.849,70C222.104,70,233.693,70,239.487,70L245.281,70"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B2_13" d="M132.387,199L138.948,194.833C145.508,190.667,158.629,182.333,171.771,178.167C184.913,174,198.076,174,210.572,174C223.068,174,234.897,174,240.812,174L246.727,174"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B3_14" d="M132.387,253L138.948,257.167C145.508,261.333,158.629,269.667,169.681,273.833C180.733,278,189.716,278,198.033,278C206.349,278,213.999,278,217.824,278L221.648,278"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B4_15" d="M104.046,253L115.33,274.5C126.614,296,149.182,339,163.591,360.5C178,382,184.25,382,189.833,382C195.417,382,200.333,382,202.792,382L205.25,382"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(89.875, 226)" id="flowchart-B-2636" class="node default"><rect height="54" width="88.75" y="-27" x="-44.375" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-14.375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="28.75"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Map</p></span></div></foreignObject></g></g><g transform="translate(310.75, 70)" id="flowchart-B1-2637" class="node default"><rect height="54" width="122.9375" y="-27" x="-61.46875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-31.46875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="62.9375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>HashMap</p></span></div></foreignObject></g></g><g transform="translate(310.75, 174)" id="flowchart-B2-2639" class="node default"><rect height="54" width="120.046875" y="-27" x="-60.0234375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-30.0234375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="60.046875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TreeMap</p></span></div></foreignObject></g></g><g transform="translate(310.75, 278)" id="flowchart-B3-2641" class="node default"><rect height="54" width="170.203125" y="-27" x="-85.1015625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-55.1015625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="110.203125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>LinkedHashMap</p></span></div></foreignObject></g></g><g transform="translate(310.75, 382)" id="flowchart-B4-2643" class="node default"><rect height="54" width="203" y="-27" x="-101.5" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-71.5, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="143"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ConcurrentHashMap</p></span></div></foreignObject></g></g></g></g><g transform="translate(755.96875, 0)" class="root"><g class="clusters"><g data-look="classic" id="Collection体系" class="cluster"><rect height="956" width="627.890625" y="8" x="8" style=""></rect><g transform="translate(269.5625, 8)" class="cluster-label"><foreignObject height="24" width="104.765625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Collection体系</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M120.847,459L136.659,411.5C152.471,364,184.095,269,203.877,221.5C223.659,174,231.599,174,238.872,174C246.146,174,252.753,174,256.056,174L259.359,174"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A2_1" d="M178.219,486L184.469,486C190.719,486,203.219,486,213.553,486C223.888,486,232.057,486,239.56,486C247.063,486,253.898,486,257.316,486L260.734,486"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A3_2" d="M120.847,513L136.659,560.5C152.471,608,184.095,703,203.032,750.5C221.969,798,228.219,798,233.802,798C239.385,798,244.302,798,246.76,798L249.219,798"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A1_A11_3" d="M329.635,147L340.795,134.167C351.955,121.333,374.274,95.667,390.243,82.833C406.212,70,415.831,70,424.783,70C433.734,70,442.02,70,446.162,70L450.305,70"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A1_A12_4" d="M348.953,174L356.893,174C364.833,174,380.714,174,393.089,174C405.465,174,414.336,174,422.54,174C430.745,174,438.283,174,442.051,174L445.82,174"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A1_A13_5" d="M329.635,201L340.795,213.833C351.955,226.667,374.274,252.333,390.975,265.167C407.676,278,418.758,278,429.173,278C439.589,278,449.337,278,454.212,278L459.086,278"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A2_A21_6" d="M329.635,459L340.795,446.167C351.955,433.333,374.274,407.667,390.528,394.833C406.783,382,416.971,382,426.493,382C436.016,382,444.871,382,449.299,382L453.727,382"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A2_A22_7" d="M347.578,486L355.747,486C363.917,486,380.255,486,393.639,486C407.023,486,417.453,486,427.216,486C436.979,486,446.076,486,450.624,486L455.172,486"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A2_A23_8" d="M329.635,513L340.795,525.833C351.955,538.667,374.274,564.333,388.559,577.167C402.844,590,409.094,590,414.677,590C420.26,590,425.177,590,427.635,590L430.094,590"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A3_A31_9" d="M329.635,771L340.795,758.167C351.955,745.333,374.274,719.667,389.432,706.833C404.59,694,412.586,694,419.915,694C427.245,694,433.908,694,437.239,694L440.57,694"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A3_A32_10" d="M359.094,798L365.344,798C371.594,798,384.094,798,393.705,798C403.316,798,410.039,798,416.095,798C422.151,798,427.54,798,430.235,798L432.93,798"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A3_A33_11" d="M329.635,825L340.795,837.833C351.955,850.667,374.274,876.333,389.87,889.167C405.465,902,414.336,902,422.54,902C430.745,902,438.283,902,442.051,902L445.82,902"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(111.859375, 486)" id="flowchart-A-2612" class="node default"><rect height="54" width="132.71875" y="-27" x="-66.359375" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-36.359375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="72.71875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Collection</p></span></div></foreignObject></g></g><g transform="translate(306.15625, 174)" id="flowchart-A1-2613" class="node default"><rect height="54" width="85.59375" y="-27" x="-42.796875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-12.796875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="25.59375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>List</p></span></div></foreignObject></g></g><g transform="translate(306.15625, 486)" id="flowchart-A2-2615" class="node default"><rect height="54" width="82.84375" y="-27" x="-41.421875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-11.421875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="22.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Set</p></span></div></foreignObject></g></g><g transform="translate(306.15625, 798)" id="flowchart-A3-2617" class="node default"><rect height="54" width="105.875" y="-27" x="-52.9375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-22.9375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="45.875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Queue</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 70)" id="flowchart-A11-2619" class="node default"><rect height="54" width="123.875" y="-27" x="-61.9375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-31.9375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="63.875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ArrayList</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 174)" id="flowchart-A12-2621" class="node default"><rect height="54" width="132.84375" y="-27" x="-66.421875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-36.421875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="72.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>LinkedList</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 278)" id="flowchart-A13-2623" class="node default"><rect height="54" width="106.3125" y="-27" x="-53.15625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-23.15625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="46.3125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Vector</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 382)" id="flowchart-A21-2625" class="node default"><rect height="54" width="117.03125" y="-27" x="-58.515625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-28.515625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="57.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>HashSet</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 486)" id="flowchart-A22-2627" class="node default"><rect height="54" width="114.140625" y="-27" x="-57.0703125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-27.0703125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="54.140625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>TreeSet</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 590)" id="flowchart-A23-2629" class="node default"><rect height="54" width="164.296875" y="-27" x="-82.1484375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-52.1484375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="104.296875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>LinkedHashSet</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 694)" id="flowchart-A31-2631" class="node default"><rect height="54" width="143.34375" y="-27" x="-71.671875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-41.671875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="83.34375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ArrayDeque</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 798)" id="flowchart-A32-2633" class="node default"><rect height="54" width="158.625" y="-27" x="-79.3125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.3125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="98.625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>PriorityQueue</p></span></div></foreignObject></g></g><g transform="translate(516.2421875, 902)" id="flowchart-A33-2635" class="node default"><rect height="54" width="132.84375" y="-27" x="-66.421875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-36.421875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="72.84375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>LinkedList</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="-n1u8rn_14"><span class="control" id="-n1u8rn_18">设计原则分析：</span></p><div class="code-block" data-lang="java">
+// Java集合框架设计原则示例
+public class CollectionFrameworkDesign {
+    
+    /*
+     * 1. 统一接口设计原则
+     * - Collection接口定义了集合的基本操作
+     * - 不同实现类提供不同的性能特征
+     * - 客户端代码面向接口编程
+     */
+    
+    // 面向接口编程示例
+    public void demonstrateInterfaceDesign() {
+        // 使用接口类型声明，具体实现可以随时切换
+        List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();
+        List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
+        Set&lt;String&gt; hashSet = new HashSet&lt;&gt;();
+        Map&lt;String, String&gt; hashMap = new HashMap&lt;&gt;();
+        
+        // 统一的操作方式
+        processCollection(arrayList);
+        processCollection(linkedList);
+        processCollection(hashSet);
+    }
+    
+    private void processCollection(Collection&lt;String&gt; collection) {
+        collection.add(&quot;element&quot;);
+        System.out.println(&quot;Size: &quot; + collection.size());
+        System.out.println(&quot;Contains: &quot; + collection.contains(&quot;element&quot;));
+    }
+    
+    /*
+     * 2. 职责分离原则
+     * - List：有序、可重复、支持索引
+     * - Set：无序、不重复、基于equals/hashCode
+     * - Queue：队列操作、FIFO或优先级
+     * - Map：键值对映射、不是Collection的子接口
+     */
+    
+    public void demonstrateResponsibilitySegregation() {
+        // List：适用于需要按索引访问的场景
+        List&lt;String&gt; names = new ArrayList&lt;&gt;();
+        names.add(&quot;Alice&quot;);
+        names.add(&quot;Bob&quot;);
+        names.add(&quot;Alice&quot;); // 允许重复
+        String firstName = names.get(0); // 索引访问
+        
+        // Set：适用于需要去重的场景
+        Set&lt;String&gt; uniqueNames = new HashSet&lt;&gt;();
+        uniqueNames.add(&quot;Alice&quot;);
+        uniqueNames.add(&quot;Bob&quot;);
+        uniqueNames.add(&quot;Alice&quot;); // 自动去重
+        System.out.println(&quot;Unique names: &quot; + uniqueNames.size()); // 2
+        
+        // Queue：适用于队列操作
+        Queue&lt;String&gt; taskQueue = new LinkedList&lt;&gt;();
+        taskQueue.offer(&quot;Task1&quot;);
+        taskQueue.offer(&quot;Task2&quot;);
+        String nextTask = taskQueue.poll(); // FIFO
+        
+        // Map：适用于键值对关联
+        Map&lt;String, Integer&gt; ageMap = new HashMap&lt;&gt;();
+        ageMap.put(&quot;Alice&quot;, 25);
+        ageMap.put(&quot;Bob&quot;, 30);
+        Integer aliceAge = ageMap.get(&quot;Alice&quot;);
+    }
+    
+    /*
+     * 3. 可扩展性设计
+     * - 抽象类提供默认实现（如AbstractList）
+     * - 具体类只需实现必要的抽象方法
+     * - 支持自定义集合实现
+     */
+    
+    // 自定义List实现示例
+    public static class SimpleList&lt;E&gt; extends AbstractList&lt;E&gt; {
+        private Object[] elements;
+        private int size = 0;
+        private static final int DEFAULT_CAPACITY = 10;
+        
+        public SimpleList() {
+            elements = new Object[DEFAULT_CAPACITY];
+        }
+        
+        @Override
+        public E get(int index) {
+            if (index &gt;= size) {
+                throw new IndexOutOfBoundsException();
+            }
+            return (E) elements[index];
+        }
+        
+        @Override
+        public int size() {
+            return size;
+        }
+        
+        @Override
+        public boolean add(E e) {
+            if (size &gt;= elements.length) {
+                // 简单扩容
+                elements = Arrays.copyOf(elements, elements.length * 2);
+            }
+            elements[size++] = e;
+            return true;
+        }
+    }
+}
+</div></section><section class="chapter"><h3 id="q2" data-toc="q2">Q2: 什么是泛型？泛型在集合中的作用是什么？</h3><p id="-n1u8rn_19"><span class="control" id="-n1u8rn_24">答案：</span></p><p id="-n1u8rn_20"><span class="control" id="-n1u8rn_25">泛型的核心概念：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 519.421875 644"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="519.421875" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"></g><g class="edgeLabels"></g><g class="nodes"><g transform="translate(0, 0)" class="root"><g class="clusters"><g data-look="classic" id="泛型机制" class="cluster"><rect height="628" width="503.421875" y="8" x="8" style=""></rect><g transform="translate(227.65625, 8)" class="cluster-label"><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>泛型机制</p></span></div></foreignObject></g></g></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_A1_0" d="M169.609,94L175.859,94C182.109,94,194.609,94,203.984,94C213.359,94,219.609,94,225.193,94C230.776,94,235.693,94,238.151,94L240.609,94"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_B1_1" d="M169.609,246L175.859,246C182.109,246,194.609,246,204.362,246C214.115,246,221.12,246,227.458,246C233.797,246,239.469,246,242.305,246L245.141,246"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_C1_2" d="M161.594,398L169.18,398C176.766,398,191.938,398,203.579,398C215.22,398,223.331,398,230.775,398C238.219,398,244.996,398,248.385,398L251.773,398"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_D_D1_3" d="M169.609,550L175.859,550C182.109,550,194.609,550,206.698,550C218.786,550,230.464,550,241.474,550C252.484,550,262.828,550,268,550L273.172,550"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(107.5546875, 94)" id="flowchart-A-2729" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>类型安全</p></span></div></foreignObject></g></g><g transform="translate(359.265625, 94)" id="flowchart-A1-2730" class="node default"><rect height="102" width="229.3125" y="-51" x="-114.65625" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-84.65625, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="169.3125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>编译时类型检查<br>避免ClassCastException<br>提供IDE智能提示</p></span></div></foreignObject></g></g><g transform="translate(107.5546875, 246)" id="flowchart-B-2731" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>类型擦除</p></span></div></foreignObject></g></g><g transform="translate(359.265625, 246)" id="flowchart-B1-2732" class="node default"><rect height="102" width="220.25" y="-51" x="-110.125" data-et="node" data-id="abc" style="fill:#fff3e0 !important" class="basic label-container"></rect><g transform="translate(-80.125, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="160.25"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>运行时不保留泛型信息<br>向后兼容<br>减少字节码膨胀</p></span></div></foreignObject></g></g><g transform="translate(107.5546875, 398)" id="flowchart-C-2733" class="node default"><rect height="54" width="108.078125" y="-27" x="-54.0390625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-24.0390625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="48.078125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>通配符</p></span></div></foreignObject></g></g><g transform="translate(359.265625, 398)" id="flowchart-C1-2734" class="node default"><rect height="102" width="206.984375" y="-51" x="-103.4921875" data-et="node" data-id="abc" style="fill:#e1f5fe !important" class="basic label-container"></rect><g transform="translate(-73.4921875, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="146.984375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>? extends上界通配符<br>? super下界通配符<br>? 无界通配符</p></span></div></foreignObject></g></g><g transform="translate(107.5546875, 550)" id="flowchart-D-2735" class="node default"><rect height="54" width="124.109375" y="-27" x="-62.0546875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-32.0546875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="64.109375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>协变逆变</p></span></div></foreignObject></g></g><g transform="translate(359.265625, 550)" id="flowchart-D1-2736" class="node default"><rect height="102" width="164.1875" y="-51" x="-82.09375" data-et="node" data-id="abc" style="fill:#f3e5f5 !important" class="basic label-container"></rect><g transform="translate(-52.09375, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="104.1875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>生产者extends<br>消费者super<br>PECS原则</p></span></div></foreignObject></g></g></g></g></g></g></g></svg><p id="-n1u8rn_22"><span class="control" id="-n1u8rn_26">泛型使用示例：</span></p><div class="code-block" data-lang="java">
+// 泛型在集合中的使用
+public class GenericsInCollections {
+    
+    // 1. 类型安全示例
+    public void typeSafetyDemo() {
+        // Java 5之前：需要手动类型转换，容易出错
+        List rawList = new ArrayList();
+        rawList.add(&quot;String&quot;);
+        rawList.add(123); // 可以添加不同类型，编译时不报错
+        
+        // 运行时可能出现ClassCastException
+        // String str = (String) rawList.get(1); // 运行时异常
+        
+        // Java 5之后：泛型提供类型安全
+        List&lt;String&gt; stringList = new ArrayList&lt;&gt;();
+        stringList.add(&quot;String&quot;);
+        // stringList.add(123); // 编译错误，类型不匹配
+        
+        String str = stringList.get(0); // 不需要强制转换
+    }
+    
+    // 2. 通配符使用示例
+    public void wildcardDemo() {
+        List&lt;Integer&gt; intList = Arrays.asList(1, 2, 3);
+        List&lt;Double&gt; doubleList = Arrays.asList(1.1, 2.2, 3.3);
+        
+        // 上界通配符：? extends Number
+        printNumbers(intList);
+        printNumbers(doubleList);
+        
+        // 下界通配符：? super Integer
+        List&lt;Number&gt; numberList = new ArrayList&lt;&gt;();
+        List&lt;Object&gt; objectList = new ArrayList&lt;&gt;();
+        
+        addIntegers(numberList);
+        addIntegers(objectList);
+    }
+    
+    // 生产者使用extends（只能读取，不能写入）
+    private void printNumbers(List&lt;? extends Number&gt; numbers) {
+        for (Number num : numbers) {
+            System.out.println(num.doubleValue());
+        }
+        // numbers.add(123); // 编译错误，不能写入
+    }
+    
+    // 消费者使用super（可以写入，读取受限）
+    private void addIntegers(List&lt;? super Integer&gt; numbers) {
+        numbers.add(123); // 可以写入Integer
+        numbers.add(456);
+        // Integer num = numbers.get(0); // 编译错误，只能作为Object读取
+        Object obj = numbers.get(0); // 只能读取为Object
+    }
+    
+    // 3. PECS原则示例（Producer Extends, Consumer Super）
+    public &lt;T&gt; void copyElements(List&lt;? extends T&gt; source, List&lt;? super T&gt; destination) {
+        for (T element : source) {
+            destination.add(element);
+        }
+    }
+    
+    public void pecsDemo() {
+        List&lt;Integer&gt; intSource = Arrays.asList(1, 2, 3);
+        List&lt;Number&gt; numberDest = new ArrayList&lt;&gt;();
+        List&lt;Object&gt; objectDest = new ArrayList&lt;&gt;();
+        
+        // Integer是Number的子类型
+        copyElements(intSource, numberDest); // Producer: List&lt;Integer&gt;, Consumer: List&lt;Number&gt;
+        copyElements(intSource, objectDest); // Producer: List&lt;Integer&gt;, Consumer: List&lt;Object&gt;
+    }
+    
+    // 4. 泛型类型擦除的影响
+    public void typeErasureDemo() {
+        List&lt;String&gt; stringList = new ArrayList&lt;&gt;();
+        List&lt;Integer&gt; intList = new ArrayList&lt;&gt;();
+        
+        // 运行时泛型信息被擦除，都是ArrayList类型
+        System.out.println(stringList.getClass() == intList.getClass()); // true
+        
+        // 不能基于泛型参数进行重载
+        // public void process(List&lt;String&gt; list) { }
+        // public void process(List&lt;Integer&gt; list) { } // 编译错误
+        
+        // 泛型数组创建限制
+        // List&lt;String&gt;[] arrayOfLists = new List&lt;String&gt;[10]; // 编译错误
+        List&lt;String&gt;[] arrayOfLists = new List[10]; // 需要使用原始类型
+    }
+    
+    // 5. 自定义泛型类
+    public static class Pair&lt;T, U&gt; {
+        private T first;
+        private U second;
+        
+        public Pair(T first, U second) {
+            this.first = first;
+            this.second = second;
+        }
+        
+        public T getFirst() { return first; }
+        public U getSecond() { return second; }
+        
+        public void setFirst(T first) { this.first = first; }
+        public void setSecond(U second) { this.second = second; }
+        
+        @Override
+        public String toString() {
+            return &quot;(&quot; + first + &quot;, &quot; + second + &quot;)&quot;;
+        }
+    }
+    
+    // 泛型方法
+    public static &lt;T extends Comparable&lt;T&gt;&gt; T max(T a, T b) {
+        return a.compareTo(b) &gt; 0 ? a : b;
+    }
+    
+    public void customGenericsDemo() {
+        Pair&lt;String, Integer&gt; nameAge = new Pair&lt;&gt;(&quot;Alice&quot;, 25);
+        System.out.println(&quot;Name: &quot; + nameAge.getFirst());
+        System.out.println(&quot;Age: &quot; + nameAge.getSecond());
+        
+        String maxString = max(&quot;apple&quot;, &quot;banana&quot;);
+        Integer maxInteger = max(10, 20);
+        System.out.println(&quot;Max string: &quot; + maxString);
+        System.out.println(&quot;Max integer: &quot; + maxInteger);
+    }
+}
+</div></section><section class="chapter"><h3 id="q3-iterator-java-fail-fast" data-toc="q3-iterator-java-fail-fast">Q3: Iterator模式在Java集合中是如何实现的？什么是fail-fast机制？</h3><p id="-n1u8rn_27"><span class="control" id="-n1u8rn_30">答案：</span></p><p id="-n1u8rn_28"><span class="control" id="-n1u8rn_31">Iterator模式实现：</span></p><div class="code-block" data-lang="java">
+// Iterator模式在Java集合中的实现
+public class IteratorPatternDemo {
+    
+    // 1. 基本Iterator使用
+    public void basicIteratorUsage() {
+        List&lt;String&gt; list = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);
+        
+        // 传统for循环
+        for (int i = 0; i &lt; list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        
+        // Iterator迭代
+        Iterator&lt;String&gt; iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println(element);
+            // 可以安全删除元素
+            if (&quot;B&quot;.equals(element)) {
+                iterator.remove();
+            }
+        }
+        
+        // 增强for循环（内部使用Iterator）
+        for (String element : list) {
+            System.out.println(element);
+        }
+    }
+    
+    // 2. ListIterator的高级功能
+    public void listIteratorDemo() {
+        List&lt;String&gt; list = new ArrayList&lt;&gt;(Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;));
+        ListIterator&lt;String&gt; listIterator = list.listIterator();
+        
+        // 双向遍历
+        System.out.println(&quot;Forward iteration:&quot;);
+        while (listIterator.hasNext()) {
+            int index = listIterator.nextIndex();
+            String element = listIterator.next();
+            System.out.println(index + &quot;: &quot; + element);
+            
+            // 可以修改元素
+            if (&quot;B&quot;.equals(element)) {
+                listIterator.set(&quot;B_MODIFIED&quot;);
+            }
+            
+            // 可以添加新元素
+            if (&quot;A&quot;.equals(element)) {
+                listIterator.add(&quot;A_NEW&quot;);
+            }
+        }
+        
+        System.out.println(&quot;Backward iteration:&quot;);
+        while (listIterator.hasPrevious()) {
+            int index = listIterator.previousIndex();
+            String element = listIterator.previous();
+            System.out.println(index + &quot;: &quot; + element);
+        }
+        
+        System.out.println(&quot;Final list: &quot; + list);
+    }
+    
+    // 3. fail-fast机制演示
+    public void failFastDemo() {
+        List&lt;String&gt; list = new ArrayList&lt;&gt;(Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;));
+        
+        try {
+            // 错误示例：在遍历过程中修改集合
+            for (String element : list) {
+                if (&quot;B&quot;.equals(element)) {
+                    list.remove(element); // 抛出ConcurrentModificationException
+                }
+            }
+        } catch (ConcurrentModificationException e) {
+            System.out.println(&quot;Caught ConcurrentModificationException: &quot; + e.getMessage());
+        }
+        
+        // 正确做法1：使用Iterator的remove方法
+        Iterator&lt;String&gt; iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            if (&quot;B&quot;.equals(element)) {
+                iterator.remove(); // 安全删除
+            }
+        }
+        
+        // 正确做法2：使用removeIf方法（Java 8+）
+        list.removeIf(element -&gt; &quot;C&quot;.equals(element));
+        
+        System.out.println(&quot;Final list: &quot; + list);
+    }
+    
+    // 4. 自定义Iterator实现
+    public static class SimpleList&lt;E&gt; implements Iterable&lt;E&gt; {
+        private Object[] elements;
+        private int size = 0;
+        private int modCount = 0; // 修改计数，用于fail-fast检测
+        
+        public SimpleList(int capacity) {
+            elements = new Object[capacity];
+        }
+        
+        public boolean add(E e) {
+            if (size &gt;= elements.length) {
+                throw new IllegalStateException(&quot;List is full&quot;);
+            }
+            elements[size++] = e;
+            modCount++; // 结构性修改时增加计数
+            return true;
+        }
+        
+        public boolean remove(Object o) {
+            for (int i = 0; i &lt; size; i++) {
+                if (Objects.equals(o, elements[i])) {
+                    // 移动元素
+                    System.arraycopy(elements, i + 1, elements, i, size - i - 1);
+                    elements[--size] = null;
+                    modCount++; // 结构性修改时增加计数
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public int size() {
+            return size;
+        }
+        
+        @Override
+        public Iterator&lt;E&gt; iterator() {
+            return new SimpleIterator();
+        }
+        
+        // 内部Iterator实现
+        private class SimpleIterator implements Iterator&lt;E&gt; {
+            private int cursor = 0; // 下一个元素的索引
+            private int lastRet = -1; // 上次返回元素的索引
+            private int expectedModCount = modCount; // 期望的修改计数
+            
+            @Override
+            public boolean hasNext() {
+                return cursor &lt; size;
+            }
+            
+            @Override
+            public E next() {
+                checkForComodification();
+                if (cursor &gt;= size) {
+                    throw new NoSuchElementException();
+                }
+                lastRet = cursor;
+                return (E) elements[cursor++];
+            }
+            
+            @Override
+            public void remove() {
+                if (lastRet &lt; 0) {
+                    throw new IllegalStateException();
+                }
+                checkForComodification();
+                
+                try {
+                    SimpleList.this.remove(elements[lastRet]);
+                    cursor = lastRet;
+                    lastRet = -1;
+                    expectedModCount = modCount;
+                } catch (IndexOutOfBoundsException ex) {
+                    throw new ConcurrentModificationException();
+                }
+            }
+            
+            // fail-fast检查
+            private void checkForComodification() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+            }
+        }
+    }
+    
+    // 5. Java 8的forEach方法
+    public void forEachDemo() {
+        List&lt;String&gt; list = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);
+        
+        // 使用forEach和Lambda表达式
+        list.forEach(System.out::println);
+        
+        // 使用forEach和方法引用
+        list.forEach(element -&gt; System.out.println(&quot;Element: &quot; + element));
+        
+        // Map的forEach
+        Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+        map.put(&quot;A&quot;, 1);
+        map.put(&quot;B&quot;, 2);
+        map.put(&quot;C&quot;, 3);
+        
+        map.forEach((key, value) -&gt; System.out.println(key + &quot;=&quot; + value));
+    }
+    
+    public static void main(String[] args) {
+        IteratorPatternDemo demo = new IteratorPatternDemo();
+        
+        System.out.println(&quot;=== Basic Iterator Usage ===&quot;);
+        demo.basicIteratorUsage();
+        
+        System.out.println(&quot;\n=== ListIterator Demo ===&quot;);
+        demo.listIteratorDemo();
+        
+        System.out.println(&quot;\n=== Fail-Fast Demo ===&quot;);
+        demo.failFastDemo();
+        
+        System.out.println(&quot;\n=== Custom Iterator Demo ===&quot;);
+        SimpleList&lt;String&gt; customList = new SimpleList&lt;&gt;(10);
+        customList.add(&quot;X&quot;);
+        customList.add(&quot;Y&quot;);
+        customList.add(&quot;Z&quot;);
+        
+        for (String element : customList) {
+            System.out.println(&quot;Custom: &quot; + element);
+        }
+        
+        System.out.println(&quot;\n=== ForEach Demo ===&quot;);
+        demo.forEachDemo();
+    }
+}
+</div></section></section><section class="chapter"><h2 id="-n1u8rn_6" data-toc="-n1u8rn_6">💡 面试技巧</h2><section class="chapter"><h3 id="-n1u8rn_32" data-toc="-n1u8rn_32">高频考点</h3><ol class="list _decimal" id="-n1u8rn_34" type="1"><li class="list__item" id="-n1u8rn_35"><p id="-n1u8rn_40"><span class="control" id="-n1u8rn_41">集合框架设计</span> ：Collection和Map的接口层次、设计原则</p></li><li class="list__item" id="-n1u8rn_36"><p id="-n1u8rn_42"><span class="control" id="-n1u8rn_43">泛型机制</span> ：类型安全、类型擦除、通配符使用、PECS原则</p></li><li class="list__item" id="-n1u8rn_37"><p id="-n1u8rn_44"><span class="control" id="-n1u8rn_45">Iterator模式</span> ：迭代器的实现原理、fail-fast机制、ListIterator特性</p></li><li class="list__item" id="-n1u8rn_38"><p id="-n1u8rn_46"><span class="control" id="-n1u8rn_47">集合选择</span> ：不同场景下如何选择合适的集合类型</p></li><li class="list__item" id="-n1u8rn_39"><p id="-n1u8rn_48"><span class="control" id="-n1u8rn_49">性能特点</span> ：各种集合的时间复杂度和空间复杂度</p></li></ol></section><section class="chapter"><h3 id="-n1u8rn_33" data-toc="-n1u8rn_33">回答策略</h3><ol class="list _decimal" id="-n1u8rn_50" type="1"><li class="list__item" id="-n1u8rn_53"><p id="-n1u8rn_57"><span class="control" id="-n1u8rn_58">设计理念</span> ：从接口设计和职责分离的角度说明框架的优势</p></li><li class="list__item" id="-n1u8rn_54"><p id="-n1u8rn_59"><span class="control" id="-n1u8rn_60">实际应用</span> ：结合具体代码示例说明概念和用法</p></li><li class="list__item" id="-n1u8rn_55"><p id="-n1u8rn_61"><span class="control" id="-n1u8rn_62">原理深入</span> ：能够解释泛型类型擦除、Iterator的fail-fast机制</p></li><li class="list__item" id="-n1u8rn_56"><p id="-n1u8rn_63"><span class="control" id="-n1u8rn_64">最佳实践</span> ：总结集合使用的常见陷阱和最佳实践</p></li></ol><p id="-n1u8rn_52"><span class="control" id="-n1u8rn_65">学习建议</span> ：Java集合基础概念是深入学习具体集合类的前提，需要重点理解框架的设计思想。泛型和Iterator是使用集合的重要工具，建议通过实际编程练习来加深理解。</p></section></section><div class="last-modified">09 六月 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="java集合面试大纲.html" class="navigation-links__prev">Java集合面试大纲</a><a href="list集合详解qa.html" class="navigation-links__next">List集合详解QA</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

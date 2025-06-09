@@ -1,0 +1,531 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-10T01:07:28.2490589"><title>Java集合源码分析QA | 技术知识库</title><script type="application/json" id="virtual-toc-data">[{"id":"-wtflnp_4","level":0,"title":"📋 知识结构","anchor":"#-wtflnp_4"},{"id":"hashmap","level":0,"title":"🔍 HashMap源码深度解析","anchor":"#hashmap"},{"id":"-wtflnp_6","level":0,"title":"💡 面试技巧","anchor":"#-wtflnp_6"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Java集合源码分析QA | 技术知识库"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="技术知识库 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/java集合源码分析qa.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Java集合源码分析QA | 技术知识库"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/java集合源码分析qa.html#webpage",
+    "url": "writerside-documentation/java集合源码分析qa.html",
+    "name": "Java集合源码分析QA | 技术知识库",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "技术知识库 Help"
+}</script><!-- End Schema.org --></head><body data-id="Java集合源码分析QA" data-main-title="Java集合源码分析QA" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="Java集合面试大纲.md|Java集合面试大纲"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>技术知识库  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Java集合源码分析QA" id="Java集合源码分析QA.md">Java集合源码分析QA</h1><p id="-wtflnp_3">深入分析Java集合框架核心实现类的源码，理解底层数据结构、算法设计和性能优化技巧。</p><section class="chapter"><h2 id="-wtflnp_4" data-toc="-wtflnp_4">📋 知识结构</h2><svg aria-roledescription="mindmap" role="graphics-document document" viewBox="5 5 888.944580078125 435.8306579589844" style="max-width: 888.944580078125px;" xmlns="http://www.w3.org/2000/svg" width="100%" id="mermaid"><g></g><g class="mindmap-edges"><path class="edge section-edge-0 edge-depth-1" d="M 454.5009358264238,128.23219222224108 L 517.5309108277996,148.48806419588132 L580.5608858291755,168.74393616952156"></path><path class="edge section-edge-0 edge-depth-1" d="M 447.138460830879,110.33348900288667 L 463.5444460214833,78.77141361796467 L479.95043121208755,47.20933823304266"></path><path class="edge section-edge-0 edge-depth-1" d="M 454.8358139997358,120.26857862542067 L 521.5517142368483,104.86608213863454 L588.2676144739607,89.4635856518484"></path><path class="edge section-edge-0 edge-depth-1" d="M 428.6299797038279,114.12098788948472 L 395.70623241668926,87.072922624918 L362.7824851295506,60.024857360351255"></path><path class="edge section-edge-0 edge-depth-0" d="M 439.70132158917517,210.55971369590344 L 439.91601235373116,174.6011367936256 L440.13070311828716,138.6425598913478"></path><path class="edge section-edge-1 edge-depth-1" d="M 253.79233740415833,194.59795851183708 L 250.93758318591415,223.0917123193965 L248.08282896766997,251.5854661269559"></path><path class="edge section-edge-1 edge-depth-1" d="M 247.53109953810375,166.83385528701098 L 229.71448030127448,137.34349297914426 L211.8978610644452,107.85313067127754"></path><path class="edge section-edge-1 edge-depth-1" d="M 240.96448482812863,184.12756498251744 L 167.17663823468263,207.07749421464004 L93.38879164123662,230.02742344676264"></path><path class="edge section-edge-1 edge-depth-1" d="M 240.55578607254793,176.84934491944392 L 171.04155967622847,163.52709933207265 L101.52733327990902,150.20485374470138"></path><path class="edge section-edge-1 edge-depth-0" d="M 425.056025921324,221.93585132602482 L 347.4497242006917,202.61606311467193 L269.8434224800594,183.296274903319"></path><path class="edge section-edge-2 edge-depth-1" d="M 652.6958910973816,251.4764102290668 L 730.473550792388,242.03141622849836 L808.2512104873944,232.58642222792986"></path><path class="edge section-edge-2 edge-depth-1" d="M 641.3073636097329,267.8701161461779 L 648.680832162457,298.5791081632156 L656.0543007151812,329.2881001802533"></path><path class="edge section-edge-2 edge-depth-1" d="M 651.9345421659193,258.3209344774618 L 718.8505899097138,282.1726691486076 L785.7666376535083,306.0244038197534"></path><path class="edge section-edge-2 edge-depth-1" d="M 648.9578290586273,243.25367608689362 L 679.9440091432523,215.3836300150698 L710.9301892278772,187.51358394324592"></path><path class="edge section-edge-2 edge-depth-0" d="M 454.4671169002569,227.63755589513198 L 538.7085241477802,239.42205492538722 L622.9499313953035,251.2065539556424"></path><path class="edge section-edge-3 edge-depth-1" d="M 365.17840730448324,319.72543136444557 L 275.45785090129345,327.61303417167846 L185.73729449810364,335.50063697891136"></path><path class="edge section-edge-3 edge-depth-1" d="M 384.83542178901683,332.6516103794063 L 395.60231705894637,365.1712353539093 L406.3692123288759,397.6908603284123"></path><path class="edge section-edge-3 edge-depth-1" d="M 368.05515346880253,327.323635254638 L 331.3798404694639,354.4125184430818 L294.70452747012524,381.5014016315256"></path><path class="edge section-edge-3 edge-depth-1" d="M 394.43478502141215,322.89612501794574 L 454.9528918682838,341.8553612605908 L515.4709987151555,360.8145975032359"></path><path class="edge section-edge-3 edge-depth-0" d="M 431.51964242864454,238.1894717569224 L 409.8662707965847,271.9856246698412 L388.2128991645248,305.78177758276"></path></g><g class="mindmap-nodes"><g transform="translate(380.5517642782096, 206.6594463513219)" class="mindmap-node section--1 section-root"><g transform="translate(59.060001373291016, 18.9)"><circle r="59.060001373291016" class="node-bkg node-circle" id="node-0"></circle></g><g transform="translate(59.060001373291016, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">集合源码分析</tspan></tspan></text></g></g></g><g transform="translate(382.7280715559617, 104.74282723592933)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h104.984375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-1"></path><line y2="37.8" x2="114.984375" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(57.4921875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">HashMap源码</tspan></tspan></text></g></g></g><g transform="translate(196.82674524988283, 160.7726798780219)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h106.921875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-6"></path><line y2="37.8" x2="116.921875" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(58.4609375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ArrayList源码</tspan></tspan></text></g></g></g><g transform="translate(575.3599701440597, 234.38466349945247)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h114.890625 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-11"></path><line y2="37.8" x2="124.890625" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(62.4453125, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">LinkedList源码</tspan></tspan></text></g></g></g><g transform="translate(282.59733844166874, 299.5118029883605)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h185.046875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-16"></path><line y2="37.8" x2="195.046875" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(97.5234375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">ConcurrentHashMap源码</tspan></tspan></text></g></g></g><g transform="translate(540.7556250996375, 154.4333011558333)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h98.171875 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-2"></path><line y2="37.8" x2="108.171875" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(54.0859375, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">put方法实现</tspan></tspan></text></g></g></g><g transform="translate(432.7458493261162, 15)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h98.24556732177734 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-3"></path><line y2="37.8" x2="108.24556732177734" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(54.12278366088867, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">get方法优化</tspan></tspan></text></g></g></g><g transform="translate(555.6331694177348, 67.18933704133974)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h84.5 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-4"></path><line y2="37.8" x2="94.5" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(47.25, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">resize扩容</tspan></tspan></text></g></g></g><g transform="translate(300.64420544172344, 31.60301801390665)" class="mindmap-node section-0"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h91.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-5"></path><line y2="37.8" x2="101.09600067138672" y1="37.8" x1="0" class="node-line-0"></line></g><g transform="translate(50.54800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">红黑树转换</tspan></tspan></text></g></g></g><g transform="translate(186.63238642345914, 247.6107447607711)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h109.91019439697266 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-7"></path><line y2="37.8" x2="119.91019439697266" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(59.95509719848633, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">grow扩容逻辑</tspan></tspan></text></g></g></g><g transform="translate(130.0354886680958, 76.1143060802666)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h138.21157836914062 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-8"></path><line y2="37.8" x2="148.21157836914062" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(74.10578918457031, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">System.arraycopy</tspan></tspan></text></g></g></g><g transform="translate(15, 215.58230855125817)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h118.13118743896484 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-9"></path><line y2="37.8" x2="128.13118743896484" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(64.06559371948242, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">trimToSize优化</tspan></tspan></text></g></g></g><g transform="translate(35.747436266880754, 128.4815187861234)" class="mindmap-node section-1"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h92.09600067138672 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-10"></path><line y2="37.8" x2="102.09600067138672" y1="37.8" x1="0" class="node-line-1"></line></g><g transform="translate(51.04800033569336, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">序列化处理</tspan></tspan></text></g></g></g><g transform="translate(762.3390654922299, 211.87816895754418)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h111.60550689697266 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-12"></path><line y2="37.8" x2="121.60550689697266" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(60.80275344848633, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">Node节点设计</tspan></tspan></text></g></g></g><g transform="translate(600.4963803075633, 324.9735528269788)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h108.12000274658203 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-13"></path><line y2="37.8" x2="118.12000274658203" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(59.060001373291016, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">双向链表操作</tspan></tspan></text></g></g></g><g transform="translate(749.3333971753678, 292.1606747977627)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h91.125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-14"></path><line y2="37.8" x2="101.125" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(50.5625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">栈队列实现</tspan></tspan></text></g></g></g><g transform="translate(679.0467363443491, 158.58259653068706)" class="mindmap-node section-2"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h76.0719985961914 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-15"></path><line y2="37.8" x2="86.0719985961914" y1="37.8" x1="0" class="node-line-2"></line></g><g transform="translate(43.0359992980957, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">性能考量</tspan></tspan></text></g></g></g><g transform="translate(120.23242586091817, 317.9142653549965)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h91.125 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-17"></path><line y2="37.8" x2="101.125" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(50.5625, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">分段锁机制</tspan></tspan></text></g></g></g><g transform="translate(355.1602932653353, 393.03066771945817)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h101.84712982177734 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-18"></path><line y2="37.8" x2="111.84712982177734" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(55.92356491088867, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">CAS无锁操作</tspan></tspan></text></g></g></g><g transform="translate(240.08421749725903, 371.51323389780316)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h75.109375 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-19"></path><line y2="37.8" x2="85.109375" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(42.5546875, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">并发扩容</tspan></tspan></text></g></g></g><g transform="translate(489.5453189216079, 346.3989195328212)" class="mindmap-node section-3"><g><path d="M0 32.8 v-27.799999999999997 q0,-5 5,-5 h70.47937774658203 q5,0 5,5 v32.8 H0 Z" class="node-bkg node-no-border" id="node-20"></path><line y2="37.8" x2="80.47937774658203" y1="37.8" x1="0" class="node-line-3"></line></g><g transform="translate(40.239688873291016, 5)" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" dy="1em"><g><rect style="stroke: none" class="background"></rect><text style="" y="-10.1"><tspan dy="1.1em" y="-0.1em" x="0" class="text-outer-tspan"><tspan font-weight="normal" class="text-inner-tspan" font-style="normal">size计算</tspan></tspan></text></g></g></g></g></svg></section><section class="chapter"><h2 id="hashmap" data-toc="hashmap">🔍 HashMap源码深度解析</h2><section class="chapter"><h3 id="q1-hashmap-put" data-toc="q1-hashmap-put">Q1: HashMap的put方法是如何实现的？包含哪些关键步骤？</h3><p id="-wtflnp_10"><span class="control" id="-wtflnp_15">答案：</span></p><p id="-wtflnp_11"><span class="control" id="-wtflnp_16">HashMap put方法流程：</span></p><p id="-wtflnp_13"><span class="control" id="-wtflnp_17">HashMap put方法源码分析：</span></p><div class="code-block" data-lang="java">
+// HashMap put方法源码深度解析
+public class HashMapSourceAnalysis {
+    
+    // 1. HashMap核心字段说明
+    public void hashMapFieldsExplanation() {
+        System.out.println(&quot;=== HashMap核心字段说明 ===&quot;);
+        System.out.println(&quot;transient Node&lt;K,V&gt;[] table;           // 哈希表数组&quot;);
+        System.out.println(&quot;transient int size;                    // 实际存储的元素数量&quot;);
+        System.out.println(&quot;transient int modCount;                // 修改次数（用于fail-fast）&quot;);
+        System.out.println(&quot;int threshold;                         // 扩容阈值 = capacity * loadFactor&quot;);
+        System.out.println(&quot;final float loadFactor;                // 负载因子，默认0.75&quot;);
+        System.out.println(&quot;static final int DEFAULT_INITIAL_CAPACITY = 16; // 默认初始容量&quot;);
+        System.out.println(&quot;static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;    // 最大容量&quot;);
+        System.out.println(&quot;static final float DEFAULT_LOAD_FACTOR = 0.75f; // 默认负载因子&quot;);
+        System.out.println(&quot;static final int TREEIFY_THRESHOLD = 8;         // 链表转红黑树阈值&quot;);
+        System.out.println(&quot;static final int UNTREEIFY_THRESHOLD = 6;       // 红黑树转链表阈值&quot;);
+        System.out.println(&quot;static final int MIN_TREEIFY_CAPACITY = 64;     // 最小树化容量&quot;);
+    }
+    
+    // 2. put方法核心实现分析
+    public V putAnalysis(K key, V value) {
+        // 第一步：计算hash值
+        int hash = hash(key);
+        System.out.println(&quot;Step 1: 计算hash值 = &quot; + hash);
+        
+        // 调用putVal方法
+        return putVal(hash, key, value, false, true);
+    }
+    
+    // 3. hash方法分析
+    static final int hash(Object key) {
+        int h;
+        // 高16位与低16位异或，减少哈希冲突
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+    }
+    
+    public void hashMethodAnalysis() {
+        System.out.println(&quot;=== hash方法分析 ===&quot;);
+        
+        String[] keys = {&quot;java&quot;, &quot;hashmap&quot;, &quot;analysis&quot;, &quot;source&quot;};
+        for (String key : keys) {
+            int originalHash = key.hashCode();
+            int optimizedHash = hash(key);
+            
+            System.out.printf(&quot;Key: %s, 原始hash: %d, 优化hash: %d%n&quot;, 
+                            key, originalHash, optimizedHash);
+            
+            // 演示为什么要高低位异或
+            int high16 = originalHash &gt;&gt;&gt; 16;
+            int low16 = originalHash &amp; 0xFFFF;
+            System.out.printf(&quot;  高16位: %d, 低16位: %d, 异或结果: %d%n&quot;, 
+                            high16, low16, high16 ^ low16);
+        }
+    }
+    
+    // 4. putVal方法详细实现
+    final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+        
+        // 步骤1：检查table是否为空，如果为空则初始化
+        if ((tab = table) == null || (n = tab.length) == 0) {
+            n = (tab = resize()).length;
+            System.out.println(&quot;Table为空，执行resize初始化，容量: &quot; + n);
+        }
+        
+        // 步骤2：计算索引位置
+        i = (n - 1) &amp; hash;  // 等价于 hash % n，但位运算更快
+        System.out.println(&quot;计算数组索引: &quot; + i);
+        
+        // 步骤3：检查该位置是否为空
+        if ((p = tab[i]) == null) {
+            // 位置为空，直接插入新节点
+            tab[i] = newNode(hash, key, value, null);
+            System.out.println(&quot;位置为空，直接插入新节点&quot;);
+        } else {
+            // 位置不为空，需要处理冲突
+            Node&lt;K,V&gt; e; K k;
+            
+            // 步骤4：检查第一个节点是否匹配
+            if (p.hash == hash &amp;&amp; ((k = p.key) == key || (key != null &amp;&amp; key.equals(k)))) {
+                e = p;  // 找到匹配的key
+                System.out.println(&quot;第一个节点匹配，准备更新值&quot;);
+            } else if (p instanceof TreeNode) {
+                // 步骤5：如果是红黑树节点，使用树的插入方法
+                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+                System.out.println(&quot;使用红黑树插入方法&quot;);
+            } else {
+                // 步骤6：遍历链表
+                for (int binCount = 0; ; ++binCount) {
+                    if ((e = p.next) == null) {
+                        // 到达链表末尾，插入新节点
+                        p.next = newNode(hash, key, value, null);
+                        System.out.println(&quot;插入到链表末尾&quot;);
+                        
+                        // 检查是否需要树化
+                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) {
+                            treeifyBin(tab, hash);
+                            System.out.println(&quot;链表长度超过阈值，转换为红黑树&quot;);
+                        }
+                        break;
+                    }
+                    
+                    // 检查当前节点是否匹配
+                    if (e.hash == hash &amp;&amp; ((k = e.key) == key || (key != null &amp;&amp; key.equals(k)))) {
+                        System.out.println(&quot;在链表中找到匹配的key&quot;);
+                        break;
+                    }
+                    p = e;
+                }
+            }
+            
+            // 步骤7：如果找到了匹配的key，更新值
+            if (e != null) {
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null) {
+                    e.value = value;
+                    System.out.println(&quot;更新旧值: &quot; + oldValue + &quot; -&gt; &quot; + value);
+                }
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+        
+        // 步骤8：增加修改计数和大小
+        ++modCount;
+        if (++size &gt; threshold) {
+            resize();
+            System.out.println(&quot;超过阈值，执行扩容&quot;);
+        }
+        afterNodeInsertion(evict);
+        return null;
+    }
+    
+    // 5. resize方法分析
+    public void resizeAnalysis() {
+        System.out.println(&quot;=== resize扩容方法分析 ===&quot;);
+        
+        // 模拟resize过程
+        int oldCap = 16;        // 旧容量
+        int oldThr = 12;        // 旧阈值 (16 * 0.75)
+        int newCap, newThr;     // 新容量和新阈值
+        
+        // 扩容逻辑
+        if (oldCap &gt; 0) {
+            if (oldCap &gt;= MAXIMUM_CAPACITY) {
+                // 已达到最大容量
+                newThr = Integer.MAX_VALUE;
+                System.out.println(&quot;已达到最大容量，阈值设为Integer.MAX_VALUE&quot;);
+            } else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp; oldCap &gt;= DEFAULT_INITIAL_CAPACITY) {
+                // 容量和阈值都翻倍
+                newThr = oldThr &lt;&lt; 1;
+                System.out.println(&quot;正常扩容：容量 &quot; + oldCap + &quot; -&gt; &quot; + newCap + 
+                                 &quot;, 阈值 &quot; + oldThr + &quot; -&gt; &quot; + newThr);
+            }
+        }
+        
+        // 重新分布元素的逻辑说明
+        System.out.println(&quot;\n重新分布元素的优化策略:&quot;);
+        System.out.println(&quot;1. 元素要么保持在原位置，要么移动到 '原位置+oldCap' 的位置&quot;);
+        System.out.println(&quot;2. 通过 (e.hash &amp; oldCap) == 0 判断元素的新位置&quot;);
+        System.out.println(&quot;3. 这样避免了重新计算每个元素的hash值&quot;);
+        
+        // 演示元素重新分布
+        demonstrateElementRedistribution();
+    }
+    
+    private void demonstrateElementRedistribution() {
+        System.out.println(&quot;\n=== 元素重新分布演示 ===&quot;);
+        
+        int oldCap = 16;
+        int newCap = 32;
+        
+        // 模拟一些hash值
+        int[] hashes = {5, 21, 37, 53}; // 这些hash值在旧容量下会冲突
+        
+        for (int hash : hashes) {
+            int oldIndex = hash &amp; (oldCap - 1);
+            int newIndex = hash &amp; (newCap - 1);
+            boolean stayInPlace = (hash &amp; oldCap) == 0;
+            
+            System.out.printf(&quot;Hash: %d, 旧位置: %d, 新位置: %d, 是否原地: %s%n&quot;,
+                            hash, oldIndex, newIndex, stayInPlace);
+        }
+    }
+    
+    // 6. 红黑树转换分析
+    public void treeifyAnalysis() {
+        System.out.println(&quot;=== 红黑树转换分析 ===&quot;);
+        
+        System.out.println(&quot;链表转红黑树的条件:&quot;);
+        System.out.println(&quot;1. 链表长度 &gt;= TREEIFY_THRESHOLD (8)&quot;);
+        System.out.println(&quot;2. 数组容量 &gt;= MIN_TREEIFY_CAPACITY (64)&quot;);
+        System.out.println(&quot;3. 如果容量不足，会先扩容而不是树化&quot;);
+        
+        System.out.println(&quot;\n红黑树转链表的条件:&quot;);
+        System.out.println(&quot;1. 红黑树节点数 &lt;= UNTREEIFY_THRESHOLD (6)&quot;);
+        System.out.println(&quot;2. 在remove操作或resize时检查&quot;);
+        
+        System.out.println(&quot;\n为什么选择8和6作为阈值?&quot;);
+        System.out.println(&quot;1. 避免频繁的树化和反树化操作&quot;);
+        System.out.println(&quot;2. 根据泊松分布，链表长度为8的概率很低&quot;);
+        System.out.println(&quot;3. 提供足够的缓冲区间，避免抖动&quot;);
+    }
+    
+    // 7. Node节点结构分析
+    static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+        final int hash;      // 缓存的hash值，避免重复计算
+        final K key;         // 键，final保证不可变
+        V value;             // 值，可变
+        Node&lt;K,V&gt; next;      // 指向下一个节点的指针
+        
+        Node(int hash, K key, V value, Node&lt;K,V&gt; next) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+        
+        public final K getKey()        { return key; }
+        public final V getValue()      { return value; }
+        public final String toString() { return key + &quot;=&quot; + value; }
+        
+        public final int hashCode() {
+            return Objects.hashCode(key) ^ Objects.hashCode(value);
+        }
+        
+        public final V setValue(V newValue) {
+            V oldValue = value;
+            value = newValue;
+            return oldValue;
+        }
+        
+        public final boolean equals(Object o) {
+            if (o == this)
+                return true;
+            if (o instanceof Map.Entry) {
+                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
+                if (Objects.equals(key, e.getKey()) &amp;&amp;
+                    Objects.equals(value, e.getValue()))
+                    return true;
+            }
+            return false;
+        }
+    }
+    
+    public static void main(String[] args) {
+        HashMapSourceAnalysis analysis = new HashMapSourceAnalysis();
+        
+        analysis.hashMapFieldsExplanation();
+        System.out.println();
+        
+        analysis.hashMethodAnalysis();
+        System.out.println();
+        
+        analysis.resizeAnalysis();
+        System.out.println();
+        
+        analysis.treeifyAnalysis();
+    }
+}
+</div></section><section class="chapter"><h3 id="q2-arraylist" data-toc="q2-arraylist">Q2: ArrayList的扩容机制在源码中是如何实现的？</h3><p id="-wtflnp_18"><span class="control" id="-wtflnp_23">答案：</span></p><p id="-wtflnp_19"><span class="control" id="-wtflnp_24">ArrayList扩容流程：</span></p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 431.625 836"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="431.625" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M189.852,62L189.852,66.167C189.852,70.333,189.852,78.667,189.852,84.917C189.852,91.167,189.852,95.333,189.852,98.833C189.852,102.333,189.852,105.167,189.852,106.583L189.852,108"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_C_1" d="M189.852,166L189.852,170.167C189.852,174.333,189.852,182.667,189.893,188.958C189.935,195.25,190.018,199.5,190.088,203.083C190.159,206.667,190.216,209.584,190.245,211.042L190.273,212.501"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_D_2" d="M158.622,308.77L146.531,320.142C134.441,331.513,110.259,354.257,98.169,368.712C86.078,383.167,86.078,389.333,86.078,394.833C86.078,400.333,86.078,405.167,86.078,407.583L86.078,410"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_E_3" d="M222.081,308.77L234.005,320.142C245.929,331.513,269.777,354.257,281.701,368.712C293.625,383.167,293.625,389.333,293.625,394.833C293.625,400.333,293.625,405.167,293.625,407.583L293.625,410"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_E_F_4" d="M293.625,468L293.625,472.167C293.625,476.333,293.625,484.667,293.625,490.917C293.625,497.167,293.625,501.333,293.625,504.833C293.625,508.333,293.625,511.167,293.625,512.583L293.625,514"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_F_G_5" d="M293.625,620L293.625,624.167C293.625,628.333,293.625,636.667,293.625,642.917C293.625,649.167,293.625,653.333,293.625,656.833C293.625,660.333,293.625,663.167,293.625,664.583L293.625,666"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_G_H_6" d="M293.625,724L293.625,728.167C293.625,732.333,293.625,740.667,293.625,746.917C293.625,753.167,293.625,757.333,293.625,760.833C293.625,764.333,293.625,767.167,293.625,768.583L293.625,770"></path></g><g class="edgeLabels"><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g transform="translate(86.078125, 377)" class="edgeLabel"><g transform="translate(-8.015625, -12)" class="label"><foreignObject height="24" width="16.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>是</p></span></div></foreignObject></g></g><g transform="translate(293.625, 377)" class="edgeLabel"><g transform="translate(-8.015625, -12)" class="label"><foreignObject height="24" width="16.03125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>否</p></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(189.8515625, 35)" id="flowchart-A-2968" class="node default"><rect height="54" width="118.359375" y="-27" x="-59.1796875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-29.1796875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="58.359375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>add元素</p></span></div></foreignObject></g></g><g transform="translate(189.8515625, 139)" id="flowchart-B-2969" class="node default"><rect height="54" width="226.53125" y="-27" x="-113.265625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-83.265625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="166.53125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>ensureCapacityInternal</p></span></div></foreignObject></g></g><g transform="translate(189.8515625, 278)" id="flowchart-C-2971" class="node default"><polygon style="fill:#e1f5fe !important" transform="translate(-62,62)" class="label-container" points="62,0 124,-62 62,-124 0,-62"></polygon><g transform="translate(-35, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="70"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>容量足够?</p></span></div></foreignObject></g></g><g transform="translate(86.078125, 441)" id="flowchart-D-2973" class="node default"><rect height="54" width="156.15625" y="-27" x="-78.078125" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-48.078125, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="96.15625"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>直接添加元素</p></span></div></foreignObject></g></g><g transform="translate(293.625, 441)" id="flowchart-E-2975" class="node default"><rect height="54" width="158.9375" y="-27" x="-79.46875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-49.46875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="98.9375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>grow方法扩容</p></span></div></foreignObject></g></g><g transform="translate(293.625, 569)" id="flowchart-F-2977" class="node default"><rect height="102" width="260" y="-51" x="-130" data-et="node" data-id="abc" style="fill:#c8e6c9 !important" class="basic label-container"></rect><g transform="translate(-100, -36)" style="" class="label"><rect></rect><foreignObject height="72" width="200"><div style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>计算新容量<br>newCapacity = oldCapacity + oldCapacity &gt;&gt; 1</p></span></div></foreignObject></g></g><g transform="translate(293.625, 697)" id="flowchart-G-2979" class="node default"><rect height="54" width="224.953125" y="-27" x="-112.4765625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-82.4765625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="164.953125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Arrays.copyOf复制数组</p></span></div></foreignObject></g></g><g transform="translate(293.625, 801)" id="flowchart-H-2981" class="node default"><rect height="54" width="140.125" y="-27" x="-70.0625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-40.0625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="80.125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>添加新元素</p></span></div></foreignObject></g></g></g></g></g></svg><p id="-wtflnp_21"><span class="control" id="-wtflnp_25">ArrayList源码分析：</span></p><div class="code-block" data-lang="java">
+// ArrayList源码深度解析
+public class ArrayListSourceAnalysis {
+    
+    // 1. ArrayList核心字段
+    public void arrayListFieldsExplanation() {
+        System.out.println(&quot;=== ArrayList核心字段 ===&quot;);
+        System.out.println(&quot;transient Object[] elementData;        // 存储元素的数组&quot;);
+        System.out.println(&quot;private int size;                      // 实际元素数量&quot;);
+        System.out.println(&quot;private static final int DEFAULT_CAPACITY = 10; // 默认容量&quot;);
+        System.out.println(&quot;private static final Object[] EMPTY_ELEMENTDATA = {}; // 空数组&quot;);
+        System.out.println(&quot;private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {}; // 默认空数组&quot;);
+        System.out.println(&quot;private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8; // 最大数组大小&quot;);
+    }
+    
+    // 2. 构造器分析
+    public void constructorAnalysis() {
+        System.out.println(&quot;=== ArrayList构造器分析 ===&quot;);
+        
+        // 无参构造器
+        System.out.println(&quot;1. 无参构造器:&quot;);
+        System.out.println(&quot;   elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA&quot;);
+        System.out.println(&quot;   延迟初始化，第一次add时才分配DEFAULT_CAPACITY大小&quot;);
+        
+        // 指定容量构造器
+        System.out.println(&quot;\n2. 指定容量构造器:&quot;);
+        System.out.println(&quot;   if (initialCapacity &gt; 0) elementData = new Object[initialCapacity]&quot;);
+        System.out.println(&quot;   else if (initialCapacity == 0) elementData = EMPTY_ELEMENTDATA&quot;);
+        System.out.println(&quot;   else throw IllegalArgumentException&quot;);
+        
+        // 集合构造器
+        System.out.println(&quot;\n3. 集合构造器:&quot;);
+        System.out.println(&quot;   elementData = c.toArray()&quot;);
+        System.out.println(&quot;   需要检查toArray返回的是否为Object[]类型&quot;);
+    }
+    
+    // 3. add方法详细分析
+    public boolean add(E e) {
+        // 确保容量足够
+        ensureCapacityInternal(size + 1);
+        
+        // 添加元素并增加size
+        elementData[size++] = e;
+        return true;
+    }
+    
+    private void ensureCapacityInternal(int minCapacity) {
+        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+    }
+    
+    private static int calculateCapacity(Object[] elementData, int minCapacity) {
+        // 如果是默认空数组，返回默认容量和最小容量的较大值
+        if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+            return Math.max(DEFAULT_CAPACITY, minCapacity);
+        }
+        return minCapacity;
+    }
+    
+    private void ensureExplicitCapacity(int minCapacity) {
+        modCount++; // 修改计数递增，用于fail-fast
+        
+        // 如果最小容量大于当前数组长度，则需要扩容
+        if (minCapacity - elementData.length &gt; 0)
+            grow(minCapacity);
+    }
+    
+    // 4. 核心扩容方法grow
+    private void grow(int minCapacity) {
+        System.out.println(&quot;=== grow扩容方法分析 ===&quot;);
+        
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1); // 扩容1.5倍
+        
+        System.out.println(&quot;旧容量: &quot; + oldCapacity);
+        System.out.println(&quot;新容量: &quot; + newCapacity + &quot; (1.5倍扩容)&quot;);
+        
+        // 检查新容量是否满足最小容量要求
+        if (newCapacity - minCapacity &lt; 0) {
+            newCapacity = minCapacity;
+            System.out.println(&quot;新容量调整为最小容量: &quot; + newCapacity);
+        }
+        
+        // 检查是否超过最大数组大小
+        if (newCapacity - MAX_ARRAY_SIZE &gt; 0) {
+            newCapacity = hugeCapacity(minCapacity);
+            System.out.println(&quot;新容量超过最大值，调整为: &quot; + newCapacity);
+        }
+        
+        // 复制数组到新的更大数组
+        elementData = Arrays.copyOf(elementData, newCapacity);
+        System.out.println(&quot;数组复制完成，新容量: &quot; + elementData.length);
+    }
+    
+    private static int hugeCapacity(int minCapacity) {
+        if (minCapacity &lt; 0) // overflow
+            throw new OutOfMemoryError();
+        return (minCapacity &gt; MAX_ARRAY_SIZE) ?
+            Integer.MAX_VALUE :
+            MAX_ARRAY_SIZE;
+    }
+    
+    // 5. 为什么选择1.5倍扩容?
+    public void whyOnePointFiveExpansion() {
+        System.out.println(&quot;=== 为什么选择1.5倍扩容? ===&quot;);
+        
+        System.out.println(&quot;1. 内存利用率考虑:&quot;);
+        System.out.println(&quot;   - 1.5倍比2倍节省内存空间&quot;);
+        System.out.println(&quot;   - 避免过度分配内存&quot;);
+        
+        System.out.println(&quot;\n2. 性能平衡:&quot;);
+        System.out.println(&quot;   - 扩容次数不会太频繁&quot;);
+        System.out.println(&quot;   - 也不会一次性分配过多内存&quot;);
+        
+        System.out.println(&quot;\n3. 数学原理:&quot;);
+        System.out.println(&quot;   - 黄金分割比例约为1.618&quot;);
+        System.out.println(&quot;   - 1.5是一个接近且计算简单的值&quot;);
+        
+        // 演示扩容过程
+        demonstrateExpansion();
+    }
+    
+    private void demonstrateExpansion() {
+        System.out.println(&quot;\n扩容过程演示:&quot;);
+        int capacity = 10;
+        
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println(&quot;第&quot; + (i + 1) + &quot;次扩容: &quot; + capacity + &quot; -&gt; &quot; + (capacity + capacity / 2));
+            capacity = capacity + capacity / 2;
+        }
+    }
+    
+    // 6. System.arraycopy vs Arrays.copyOf
+    public void arrayCopyAnalysis() {
+        System.out.println(&quot;=== 数组复制方法分析 ===&quot;);
+        
+        System.out.println(&quot;System.arraycopy:&quot;);
+        System.out.println(&quot;- 本地方法，性能最优&quot;);
+        System.out.println(&quot;- 用于在同一数组内移动元素&quot;);
+        System.out.println(&quot;- 如：插入/删除元素时移动其他元素&quot;);
+        
+        System.out.println(&quot;\nArrays.copyOf:&quot;);
+        System.out.println(&quot;- 内部调用System.arraycopy&quot;);
+        System.out.println(&quot;- 创建新数组并复制元素&quot;);
+        System.out.println(&quot;- 用于扩容时创建更大的数组&quot;);
+        
+        // 性能测试
+        performanceCopyTest();
+    }
+    
+    private void performanceCopyTest() {
+        System.out.println(&quot;\n数组复制性能测试:&quot;);
+        
+        int[] source = new int[1000000];
+        for (int i = 0; i &lt; source.length; i++) {
+            source[i] = i;
+        }
+        
+        // 测试System.arraycopy
+        long startTime = System.nanoTime();
+        int[] dest1 = new int[source.length];
+        System.arraycopy(source, 0, dest1, 0, source.length);
+        long arraycopyTime = System.nanoTime() - startTime;
+        
+        // 测试Arrays.copyOf
+        startTime = System.nanoTime();
+        int[] dest2 = Arrays.copyOf(source, source.length);
+        long copyOfTime = System.nanoTime() - startTime;
+        
+        System.out.println(&quot;System.arraycopy耗时: &quot; + arraycopyTime / 1_000_000 + &quot;ms&quot;);
+        System.out.println(&quot;Arrays.copyOf耗时: &quot; + copyOfTime / 1_000_000 + &quot;ms&quot;);
+    }
+    
+    // 7. trimToSize方法分析
+    public void trimToSize() {
+        System.out.println(&quot;=== trimToSize方法分析 ===&quot;);
+        
+        modCount++;
+        if (size &lt; elementData.length) {
+            elementData = (size == 0)
+                ? EMPTY_ELEMENTDATA
+                : Arrays.copyOf(elementData, size);
+        }
+        
+        System.out.println(&quot;trimToSize的作用:&quot;);
+        System.out.println(&quot;1. 去除多余的容量，节省内存&quot;);
+        System.out.println(&quot;2. 将数组大小调整为实际元素数量&quot;);
+        System.out.println(&quot;3. 适用于确定不再添加元素的场景&quot;);
+        
+        // 演示trimToSize效果
+        demonstrateTrimToSize();
+    }
+    
+    private void demonstrateTrimToSize() {
+        System.out.println(&quot;\ntrimToSize效果演示:&quot;);
+        
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        
+        // 添加100个元素
+        for (int i = 0; i &lt; 100; i++) {
+            list.add(i);
+        }
+        
+        // 删除50个元素
+        for (int i = 0; i &lt; 50; i++) {
+            list.remove(list.size() - 1);
+        }
+        
+        System.out.println(&quot;删除元素后，size: &quot; + list.size());
+        System.out.println(&quot;此时内部数组容量可能远大于实际size&quot;);
+        System.out.println(&quot;调用trimToSize可以回收多余空间&quot;);
+        
+        // 在实际实现中会调用 ((ArrayList)list).trimToSize();
+    }
+    
+    // 8. 序列化相关分析
+    public void serializationAnalysis() {
+        System.out.println(&quot;=== ArrayList序列化分析 ===&quot;);
+        
+        System.out.println(&quot;关键设计决策:&quot;);
+        System.out.println(&quot;1. elementData声明为transient&quot;);
+        System.out.println(&quot;2. 自定义writeObject/readObject方法&quot;);
+        System.out.println(&quot;3. 只序列化实际存储的元素，不序列化整个数组&quot;);
+        
+        System.out.println(&quot;\n为什么这样设计?&quot;);
+        System.out.println(&quot;1. 节省序列化空间（不序列化null元素）&quot;);
+        System.out.println(&quot;2. 提高序列化性能&quot;);
+        System.out.println(&quot;3. 避免序列化未使用的数组空间&quot;);
+        
+        System.out.println(&quot;\n自定义序列化方法:&quot;);
+        System.out.println(&quot;private void writeObject(ObjectOutputStream s) {&quot;);
+        System.out.println(&quot;    s.defaultWriteObject();&quot;);
+        System.out.println(&quot;    s.writeInt(size);&quot;);
+        System.out.println(&quot;    for (int i=0; i&lt;size; i++) s.writeObject(elementData[i]);&quot;);
+        System.out.println(&quot;}&quot;);
+    }
+    
+    public static void main(String[] args) {
+        ArrayListSourceAnalysis analysis = new ArrayListSourceAnalysis();
+        
+        analysis.arrayListFieldsExplanation();
+        System.out.println();
+        
+        analysis.constructorAnalysis();
+        System.out.println();
+        
+        analysis.whyOnePointFiveExpansion();
+        System.out.println();
+        
+        analysis.arrayCopyAnalysis();
+        System.out.println();
+        
+        analysis.serializationAnalysis();
+    }
+}
+</div></section></section><section class="chapter"><h2 id="-wtflnp_6" data-toc="-wtflnp_6">💡 面试技巧</h2><section class="chapter"><h3 id="-wtflnp_26" data-toc="-wtflnp_26">高频考点</h3><ol class="list _decimal" id="-wtflnp_28" type="1"><li class="list__item" id="-wtflnp_29"><p id="-wtflnp_34"><span class="control" id="-wtflnp_35">HashMap源码</span> ：put/get方法实现、扩容机制、红黑树转换</p></li><li class="list__item" id="-wtflnp_30"><p id="-wtflnp_36"><span class="control" id="-wtflnp_37">ArrayList源码</span> ：扩容策略、数组复制、序列化机制</p></li><li class="list__item" id="-wtflnp_31"><p id="-wtflnp_38"><span class="control" id="-wtflnp_39">ConcurrentHashMap</span> ：分段锁、CAS操作、并发扩容</p></li><li class="list__item" id="-wtflnp_32"><p id="-wtflnp_40"><span class="control" id="-wtflnp_41">LinkedList源码</span> ：双向链表操作、栈队列实现</p></li><li class="list__item" id="-wtflnp_33"><p id="-wtflnp_42"><span class="control" id="-wtflnp_43">设计思想</span> ：数据结构选择、性能优化技巧</p></li></ol></section><section class="chapter"><h3 id="-wtflnp_27" data-toc="-wtflnp_27">回答策略</h3><ol class="list _decimal" id="-wtflnp_44" type="1"><li class="list__item" id="-wtflnp_47"><p id="-wtflnp_51"><span class="control" id="-wtflnp_52">源码理解</span> ：能够详细解释核心方法的实现逻辑</p></li><li class="list__item" id="-wtflnp_48"><p id="-wtflnp_53"><span class="control" id="-wtflnp_54">设计思想</span> ：理解为什么这样设计，有什么优势</p></li><li class="list__item" id="-wtflnp_49"><p id="-wtflnp_55"><span class="control" id="-wtflnp_56">性能分析</span> ：知道各种操作的时间复杂度和优化手段</p></li><li class="list__item" id="-wtflnp_50"><p id="-wtflnp_57"><span class="control" id="-wtflnp_58">实际应用</span> ：结合源码分析选择合适的集合类型</p></li></ol><p id="-wtflnp_46"><span class="control" id="-wtflnp_59">学习建议</span> ：源码分析需要结合实际调试来加深理解。重点关注HashMap和ArrayList的核心方法，这是面试中最常考查的内容。理解设计思想比记住具体代码更重要。</p></section></section><div class="last-modified">09 六月 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="map集合详解qa.html" class="navigation-links__prev">Map集合详解QA</a><a href="java集合性能优化qa.html" class="navigation-links__next">Java集合性能优化QA</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
